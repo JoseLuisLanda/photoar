@@ -13,7 +13,7 @@ export class AfelementComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log("AFELEMENT receiving"+JSON.stringify(this.item));
+   // console.log("AFELEMENT receiving"+JSON.stringify(this.item));
     this.urlPhoto = this.item.images![0].url!;
   }
 

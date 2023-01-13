@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnChanges  {
       if(this.subfotos.length>0){
         this.itemAR = this.subfotos[0];
         this.switchTemp = true;
-        console.log("SwITCHING TO PHOTO");
+        //console.log("SwITCHING TO PHOTO");
       }else{
         console.log("no tienes fotos que coincidan");
       }
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, OnChanges  {
     
   }
   receiveModel(modelName: string){
-    console.log("otro modelo received: " + modelName);
+    //console.log("otro modelo received: " + modelName);
     this.itemAR.name = modelName;
   }
   switchTemplate(){

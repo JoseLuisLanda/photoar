@@ -7,6 +7,10 @@ import { ARHeaderComponent } from './shared/arheader/arheader.component';
 import { ARElementComponent } from './shared/arelement/arelement.component';
 import { AnnotationsComponent } from './shared/annotations/annotations.component';
 import { AfelementComponent } from './shared/afelement/afelement.component';
+import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -17,8 +21,11 @@ import { AfelementComponent } from './shared/afelement/afelement.component';
     AfelementComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // for firestore
   ],
   providers: [],
   bootstrap: [AppComponent],

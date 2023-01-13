@@ -1,8 +1,17 @@
+<div *ngIf="!switchTemp; else showPhoto">
+    <input type="text" [(ngModel)]="photoNumber">
+<button (click)="switchToFoto()">switch</button>
+</div>
+<ng-template #showPhoto>
+    <app-afelement [item]="itemAR"></app-afelement>
+  </ng-template>
 
-<!--a class="btn btn-primary" routerLink="/afelement">GO HIRO</a-->
+
+
+<!--a class="btn btn-primary" routerLink="/afelement">GO HIRO</a>
 <app-arheader (changeModel)="receiveModel($event)"></app-arheader>
 <!--div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;"-->
-    <!--app-afelement></app-afelement-->
+    <!--app-afelement></app-afelement>
     <app-arelement [item]="itemAR"></app-arelement> 
 <!--/div>
 <!--div *ngIf="switchTemp">

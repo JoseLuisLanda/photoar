@@ -1,6 +1,11 @@
 <div *ngIf="!switchTemp; else showPhoto">
-    <input type="text" [(ngModel)]="photoNumber">
-<button (click)="switchToFoto()">switch</button>
+    <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
+    <h4 class="text-center text-warning">Inserta tu codigo</h4>
+    <div class="container center form">
+        <input class="form-control form-text m-3" type="text" [(ngModel)]="photoNumber">
+        <button class="form-control btn btn-primary m-3" (click)="switchToFoto()">switch</button>
+        <h5 id="error" class="text-danger text-center">{{textError}}</h5>
+    </div>
 </div>
 <ng-template #showPhoto>
     <app-afelement [item]="itemAR"></app-afelement>

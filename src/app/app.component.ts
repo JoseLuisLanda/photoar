@@ -17,6 +17,7 @@ export class AppComponent implements OnInit, OnChanges  {
   subfotos?: ElementId[];
   myPhoto?: ElementId;
   photoNumber = "";
+  textError = "";
 
   constructor(private fotosService: FotosService) {}
  
@@ -51,10 +52,12 @@ export class AppComponent implements OnInit, OnChanges  {
         //console.log("SwITCHING TO PHOTO");
       }else{
         console.log("no tienes fotos que coincidan");
+        this.textError = "no tienes fotos que coincidan";
       }
       
     }else{
       console.log("empty field to search");
+      this.textError = "no tienes fotos que coincidan";
     }
     
   }

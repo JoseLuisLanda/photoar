@@ -11,15 +11,15 @@ AFRAME.registerComponent('markers_start',{
 		var sceneEl = document.querySelector('a-scene');
 		
 		//list of the markers
-		for(var i=1; i<=1; i++)
+		for(var i=1; i<=4; i++)
 		{
-			var url="../../../assets/presets/pattern-Individual_Blocks-"+i+".patt";
+			var url="../../../assets/presets/pat"+i+".patt";
 			markersURLArray.push(url);
 			markersNameArray.push('Marker_'+i);
 			//console.log(url);
 		}
 
-		for(var k=0; k<1; k++)
+		for(var k=0; k<4; k++)
 		{
 			var markerEl = document.createElement('a-marker');
 			markerEl.setAttribute('type','pattern');
@@ -36,9 +36,9 @@ AFRAME.registerComponent('markers_start',{
 			//textEl.setAttribute('text',{color: 'red', align: 'center', value:markersNameArray[k], width: '5.5'});
 			textEl.setAttribute('id','image');
 			textEl.setAttribute('class','clickable');
-			textEl.setAttribute('gesture-handler',{minScale: '0.25', maxScale: '10'});
-			textEl.setAttribute('geometry',{width:'2', height:'2'});
-			textEl.setAttribute('material',{src: '#menu-img', color: '#FFF'});
+			textEl.setAttribute('gesture-handler',{minScale: '1', maxScale: '10'});
+			textEl.setAttribute('geometry',{width:'3', height:'3'});
+			textEl.setAttribute('material',{src: '#img'+[k], color: '#FFF'});
 			textEl.object3D.position.set(0, .1, 0);
 			textEl.object3D.rotation.set(-90, 0, 0);
 

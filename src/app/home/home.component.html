@@ -1,12 +1,7 @@
-<!--app-header></app-header-->
-
-<div class="main-container">
-  <router-outlet></router-outlet>
+<div class="main container form-group">
+    <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div>
-<!--app-footer></app-footer-->
-
-
-<!--div *ngIf="!switchTemp; else showPhoto">
+<div *ngIf="!switchTemp; else showPhoto">
     <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
     <div class="form-group mt-3">
         <label class="label text-white mb-2">Carrera/Ocupación</label>
@@ -23,16 +18,5 @@
 </div>
 <ng-template #showPhoto>
     <app-afelement [item]="itemAR"></app-afelement>
-  </ng-template-->
+  </ng-template>
 
-
-
-<!--a class="btn btn-primary" routerLink="/afelement">GO HIRO</a>
-<app-arheader (changeModel)="receiveModel($event)"></app-arheader>
-<!--div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;"-->
-    <!--app-afelement></app-afelement>
-    <app-arelement [item]="itemAR"></app-arelement> 
-<!--/div>
-<!--div *ngIf="switchTemp">
-<app-afelement></app-afelement>
-</div-->

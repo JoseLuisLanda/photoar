@@ -7,20 +7,22 @@ import { collection, query, where, getDocs } from "firebase/firestore";
   providedIn: 'root'
 })
 export class FotosService {
-  private dbPath = '/foto';
+  private dbPath = '/lugares';
 
-  fotosRef: AngularFirestoreCollection<Elemento>;
+  elementRef: AngularFirestoreCollection<Elemento>;
 
   constructor(private db: AngularFirestore) {
-    this.fotosRef = db.collection(this.dbPath);
+    this.elementRef = db.collection(this.dbPath);
   }
 
-  getAll(): AngularFirestoreCollection<Elemento> {
-    return this.fotosRef;
+  getAllItems(type: string): AngularFirestoreCollection<Elemento> {
+    this.dbPath = "/"+type;
+    this.elementRef = this.db.collection(this.dbPath)
+    return this.elementRef;
   }
 
   getPhoto(): any{
-    return this.fotosRef;
+    return this.elementRef;
   }
 
   create(tutorial: Element): any {
@@ -28,10 +30,10 @@ export class FotosService {
   }
 
   update(id: string, data: any): Promise<void> {
-    return this.fotosRef.doc(id).update(data);
+    return this.elementRef.doc(id).update(data);
   }
 
   delete(id: string): Promise<void> {
-    return this.fotosRef.doc(id).delete();
+    return this.elementRef.doc(id).delete();
   }
 }

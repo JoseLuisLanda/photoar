@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { environment } from 'src/environments/environment';
     ARHeaderComponent,
     ARElementComponent,
     AnnotationsComponent,
-    AfelementComponent
+    AfelementComponent,
+    HomeComponent
   ],
   imports: [
     FormsModule,

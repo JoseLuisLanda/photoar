@@ -1,14 +1,15 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { ElementId } from './collections/element';
+import { ElementId } from '../collections/element';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class AppComponent implements OnInit, OnChanges  {
+export class HomeComponent implements OnInit {
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean  = false;
   title = 'Visualiz-AR';
@@ -20,17 +21,14 @@ export class AppComponent implements OnInit, OnChanges  {
   elementNumber = "";
   textError = "";
   place = "lugares";
+  constructor( private router: Router, private fotosService: FotosService) { }
 
-  constructor(private fotosService: FotosService) {}
-
-
-  ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
-  }
   ngOnInit(): void {
     this.getElements("lugares");
   }
-
+  gotTo(page: string){
+    this.router.navigateByUrl('/'+page);
+  }
   getElements(type: string){
     this.fotosService.getAllItems(type).snapshotChanges().pipe(map((changes: any[]) =>
     changes.map(c =>

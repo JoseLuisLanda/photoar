@@ -10,14 +10,22 @@ export class AfelementComponent implements OnInit {
   @Input() item: ElementId = 
   {name:"undefined"} as ElementId;
   urlPhoto: string = "";
-
+  urls:string[] = [];
+  tagNumberinit = 5;
+  tagNumberend = 10;
+  tagNumberlength = 5;
   constructor(
     private router: Router
   ) {}
 
   ngOnInit(): void {
-   // console.log("AFELEMENT receiving"+JSON.stringify(this.item));
+    console.log("AFELEMENT receiving"+JSON.stringify(this.item));
     this.urlPhoto = this.item.images![0].url!;
+    
+      this.tagNumberend = this.tagNumberinit+this.item.elements!.length+1;
+      this.tagNumberlength = this.item.images!.length;
+    
+    
   }
   homeAction(){
     //console.log("home action pressed");

@@ -6,12 +6,15 @@ var markersNameArray=[];
 console.log('Add markers to the scene');
 AFRAME.registerComponent('markers_start',{
 	init:function(){
-		console.log('Add markers to the scene');
+		
 
 		var sceneEl = document.querySelector('a-scene');
-		
+		var tagNumberinit = document.getElementById("tagNumberinit").value;
+		var tagNumberlength = document.getElementById("tagNumberlength").value;
+		var tagNumberend = document.getElementById("tagNumberend").value;
+		console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
 		//list of the markers
-		for(var i=1; i<=4; i++)
+		for(var i=tagNumberinit; i<=tagNumberend; i++)
 		{
 			var url="../../../assets/presets/pat"+i+".patt";
 			markersURLArray.push(url);
@@ -19,11 +22,12 @@ AFRAME.registerComponent('markers_start',{
 			//console.log(url);
 		}
 
-		for(var k=0; k<4; k++)
+		for(var k=tagNumberinit; k<=tagNumberlength; k++)
 		{
 			var markerEl = document.createElement('a-marker');
 			markerEl.setAttribute('type','pattern');
 			markerEl.setAttribute('url',markersURLArray[k]);
+			//markerEl.setAttribute('url',markersNameArray[k]);
 			markerEl.setAttribute('id',markersNameArray[k]);
 
 			markerEl.setAttribute('registerevents','');
@@ -42,21 +46,7 @@ AFRAME.registerComponent('markers_start',{
 			textEl.object3D.position.set(0, .1, 0);
 			textEl.object3D.rotation.set(-90, 0, 0);
 
-/*
-class="clickable"
-      gesture-handler="minScale: 0.25; maxScale: 10"
 
- <a-assets>
-      <img id="earth-sphere" src="../../../assets/images/earth-sphere.jpeg" />
-          <a-asset-item id="back" src="../../../assets/models/hoverboard.glb"></a-asset-item>
-    </a-assets>
-  <a-plane id="followerPlane"
-          position="0 0 0"
-          position="0 1 0"
-          rotation="-90 0 0"
-          material="src:#earth-sphere;">
-   </a-plane>
-*/
 
 			markerEl.appendChild(textEl);
 		}

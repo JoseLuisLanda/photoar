@@ -1,3 +1,6 @@
+<input id="tagNumberinit" type="hidden" value="{{tagNumberinit}}" />
+<input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
+<input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
   <button (click)="homeAction()" class="say-hi-button">Home</button>
 </div>
@@ -5,7 +8,7 @@
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
   gesture-detector>
   <a-assets>
-    <img *ngFor="let image of item.images; index as i" crossorigin="anonymous" id="{{'img'+i}}" src={{image.url}} />
+    <img *ngFor="let image of item.images; index as i" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
 	<!--img crossorigin="anonymous" id="img0" src={{urlPhoto}} />
   <img crossorigin="anonymous" id="img1" src={{urlPhoto}} />
   <img crossorigin="anonymous" id="img2" src={{urlPhoto}} />
@@ -16,4 +19,13 @@
 		<a-cursor> </a-cursor>
 		
     	</a-entity>
+      <!--a-marker *ngFor="let element of item.elements; index as ind" registerevents 
+      url="{{urltest}}" id="{{element.name}}" type='pattern'>
+        <a-image class='clickable' gesture-handler="{minScale: '1', maxScale: '10'}" 
+        geometry="{width:'3', height:'3'}" material="{src: '#img'+ind, color: '#FFF'}"
+        position="0, .1, 0" rotation="-90, 0, 0">
+  
+        </a-image>
+  
+      </a-marker-->
 	</a-scene>

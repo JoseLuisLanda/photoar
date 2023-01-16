@@ -23,6 +23,8 @@ export class AfelementComponent implements OnInit {
     this.urlPhoto = this.item.images![0].url!;
     
     this.tagNumberlength = this.item.images!.length;
+    this.tagNumberinit = this.item.indexInit!;
+    this.tagNumberend = this.item.indexEnd!;
       
     
     

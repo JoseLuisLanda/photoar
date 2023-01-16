@@ -14,16 +14,18 @@ AFRAME.registerComponent('markers_start',{
 		var tagNumberend = document.getElementById("tagNumberend").value;
 		console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
 		//list of the markers
-		for(var i=tagNumberinit; i<=tagNumberend; i++)
+		for(var i=0; i<=tagNumberlength; i++)
 		{
-			var url="../../../assets/presets/pat"+i+".patt";
+			var indexPath = +tagNumberinit+i;
+			var url="../../../assets/presets/pat"+indexPath+".patt";
 			markersURLArray.push(url);
-			markersNameArray.push('Marker_'+i);
+			markersNameArray.push('Marker_'+(indexPath));
 			//console.log(url);
 		}
 
-		for(var k=tagNumberinit; k<=tagNumberlength; k++)
+		for(var k=0; k<=tagNumberlength; k++)
 		{
+			console.log('Add markers to the scene');
 			var markerEl = document.createElement('a-marker');
 			markerEl.setAttribute('type','pattern');
 			markerEl.setAttribute('url',markersURLArray[k]);
@@ -42,7 +44,7 @@ AFRAME.registerComponent('markers_start',{
 			textEl.setAttribute('class','clickable');
 			textEl.setAttribute('gesture-handler',{minScale: '1', maxScale: '10'});
 			textEl.setAttribute('geometry',{width:'3', height:'3'});
-			textEl.setAttribute('material',{src: '#img'+[k], color: '#FFF'});
+			textEl.setAttribute('material',{src: '#img'+[(+tagNumberinit+k)], color: '#FFF'});
 			textEl.object3D.position.set(0, .1, 0);
 			textEl.object3D.rotation.set(-90, 0, 0);
 

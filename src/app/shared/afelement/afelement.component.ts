@@ -22,8 +22,8 @@ export class AfelementComponent implements OnInit {
     console.log("AFELEMENT receiving"+JSON.stringify(this.item));
     this.urlPhoto = this.item.images![0].url!;
     
-      this.tagNumberend = this.tagNumberinit+this.item.elements!.length+1;
-      this.tagNumberlength = this.item.images!.length;
+    this.tagNumberlength = this.item.images!.length;
+      
     
     
   }

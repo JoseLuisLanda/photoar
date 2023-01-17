@@ -10,9 +10,9 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   nombreModelo: Elemento[] = [
 //models tuzo
 {name:"Duende",url:"../../../assets/models/duende.glb",},
-    {name:"Gnomo",url:"../../../assets/models/gnomo.glb",},//      36
+    {name:"Gnomo",url:"../../../assets/models/gnomocut.glb",},//      36
     {name:"Gnomo 2",url:"../../../assets/models/gnomo1.glb",},
-    {name:"Pitufo",url:"../../../assets/models/pitufo.glb",},
+    {name:"Pitufo",url:"../../../assets/models/pituf.glb",},
     {name:"Armadillo",url:"../../../assets/modelstuzofari/armadillo.glb",},//8    0
     {name:"Bengali",url:"../../../assets/modelstuzofari/bengal_cat.glb",},//5   1
     {name:"Lobo",url:"../../../assets/modelstuzofari/lobo_anim.glb",},//1    3 ok gde

@@ -6,30 +6,9 @@
         </button>
       </h2>
       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body">
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(0)">Armadillo</button>    
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(1)">Bengali</button>
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(2)">Lagarto</button-->
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(2)">Lobo Aminado</button>
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(4)">Lobo</button--ok>
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(5)">Lobo black</button-->
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(3)">Pinguino</button>
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(4)">Husky</button-->
+        <div class="accordion-body overflow" style="overflow: scroll">
+          <button *ngFor="let element of nombreModelo" type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(element.url)">{{element.name}}</button>    
 
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(6)">Alien</button>    
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(7)">Ankylo</button-->
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(6)">Cerato</button>
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(7)">Gallimi</button>
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(12)">Megalod</button>
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(13)">Mosa</button>
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(14)">Paluxy</button-->
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(5)">Quetzal</button--ok>
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(6)">Spino</button--ok>
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(17)">Stygi</button-->
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(7)">Suchom</button>
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(8)">Toros</button>
-          <!--button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(20)">Tricer</button-->
-          <button type="button" class="btn btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(9)">Velocy</button>
         </div>
       </div>
     </div>

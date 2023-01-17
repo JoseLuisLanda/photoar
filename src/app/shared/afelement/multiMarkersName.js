@@ -6,8 +6,6 @@ var markersNameArray=[];
 console.log('Add markers to the scene');
 AFRAME.registerComponent('markers_start',{
 	init:function(){
-		
-
 		var sceneEl = document.querySelector('a-scene');
 		var tagNumberinit = document.getElementById("tagNumberinit").value;
 		var tagNumberlength = document.getElementById("tagNumberlength").value;

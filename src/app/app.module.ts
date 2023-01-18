@@ -12,6 +12,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
+import { ModalComponent } from './shared/modal/modal.component';
+import { ElementcardComponent } from './shared/elementcard/elementcard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HomeComponent } from './home/home.component';
     ARElementComponent,
     AnnotationsComponent,
     AfelementComponent,
-    HomeComponent
+    HomeComponent,
+    ModalComponent,
+    ElementcardComponent
   ],
   imports: [
     FormsModule,

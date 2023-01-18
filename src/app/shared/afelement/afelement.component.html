@@ -2,8 +2,11 @@
 <input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
 <input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
-  <button (click)="homeAction()" class="say-hi-button">Home</button>
+  <button (click)="homeAction()" class="btn btn-primary say-hi-button">Home</button>
+  <button type="button" id="showModal" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Detalle</button>
 </div>
+
 <a-scene markers_start vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
   gesture-detector>
@@ -29,3 +32,6 @@
   
       </a-marker-->
 	</a-scene>
+  
+  
+  <app-modal [item]="item"></app-modal>

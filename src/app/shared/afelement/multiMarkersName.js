@@ -72,6 +72,7 @@ AFRAME.registerComponent('registerevents', {
 				var markerId = marker.id;
 				//window.location = 'https://www.google.com/';  //works
 				console.log('Marker Found: ', markerId);
+				document.getElementById("showModal").style.visibility = "visible";
 				marker.setAttribute("position", marker.getAttribute("position"));
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
 				marker.addEventListener("onefingermove", handleRotation);
@@ -95,6 +96,7 @@ AFRAME.registerComponent('registerevents', {
 			});
 
 			marker.addEventListener("markerLost",() =>{
+				document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
 				console.log('Marker Lost: ', markerId);
 			});

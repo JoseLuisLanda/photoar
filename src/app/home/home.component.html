@@ -1,7 +1,7 @@
-<div class="main container form-group">
+<div *ngIf="!switchTemp; else showPhoto">
+  <div class="main container form-group">
     <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div>
-<div *ngIf="!switchTemp; else showPhoto">
     <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
     <div class="form-group mt-3">
         <label class="label text-white mb-2">Carrera/Ocupación</label>

@@ -22,14 +22,8 @@
   }
 
   #showModal{
-      background-color: yellowgreen;
-      padding: 0.25em;
-      border-radius: 4px;
-      border: none;
-      color: black;
-      width: 4em;
-      height: 2em;
     
+  
     visibility: hidden;
-    background-color: azure;
+    
   }

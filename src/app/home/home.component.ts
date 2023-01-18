@@ -42,9 +42,9 @@ export class HomeComponent implements OnInit {
       if(type == "lugares")
       this.lugares = data;
       else{
-        console.log("getting elements: "+this.place);
+       // console.log("getting elements: "+this.place);
         this.elements = data;
-        console.log("getting elements: "+this.elements);
+       // console.log("getting elements: "+this.elements);
         if(this.elements!.length<1)
         {
           this.textError = "no existe contenido para este lugar";

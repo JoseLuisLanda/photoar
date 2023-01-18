@@ -11,9 +11,9 @@ export class AfelementComponent implements OnInit {
   {name:"undefined"} as ElementId;
   urlPhoto: string = "";
   urls:string[] = [];
-  tagNumberinit = 5;
-  tagNumberend = 10;
-  tagNumberlength = 5;
+  tagNumberinit = 0;
+  tagNumberend = 1;
+  tagNumberlength = 1;
   constructor(
     private router: Router
   ) {}
@@ -22,9 +22,12 @@ export class AfelementComponent implements OnInit {
     console.log("AFELEMENT receiving"+JSON.stringify(this.item));
     this.urlPhoto = this.item.images![0].url!;
     
-    this.tagNumberlength = this.item.images!.length;
-    this.tagNumberinit = this.item.indexInit!;
-    this.tagNumberend = this.item.indexEnd!;
+    this.tagNumberlength = this.item.images!.length !== undefined 
+    && this.item.images!.length >0 ? this.item.images!.length:this.tagNumberlength;
+    this.tagNumberinit = this.item.indexInit !== undefined 
+    && this.item.images!.length >0 ? this.item.indexInit:this.tagNumberinit;
+    this.tagNumberend = this.item.indexEnd !== undefined 
+    && this.item.images!.length >0 ?this.item.indexEnd:this.tagNumberend;
       
     
     

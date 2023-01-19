@@ -17,7 +17,7 @@ AFRAME.registerComponent('markers_start',{
 			var indexPath = +tagNumberinit+i;
 			var url="../../../assets/presets/pat"+indexPath+".patt";
 			markersURLArray.push(url);
-			markersNameArray.push('Marker_'+(indexPath));
+			markersNameArray.push(i);
 			//console.log(url);
 		}
 
@@ -74,7 +74,7 @@ AFRAME.registerComponent('registerevents', {
 				console.log('Marker Found: ', markerId);
 				
 				document.getElementById("showModal").style.visibility = "visible";
-				document.getElementById("imgIndex").value = marker.id.split("_")[1];
+				document.getElementById("imgIndex").value = marker.id;
 
 				marker.setAttribute("position", marker.getAttribute("position"));
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));

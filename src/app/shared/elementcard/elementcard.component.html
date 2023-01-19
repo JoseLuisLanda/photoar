@@ -20,13 +20,25 @@
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 
         <div class="carousel-inner">
-          <div *ngFor="let image of item.images![currentMarkerIndex].elements; index as i" [ngClass]="{
-            'carousel-item': true,
-            'active': i==0
-          }"
-          >
-            <img src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
+          <div *ngIf="item.value == 'photo'; else place">
+            <div *ngFor="let image of item.images; index as i" [ngClass]="{
+              'carousel-item': true,
+              'active': i==0
+            }"
+            >
+              <img src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
+            </div>
           </div>
+          <ng-template #place>
+            <div *ngFor="let image of item.images![currentMarkerIndex].elements; index as i" [ngClass]="{
+              'carousel-item': true,
+              'active': i==0
+            }"
+            >
+              <img src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
+            </div>
+          </ng-template>
+          
           
          
         </div>

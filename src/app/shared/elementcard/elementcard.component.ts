@@ -18,7 +18,10 @@ export class ElementcardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+    if(this.item.type == "photo")
+    this.imgs = this.item!.images!
+    else
+    this.imgs = this.item.images![this.currentMarkerIndex].elements!
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.imgs = this.item!.images !==undefined ?this.item!.images:this.imgs;

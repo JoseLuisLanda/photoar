@@ -21,11 +21,11 @@ export class AfelementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //console.log("AFELEMENT receiving"+JSON.stringify(this.item));
+    console.log("AFELEMENT receiving"+JSON.stringify(this.item));
     this.urlPhoto = this.item.images![0].url!;
     
     this.tagNumberlength = this.item.images!.length !== undefined 
-    && this.item.images!.length >0 ? this.item.images!.length:this.tagNumberlength;
+    && this.item.images!.length >0 ? this.item.images!.length-1:this.tagNumberlength;
     this.tagNumberinit = this.item.indexInit !== undefined 
     && this.item.images!.length >0 ? this.item.indexInit:this.tagNumberinit;
     this.tagNumberend = this.item.indexEnd !== undefined 

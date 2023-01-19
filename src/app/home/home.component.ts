@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
 
       if(this.subElements.length>0){
         this.itemAR = this.subElements[0];
+        this.itemAR.type = "place";
         this.switchTemp = true;
         //console.log("SwITCHING TO PHOTO");
       }else{
@@ -80,7 +81,9 @@ export class HomeComponent implements OnInit {
   }
   switchToPlace(event: any){
     //console.log("otro modelo received: " + JSON.stringify(event));
+    
     this.itemAR = event;
+    this.itemAR.type = "photos";
         this.switchTemp = true;
   }
 

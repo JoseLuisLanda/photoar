@@ -99,7 +99,7 @@ AFRAME.registerComponent('registerevents', {
 			});
 
 			marker.addEventListener("markerLost",() =>{
-				//document.getElementById("showModal").style.visibility = "hidden";
+				document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
 				console.log('Marker Lost: ', markerId);
 			});

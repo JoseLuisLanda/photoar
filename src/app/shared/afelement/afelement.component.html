@@ -3,7 +3,7 @@
 <input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
   <button (click)="homeAction()" class="btn btn-primary">Home</button>
-  <button type="button" id="showModal" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Detalle</button>
 </div>
 
@@ -32,6 +32,6 @@
   
       </a-marker-->
 	</a-scene>
+  <input type="hidden" id="imgIndex" [value] = "currentMarkerIndex"/>
   
-  
-  <app-modal [item]="item"></app-modal>
+  <app-modal [item]="item" [currentMarkerIndex]="currentMarkerIndex"></app-modal>

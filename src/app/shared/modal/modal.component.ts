@@ -8,7 +8,7 @@ import { ElementId } from 'src/app/collections/element';
 })
 export class ModalComponent implements OnInit {
   @Input() item: ElementId = {} as ElementId;
-  @Input() element: string | undefined;
+  @Input() currentMarkerIndex: number = 0;
   @Input() edit: boolean = false;
   @Input() detail: boolean = false;
   @Output() valueInputText: EventEmitter<ElementId> = new EventEmitter<ElementId>();

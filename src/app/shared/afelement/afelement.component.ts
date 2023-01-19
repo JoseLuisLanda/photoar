@@ -14,6 +14,8 @@ export class AfelementComponent implements OnInit {
   tagNumberinit = 0;
   tagNumberend = 1;
   tagNumberlength = 1;
+  currentMarkerIndex = 0;
+
   constructor(
     private router: Router
   ) {}
@@ -38,5 +40,10 @@ export class AfelementComponent implements OnInit {
   .then(() => {
     window.location.reload();
   });
+  }
+  setMarkerIndex(){
+    this.currentMarkerIndex = +(<HTMLInputElement> document.getElementById("imgIndex")).value;
+    
+    //console.log("marker value is: "+markerIndex+"currentmarkerindex: "+this.currentMarkerIndex);
   }
 }

@@ -8,6 +8,7 @@ import { ElementId } from 'src/app/collections/element';
 })
 export class ElementcardComponent implements OnInit {
   @Input() item: ElementId ={uid:"1"};
+  @Input() currentMarkerIndex: number = 0;
   @Input() selected: boolean = false;
   @Input() detail: boolean = false;
   @Input() showImg: boolean = false;

@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   title = 'Visualiz-AR';
   itemAR:ElementId={uid:"sky",name:"../../../assets/models/Astronaut.glb"};
   elements?: ElementId[]=[];
-  lugares?: ElementId[]=[{uid: "2", name: "Fotos"}];
+  lugares?: ElementId[]=[{uid: "2", name: "Foto", description:"foto"}];
   subElements?: ElementId[];
   myPhoto?: ElementId;
   elementNumber = "";
@@ -25,7 +25,9 @@ export class HomeComponent implements OnInit {
   constructor( private router: Router, private fotosService: FotosService) { }
 
   ngOnInit(): void {
-    this.getElements("lugares");
+    //functionality to get all places for dropdown
+    // this.getElements("lugares");
+    this.getElements("foto");
   }
   gotTo(page: string){
     this.router.navigateByUrl('/'+page);

@@ -1,9 +1,39 @@
+<!--app-header></app-header-->
 
-<!--a class="btn btn-primary" routerLink="/afelement">GO HIRO</a-->
-<!--app-arheader (changeModel)="receiveModel($event)"></app-arheader-->
+
+
+  <router-outlet></router-outlet>
+
+<!--app-footer></app-footer-->
+
+
+<!--div *ngIf="!switchTemp; else showPhoto">
+    <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
+    <div class="form-group mt-3">
+        <label class="label text-white mb-2">Carrera/Ocupación</label>
+        <select class="form-select form-select-md mb-3" name="title" [(ngModel)]="place" aria-label=".form-select-lg example">
+          <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
+        </select>
+      </div>
+    <h4 class="text-center text-warning">Inserta tu codigo</h4>
+    <div class="container center form">
+        <input class="form-control form-text m-3" type="text" [(ngModel)]="elementNumber">
+        <button class="form-control btn btn-primary m-3" (click)="switchToPlace()">Buscar</button>
+        <h5 id="error" class="text-danger text-center">{{textError}}</h5>
+    </div>
+</div>
+<ng-template #showPhoto>
+    <app-afelement [item]="itemAR"></app-afelement>
+  </ng-template-->
+
+
+
+<!--a class="btn btn-primary" routerLink="/afelement">GO HIRO</a>
+<app-arheader (changeModel)="receiveModel($event)"></app-arheader>
 <!--div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;"-->
-    <app-afelement></app-afelement>
-    <!--app-arelement [item]="itemAR"></app-arelement--> 
+    <!--app-afelement></app-afelement>
+    <app-arelement [item]="itemAR"></app-arelement> 
+
 <!--/div>
 <!--div *ngIf="switchTemp">
 <app-afelement></app-afelement>

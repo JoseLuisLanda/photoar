@@ -6,24 +6,32 @@ var markersNameArray=[];
 console.log('Add markers to the scene');
 AFRAME.registerComponent('markers_start',{
 	init:function(){
-		console.log('Add markers to the scene');
-
 		var sceneEl = document.querySelector('a-scene');
-		
+		var tagNumberinit = document.getElementById("tagNumberinit").value;
+		var tagNumberlength = document.getElementById("tagNumberlength").value;
+		var tagNumberend = document.getElementById("tagNumberend").value;
+		console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
 		//list of the markers
-		for(var i=1; i<=23; i++)
+
+		for(var i=0; i<=tagNumberlength; i++)
 		{
-			var url = "../../../assets/presets/patterns/pat"+i+".patt";
+			var indexPath = +tagNumberinit+i;
+			var url="../../../assets/presets/pat"+indexPath+".patt";
+
 			markersURLArray.push(url);
-			markersNameArray.push('Marker_'+i);
+			markersNameArray.push(i);
 			//console.log(url);
 		}
 
-		for(var k=0; k<23; k++)
+
+		for(var k=0; k<=tagNumberlength; k++)
+
 		{
+			console.log('Add markers to the scene');
 			var markerEl = document.createElement('a-marker');
 			markerEl.setAttribute('type','pattern');
 			markerEl.setAttribute('url',markersURLArray[k]);
+			//markerEl.setAttribute('url',markersNameArray[k]);
 			markerEl.setAttribute('id',markersNameArray[k]);
 
 			markerEl.setAttribute('registerevents','');
@@ -37,27 +45,14 @@ AFRAME.registerComponent('markers_start',{
 			textEl.setAttribute('id','image');
 			textEl.setAttribute('class','clickable');
 			textEl.setAttribute('gesture-handler',{minScale: '1', maxScale: '10'});
-			textEl.setAttribute('geometry',{width: size, height:size});
-			textEl.setAttribute('material',{src: '#menu'+[k], color: '#FFF'});
-			textEl.object3D.position.set(0, 0, 0);
-			textEl.object3D.rotation.set(-90, 0, 0);
-			markerEl.appendChild(textEl);
-		
-/*
-class="clickable"
-      gesture-handler="minScale: 0.25; maxScale: 10"
 
- <a-assets>
-      <img id="earth-sphere" src="../../../assets/images/earth-sphere.jpeg" />
-          <a-asset-item id="back" src="../../../assets/models/hoverboard.glb"></a-asset-item>
-    </a-assets>
-  <a-plane id="followerPlane"
-          position="0 0 0"
-          position="0 1 0"
-          rotation="-90 0 0"
-          material="src:#earth-sphere;">
-   </a-plane>
-*/
+			textEl.setAttribute('geometry',{width:'3', height:'3'});
+			textEl.setAttribute('material',{src: '#img'+[(+tagNumberinit+k)], color: '#FFF'});
+			textEl.object3D.position.set(0, .1, 0);
+			textEl.object3D.rotation.set(-90, 0, 0);
+
+
+
 
 			
 		}
@@ -83,6 +78,10 @@ AFRAME.registerComponent('registerevents', {
 				var markerId = marker.id;
 				//window.location = 'https://www.google.com/';  //works
 				console.log('Marker Found: ', markerId);
+				
+				document.getElementById("showModal").style.visibility = "visible";
+				document.getElementById("imgIndex").value = marker.id;
+
 				marker.setAttribute("position", marker.getAttribute("position"));
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
 				marker.addEventListener("onefingermove", handleRotation);
@@ -106,6 +105,7 @@ AFRAME.registerComponent('registerevents', {
 			});
 
 			marker.addEventListener("markerLost",() =>{
+				document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
 				console.log('Marker Lost: ', markerId);
 			});

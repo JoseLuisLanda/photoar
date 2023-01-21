@@ -1,40 +1,39 @@
+<input id="tagNumberinit" type="hidden" value="{{tagNumberinit}}" />
+<input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
+<input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
+<div class="buttons">
+  <button (click)="homeAction()" class="btn btn-primary">Home</button>
+  <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Detalle</button>
+</div>
+
 <a-scene markers_start vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
   gesture-detector>
   <a-assets>
-	
-	<img id="menu0" src="../../../assets/images/dato1.jpg" />
-	<img id="menu1" src="../../../assets/images/dato1.jpg" />
-	<img id="menu2" src="../../../assets/images/dato2.jpg" />
-	<img id="menu3" src="../../../assets/images/dato3.jpg" />
-	<img id="menu4" src="../../../assets/images/dato4.jpg" />
-	<img id="menu5" src="../../../assets/images/dato5.jpg" />
-	<img id="menu6" src="../../../assets/images/dato6.jpg" />
-	<img id="menu7" src="../../../assets/images/dato7.jpg" />
-	<img id="menu8" src="../../../assets/images/dato8.jpg" />
-	<img id="menu9" src="../../../assets/images/dato9.jpg" />
-	<img id="menu10" src="../../../assets/images/dato10.jpg" />
-	<img id="menu11" src="../../../assets/images/dato11.jpg" />
-	<img id="menu12" src="../../../assets/images/dato12.jpg" />
-	<img id="menu13" src="../../../assets/images/dato13.jpg" />
-	<img id="menu14" src="../../../assets/images/dato14.jpg" />
-	<img id="menu15" src="../../../assets/images/dato15.jpg" />
-	<img id="menu16" src="../../../assets/images/dato16.jpg" />
-	<img id="menu17" src="../../../assets/images/dato17.jpg" />
-	<img id="menu18" src="../../../assets/images/dato18.jpg" />
-	<img id="menu19" src="../../../assets/images/dato20.jpg" />
-	<img id="menu20" src="../../../assets/images/dato21.jpg" />
-	<img id="menu21" src="../../../assets/images/dato22.jpg" />
-	<img id="menu22" src="../../../assets/images/dato23.jpg" />
-	<img id="menu23" src="../../../assets/images/dato24.jpg" />
-	<!--img id="menu24" src="../../../assets/images/dato25.jpg"/>
-	<img id="menu25" src="../../../assets/images/dato26.jpg" />
-	<img id="menu26" src="../../../assets/images/dato26.jpg" />
-	<img id="menu27" src="../../../assets/images/dato28.jpg" />
-	<img id="menu28" src="../../../assets/images/dato29.jpg" /-->
-	<video id="cumple" autoplay loop="true" src="../../../assets/videos/replay.mp4"></video>
+
+    <img *ngFor="let image of item.images; index as i" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+	<!--img crossorigin="anonymous" id="img0" src={{urlPhoto}} />
+  <img crossorigin="anonymous" id="img1" src={{urlPhoto}} />
+  <img crossorigin="anonymous" id="img2" src={{urlPhoto}} />
+  <img crossorigin="anonymous" id="img3" src={{urlPhoto}} /-->
+		<a-asset-item id="back" src="../../../assets/models/hoverboard.glb"></a-asset-item>
+
   </a-assets>  	
   <a-entity id='userCamera' camera>
 		<a-cursor> </a-cursor>
+		
     	</a-entity>
+      <!--a-marker *ngFor="let element of item.elements; index as ind" registerevents 
+      url="{{urltest}}" id="{{element.name}}" type='pattern'>
+        <a-image class='clickable' gesture-handler="{minScale: '1', maxScale: '10'}" 
+        geometry="{width:'3', height:'3'}" material="{src: '#img'+ind, color: '#FFF'}"
+        position="0, .1, 0" rotation="-90, 0, 0">
+  
+        </a-image>
+  
+      </a-marker-->
 	</a-scene>
+  <input type="hidden" id="imgIndex" [value] = "currentMarkerIndex"/>
+  
+  <app-modal [item]="item" [currentMarkerIndex]="currentMarkerIndex"></app-modal>

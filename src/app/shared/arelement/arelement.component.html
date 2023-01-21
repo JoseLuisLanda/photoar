@@ -1,4 +1,5 @@
 
+
 <!--a-scene embedded arjs>
     <a-marker preset="hiro">
         <a-entity gltf-model="#tree" scale="0.01 0.01 0.01"></a-entity>
@@ -14,12 +15,10 @@
   <app-arheader (changeModel)="receiveModel($event)"></app-arheader>
   <div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;">
   <model-viewer src="{{itemAR.name}}" 
+
   ar ar-scale="auto" camera-controls touch-action="pan-y" 
   alt="A 3D model of an astronaut" 
   xr-environment
   ar  ></model-viewer>
+
   </div>
-  <!--model-viewer src="{{item.name}}" 
-  ar ar-scale="fixed" camera-controls touch-action="pan-y" 
-  alt="A 3D model of an item" 
-  skybox-image="../../../assets/view.hdr" xr-environment></model-viewer-->

@@ -12,16 +12,20 @@ AFRAME.registerComponent('markers_start',{
 		var tagNumberend = document.getElementById("tagNumberend").value;
 		console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
 		//list of the markers
+
 		for(var i=0; i<=tagNumberlength; i++)
 		{
 			var indexPath = +tagNumberinit+i;
 			var url="../../../assets/presets/pat"+indexPath+".patt";
+
 			markersURLArray.push(url);
 			markersNameArray.push(i);
 			//console.log(url);
 		}
 
+
 		for(var k=0; k<=tagNumberlength; k++)
+
 		{
 			console.log('Add markers to the scene');
 			var markerEl = document.createElement('a-marker');
@@ -32,15 +36,16 @@ AFRAME.registerComponent('markers_start',{
 
 			markerEl.setAttribute('registerevents','');
 			sceneEl.appendChild(markerEl);
-
+			
 			//Adding text to each marker
 			var textEl = document.createElement('a-image');
-			
+			var size = 2;
 			//textEl.setAttribute('id','text');
 			//textEl.setAttribute('text',{color: 'red', align: 'center', value:markersNameArray[k], width: '5.5'});
 			textEl.setAttribute('id','image');
 			textEl.setAttribute('class','clickable');
 			textEl.setAttribute('gesture-handler',{minScale: '1', maxScale: '10'});
+
 			textEl.setAttribute('geometry',{width:'3', height:'3'});
 			textEl.setAttribute('material',{src: '#img'+[(+tagNumberinit+k)], color: '#FFF'});
 			textEl.object3D.position.set(0, .1, 0);
@@ -48,7 +53,8 @@ AFRAME.registerComponent('markers_start',{
 
 
 
-			markerEl.appendChild(textEl);
+
+			
 		}
 	}
 });

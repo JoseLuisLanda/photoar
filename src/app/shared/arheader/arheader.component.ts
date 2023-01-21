@@ -7,6 +7,7 @@ import { Elemento } from 'src/app/collections/element';
 })
 export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
+
   nombreModelo: Elemento[] = [
     //models tuzo
     { name: "Chase", url: "../../../assets/models/chase_tuzoo.glb", },
@@ -82,14 +83,17 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     console.log("onchanges arheader");
 
+
   }
 
   ngOnInit(): void {
   }
+
   sendModel(modelName: any) {
     console.log("sending modelo: " + modelName);
 
     this.changeModel.emit(modelName);
+
 
   }
 

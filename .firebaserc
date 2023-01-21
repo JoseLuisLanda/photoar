@@ -1,7 +1,5 @@
 {
   "projects": {
-
-    "default": "mialtar"
-
+    "default": "visualizr"
   }
 }

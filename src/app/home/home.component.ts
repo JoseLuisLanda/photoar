@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     //functionality to get all places for dropdown
-    // this.getElements("lugares");
-    this.getElements("foto");
+    this.getElements("lugares");
+    //this.getElements("foto");
   }
   gotTo(page: string){
     this.router.navigateByUrl('/'+page);

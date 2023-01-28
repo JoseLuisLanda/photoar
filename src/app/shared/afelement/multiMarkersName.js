@@ -72,8 +72,8 @@ AFRAME.registerComponent('registerevents', {
 				var markerId = marker.id;
 				//window.location = 'https://www.google.com/';  //works
 				console.log('Marker Found: ', markerId);
-				
-				document.getElementById("showModal").style.visibility = "visible";
+				//show button for modal details, 
+				//document.getElementById("showModal").style.visibility = "visible";
 				document.getElementById("imgIndex").value = marker.id;
 
 				marker.setAttribute("position", marker.getAttribute("position"));

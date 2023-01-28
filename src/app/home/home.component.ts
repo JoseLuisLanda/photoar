@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     //functionality to get all places for dropdown
     this.getElements("lugares");
-    //this.getElements("foto");
+    this.getElements("foto");
   }
   gotTo(page: string){
     this.router.navigateByUrl('/'+page);
@@ -40,12 +40,17 @@ export class HomeComponent implements OnInit {
     )
     )
     ).subscribe(data => {
-      
-      if(type == "lugares")
-      this.lugares = data;
+      //filtering only active or type of firs dropdown TODO
+      if(type == "lugares"){
+        this.lugares = data.filter(obj => {
+          return obj.status == true
+        });
+      }
       else{
        // console.log("getting elements: "+this.place);
-        this.elements = data;
+        this.elements = data.filter(obj => {
+          return obj.name != "default"
+        });
        // console.log("getting elements: "+this.elements);
         if(this.elements!.length<1)
         {

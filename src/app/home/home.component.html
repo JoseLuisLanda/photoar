@@ -1,0 +1,29 @@
+<div *ngIf="!switchTemp; else showPhoto">
+  <div class="main container form-group">
+    <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
+</div>
+    <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
+    <div class="form-group mt-3">
+        <label class="label text-white mb-2">Carrera/Ocupación</label>
+        <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
+          <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
+        </select>
+      </div>
+      <div  *ngIf="!showCodeDiv; else showCodeInput">
+        <button (click)="switchToPlace(element)" class="btn btn-outline-primary" *ngFor="let element of elements">{{element.name}}</button>
+      </div>
+      <ng-template #showCodeInput>
+        <div class="container center form"  >
+            <h4 class="text-center text-warning">Inserta tu codigo</h4>
+            <input id="codeForElement" class="form-control form-text m-3" type="text" [(ngModel)]="elementNumber">
+            <button class="form-control btn btn-primary m-3" (click)="switchToPhoto()">Buscar</button>
+        
+         </div>
+         
+    </ng-template>
+</div>
+<ng-template #showPhoto>
+    <app-afelement [item]="itemAR"></app-afelement>
+  </ng-template>
+  <h5 id="error" class="text-danger text-center">{{textError}}</h5>
+

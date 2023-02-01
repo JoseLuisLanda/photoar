@@ -44,6 +44,7 @@ export interface Elemento {
     group?:string;
     mine?: boolean;
     value?: string;
+    baseUrlPat?: string;
     indexInit? :number;
     indexEnd? :number;
     status?: boolean;

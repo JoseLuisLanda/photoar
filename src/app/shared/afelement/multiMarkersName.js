@@ -53,6 +53,8 @@ AFRAME.registerComponent('markers_start',{
 	}
 });
 
+
+
 function handleRotation(event) {
     if (isMarkerVisible) {
       el.object3D.rotation.y +=
@@ -78,30 +80,16 @@ AFRAME.registerComponent('registerevents', {
 
 				marker.setAttribute("position", marker.getAttribute("position"));
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
-				marker.addEventListener("onefingermove", handleRotation);
-				marker.addEventListener("twofingermove", function () {
-					
-						if (isMarkerVisible) {
-						  this.scaleFactor *=
-							1 + detail.spreadChange / detail.startSpread;
-					
-						  this.scaleFactor = Math.min(
-							Math.max(this.scaleFactor, this.data.minScale),
-							this.data.maxScale
-						  );
-					
-						  el.object3D.scale.x = scaleFactor * initialScale.x;
-						  el.object3D.scale.y = scaleFactor * initialScale.y;
-						  el.object3D.scale.z = scaleFactor * initialScale.z;
-						}
-					  
-				});
+			
+				var v = document.querySelector('#mivideo2').play();
+				
 			});
 
 			marker.addEventListener("markerLost",() =>{
 				document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
 				console.log('Marker Lost: ', markerId);
+				var v = document.querySelector('#mivideo2').pause();
 			});
 		},
 	});

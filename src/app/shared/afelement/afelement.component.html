@@ -7,24 +7,34 @@
     Detalle</button>
 </div>
 
-<a-scene markers_start vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
+<a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
-  gesture-detector>
+  gesture-detector class="scene">
   <a-assets>
-    <img *ngFor="let image of item.images; index as i" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+    <div *ngFor="let image of item.images; index as i" >
+      <img *ngIf="image.type == 'image'" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+      <video *ngIf="image.type == 'video'" id="mivideo2" crossOrigin="anonymous" playsinline webkitplaysinline 
+      controls muted src="{{image.url}}" ></video>
+ 
+  </div>
+  
 	<!--img crossorigin="anonymous" id="img0" src={{urlPhoto}} />
   <img crossorigin="anonymous" id="img1" src={{urlPhoto}} />
   <img crossorigin="anonymous" id="img2" src={{urlPhoto}} />
   <img crossorigin="anonymous" id="img3" src={{urlPhoto}} /-->
+ 
+
 		<a-asset-item id="back" src="../../../assets/models/hoverboard.glb"></a-asset-item>
   </a-assets>  	
   <a-entity id='userCamera' camera>
 		<a-cursor> </a-cursor>
 		
     	</a-entity>
-      <!--a-marker *ngFor="let element of item.elements; index as ind" registerevents 
-      url="{{urltest}}" id="{{element.name}}" type='pattern'>
-        <a-image class='clickable' gesture-handler="{minScale: '1', maxScale: '10'}" 
+
+      
+      <!--a-marker *ngFor="let image of item.images; index as i" 
+      url={{urlPhoto}} id="{{image.name}}" type='pattern'>
+        <!--a-image class='clickable' gesture-handler="{minScale: '1', maxScale: '10'}" 
         geometry="{width:'3', height:'3'}" material="{src: '#img'+ind, color: '#FFF'}"
         position="0, .1, 0" rotation="-90, 0, 0">
   

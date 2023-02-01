@@ -2,9 +2,9 @@
 <input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
 <input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
-  <button (click)="homeAction()" class="btn btn-primary">Home</button>
+  <button (click)="homeAction()" class="btn btn-primary">Inicio</button>
   <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Detalle</button>
+    Mostrar más</button>
 </div>
 
 <a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
@@ -13,7 +13,7 @@
   <a-assets>
     <div *ngFor="let image of item.images; index as i" >
       <img *ngIf="image.type == 'image'" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
-      <video *ngIf="image.type == 'video'" id="mivideo2" crossOrigin="anonymous" playsinline webkitplaysinline 
+      <video *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
       controls muted src="{{image.url}}" ></video>
  
   </div>

@@ -25,31 +25,24 @@ export class AfelementComponent implements OnInit {
     
     var scene = this.elementRef.nativeElement.querySelector('.scene');
     
-    for(var i=0; i<= this.tagNumberinit; i++)
+    for(var i=0; i<= this.tagNumberlength; i++)
 		{
       var indexPath = +this.tagNumberinit+i;
 			var url="../../../assets/presets/pat"+indexPath+".patt";
-var markerIndex = "marker"+i;
+      var markerIndex = "marker_"+i;
 
 			scene.insertAdjacentHTML('beforeend', 
-      '<a-marker id="'+markerIndex+'" type="pattern" url="'+url+'"></a-marker>');
+      '<a-marker id="'+markerIndex+'" type="pattern" registerevents url="'+url+'"></a-marker>');
       var marker = this.elementRef.nativeElement.querySelector('#'+markerIndex+'');
 
       if(this.item.images![i].type == "video")
       {
+        marker.id = "markervid_"+i;
+        marker.title = "video"+indexPath;
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-video src="#mivideo2" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
-  
-        var v = this.elementRef.nativeElement.querySelector('#mivideo2');
-        marker.addEventListener("markerFound", function() {
-          console.log('Marker Found typescript: ', marker.id);
-         v.play();
-         v.muted = false;
-        }, true);
-        marker.addEventListener("markerLost", function() {
-          console.log('Marker Lost typescript: ', marker.id);
-         v.pause();
-        }, true);
+        '<a-video id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
+        console.log("asignando a marker: "+marker.id);
+      
       }else if(this.item.images![i].type == "image"){
         marker.insertAdjacentHTML('beforeEnd', 
         '<a-image position="0 .1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="3" height="3"></a-image>');

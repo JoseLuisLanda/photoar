@@ -15,16 +15,20 @@ export class ElementcardComponent implements OnInit {
   @Input() imgURL: string = "";
   @Output() elementSelected: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   imgs:ElementId[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
     if(this.item.type == "photo")
     this.imgs = this.item!.images!
     else
-    this.imgs = this.item.images![this.currentMarkerIndex].elements!
+    this.imgs = this.item.images![this.currentMarkerIndex].elements !== undefined? this.item.images![this.currentMarkerIndex].elements!:[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.imgs = this.item!.images !==undefined ?this.item!.images:this.imgs;
+    if(this.item.type == "photo")
+    this.imgs = this.item!.images!
+    else
+    this.imgs = this.item.images![this.currentMarkerIndex].elements !== undefined? this.item.images![this.currentMarkerIndex].elements!:[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
   }
   selectedElement(){
     this.elementSelected.emit(this.item);

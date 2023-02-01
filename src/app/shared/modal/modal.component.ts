@@ -7,7 +7,7 @@ import { ElementId } from 'src/app/collections/element';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  @Input() item: ElementId = {} as ElementId;
+  @Input() item: ElementId = {images:[{elements:[{name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}]}]} as ElementId;
   @Input() currentMarkerIndex: number = 0;
   @Input() edit: boolean = false;
   @Input() detail: boolean = false;

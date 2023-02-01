@@ -73,23 +73,39 @@ AFRAME.registerComponent('registerevents', {
 			marker.addEventListener("markerFound", ()=> {
 				var markerId = marker.id;
 				//window.location = 'https://www.google.com/';  //works
-				console.log('Marker Found: ', markerId);
+				//console.log('Marker Found: ', markerId);
 				//show button for modal details, 
-				//document.getElementById("showModal").style.visibility = "visible";
-				document.getElementById("imgIndex").value = marker.id;
+				document.getElementById("showModal").style.visibility = "visible";
+				
 
 				marker.setAttribute("position", marker.getAttribute("position"));
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
-			
-				var v = document.querySelector('#mivideo2').play();
+				if(marker.id.includes("vid")){
+					var indexVid = marker.title;
+					//console.log("el index es: "+indexVid);
+					var v = document.getElementById(""+indexVid);
+					v.load();
+					v.play();
+					v.muted = false;
+					markerid = marker.id.split("markervid_")[1];
+				}else{
+					markerid = marker.id.split("marker_")[1];
+				}
+
+				document.getElementById("imgIndex").value = markerid;
 				
 			});
 
 			marker.addEventListener("markerLost",() =>{
 				document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
-				console.log('Marker Lost: ', markerId);
-				var v = document.querySelector('#mivideo2').pause();
+				//console.log('Marker Lost: ', markerId);
+				if(marker.id.includes("vid")){
+					var indexVid = marker.title;
+					//console.log("el index es: "+indexVid);
+					document.querySelector("#"+indexVid).pause();
+				}
+				//var v = document.querySelector('#mivideo2').pause();
 			});
 		},
 	});

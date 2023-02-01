@@ -30,7 +30,7 @@
               "src/styles.css"
             ],
             "scripts": [
-            
+              "src/app/shared/afelement/multiMarkersName.js"
             ]
           },
           "configurations": {
@@ -99,7 +99,7 @@
               "src/styles.css"
             ],
             "scripts": [
-              
+              "src/app/shared/afelement/multiMarkersName.js"
             ]
           }
         }

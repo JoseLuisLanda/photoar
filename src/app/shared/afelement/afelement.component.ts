@@ -38,12 +38,13 @@ var markerIndex = "marker"+i;
       if(this.item.images![i].type == "video")
       {
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-video src="#mivideo2" position="0 0 0" rotation="270 0 0"></a-video>');
+        '<a-video src="#mivideo2" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
   
         var v = this.elementRef.nativeElement.querySelector('#mivideo2');
         marker.addEventListener("markerFound", function() {
           console.log('Marker Found typescript: ', marker.id);
          v.play();
+         v.muted = false;
         }, true);
         marker.addEventListener("markerLost", function() {
           console.log('Marker Lost typescript: ', marker.id);

@@ -12,35 +12,20 @@
   gesture-detector class="scene">
   <a-assets>
     <div *ngFor="let image of item.images; index as i" >
-      <img *ngIf="image.type == 'image'" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+      <img *ngIf="image.type == 'image' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
       <video *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
       controls muted src="{{image.url}}" ></video>
- 
+      <a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/hover_board_low_poly.glb"></a-asset-item>
   </div>
   
-	<!--img crossorigin="anonymous" id="img0" src={{urlPhoto}} />
-  <img crossorigin="anonymous" id="img1" src={{urlPhoto}} />
-  <img crossorigin="anonymous" id="img2" src={{urlPhoto}} />
-  <img crossorigin="anonymous" id="img3" src={{urlPhoto}} /-->
- 
 
-		<a-asset-item id="back" src="../../../assets/models/hoverboard.glb"></a-asset-item>
+		
   </a-assets>  	
   <a-entity id='userCamera' camera>
 		<a-cursor> </a-cursor>
 		
     	</a-entity>
 
-      
-      <!--a-marker *ngFor="let image of item.images; index as i" 
-      url={{urlPhoto}} id="{{image.name}}" type='pattern'>
-        <!--a-image class='clickable' gesture-handler="{minScale: '1', maxScale: '10'}" 
-        geometry="{width:'3', height:'3'}" material="{src: '#img'+ind, color: '#FFF'}"
-        position="0, .1, 0" rotation="-90, 0, 0">
-  
-        </a-image>
-  
-      </a-marker-->
 	</a-scene>
   <input type="hidden" id="imgIndex" [value] = "currentMarkerIndex"/>
   

@@ -43,7 +43,10 @@ export class AfelementComponent implements OnInit {
         '<a-video id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
         console.log("asignando a marker: "+marker.id);
       
-      }else if(this.item.images![i].type == "image"){
+      }else if(this.item.images![i].type == "model"){
+        marker.insertAdjacentHTML('beforeEnd', 
+        '<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
+      }else{
         marker.insertAdjacentHTML('beforeEnd', 
         '<a-image position="0 .1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="3" height="3"></a-image>');
       }

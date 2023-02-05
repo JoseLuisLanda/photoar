@@ -19,13 +19,13 @@ export class ElementcardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(this.item.type == "photo")
+    if(this.item.type === "photo")
     this.imgs = this.item!.images!
     else
     this.imgs = this.item.images![this.currentMarkerIndex].elements !== undefined? this.item.images![this.currentMarkerIndex].elements!:[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if(this.item.type == "photo")
+    if(this.item.type === "photo")
     this.imgs = this.item!.images!
     else
     this.imgs = this.item.images![this.currentMarkerIndex].elements !== undefined? this.item.images![this.currentMarkerIndex].elements!:[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
@@ -36,7 +36,7 @@ export class ElementcardComponent implements OnInit {
  selectedImage(id: number){
    this.imgURL = this.imgs[id].url!;
    this.showImg = true;
-   console.log("SELECTING: "+this.imgs[id].url);
+   //console.log("SELECTING: "+this.imgs[id].url);
  }
  closeImg(){
    this.showImg = false;

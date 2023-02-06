@@ -9,9 +9,17 @@
           <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
         </select>
       </div>
-      <div  *ngIf="!showCodeDiv; else showCodeInput">
-        <button (click)="switchToPlace(element)" class="btn btn-outline-primary" *ngFor="let element of elements">{{element.name}}</button>
-      </div>
+      <div  *ngIf="!showCodeDiv; else showCodeInput" class="row">
+        <div *ngFor="let element of elements" class="card" class="col-sm-6 col-md-3 col-lg-3">
+  <img src={{element.url}} class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{element.name}}</h5>
+    <p class="card-text">{{element.description}}</p>
+    <button (click)="switchToPlace(element)" class="btn btn-outline-primary">Ver más</button>
+     
+  </div>
+</div>
+        </div>
       <ng-template #showCodeInput>
         <div class="container center form"  >
             <h4 class="text-center text-warning">Inserta tu codigo</h4>

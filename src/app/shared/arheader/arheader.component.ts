@@ -9,13 +9,17 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
   nombreModelo: Elemento[] = [
     //models tuzo
-    { name: "Chase", url: "../../../assets/models/chase_tuzoo.glb", },
-    { name: "Everest", url: "../../../assets/models/everest_tuzoo.glb", },
-    { name: "Marshall", url: "../../../assets/models/marshall_tuzoo.glb", },
+    { name: "Cuernudo", url: "../../../assets/models/CUERNUDO.glb", },
+    { name: "Chase", url: "../../../assets/models/chase.glb", },
+    { name: "Everest", url: "../../../assets/models/everest.glb", },
+    { name: "Marshall", url: "../../../assets/models/marshall.glb", },
     { name: "Paw", url: "../../../assets/models/patrol_all_tuzoo.glb", },
     { name: "Patrulla", url: "../../../assets/models/paw_patrol_all.glb", },
-    { name: "Skye", url: "../../../assets/models/skye_tuzoo.glb", },
+    { name: "Skye", url: "../../../assets/models/skye.glb", },
     { name: "Tracker", url: "../../../assets/models/tracker_tuzoo.glb", },
+    { name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
+    { name: "Rubble", url: "../../../assets/models/rubble.glb", },
+    { name: "Tracker", url: "../../../assets/models/tracker.glb", },
     { name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
     { name: "Rubble", url: "../../../assets/models/rubble_tuzoo.glb", },
   

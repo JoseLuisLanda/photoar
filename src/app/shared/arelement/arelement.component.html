@@ -11,7 +11,10 @@
     <a-entity class="not-clickable" geometry="primitive: sphere" position="-1 0 0"></a-entity>
   </a-scene-->
   <button (click)="goToHome()" class="btn btn-primary btn-sm">Home</button>
-  <app-arheader (changeModel)="receiveModel($event)"></app-arheader>
+  <div class="scroll-auto">
+    <app-arheader (changeModel)="receiveModel($event)"></app-arheader>
+  </div>
+  
   <div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;">
   <model-viewer src="{{itemAR.name}}" 
   ar ar-scale="auto" camera-controls touch-action="pan-y" 

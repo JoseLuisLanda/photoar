@@ -98,7 +98,7 @@ export class AfelementComponent implements OnInit {
   setImage(url: string, index: number){
     //setting image
     console.log("setting index image: "+index);
-    (<HTMLInputElement> document.getElementById("multimarkertest")).setAttribute("src",url);
+    (<HTMLElement> document.getElementById("multimarkertest")).setAttribute("src",url);
     (<HTMLInputElement> document.getElementById("imgIndex")).value = index.toString();
    
     //this.item.images[0].url = url; 

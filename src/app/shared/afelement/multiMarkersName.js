@@ -72,8 +72,12 @@ AFRAME.registerComponent('registerevents', {
 
 			marker.addEventListener("markerFound", ()=> {
 				var markerId = marker.id;
+				/*var value = document.getElementById("multimarkerImg").src;
+				var elem = document.getElementById("multimarkertest");
+				elem.setAttribute("src",value);*/
+				
 				//window.location = 'https://www.google.com/';  //works
-				//console.log('Marker Found: ', markerId);
+				//console.log('Value to change: ', value);
 				//show button for modal details, 
 				document.getElementById("showModal").style.visibility = "visible";
 				

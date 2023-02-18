@@ -2,14 +2,20 @@
   <div class="main container form-group">
     <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div>
-    <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
-    <div class="form-group mt-3">
-        <label class="label text-white mb-2">Carrera/Ocupación</label>
-        <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
-          <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
-        </select>
-      </div>
+<h1 class="text-center text-primary m-3">Bienvenido a Publicar-3D</h1>
+    <div class="main container">
+      <button class="btn btn-warning btn-sm col-6" (click)="showmyCodeDiv(false)">Ver información</button>
+      <button class="btn btn-primary btn-sm col-6" (click)="showmyCodeDiv(true)">Ver foto 3D</button>
+    </div>
+    
+    
       <div  *ngIf="!showCodeDiv; else showCodeInput" class="row">
+        <div class="form-group mt-3">
+          <label class="label mb-2">Selecciona un lugar</label>
+          <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
+            <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
+          </select>
+        </div>
         <div *ngFor="let element of elements" class="card" class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
   <img src={{element.url}} class="card-img-top" alt="...">
   <div class="card-body">

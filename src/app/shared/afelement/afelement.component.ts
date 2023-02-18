@@ -8,13 +8,14 @@ import { Router } from '@angular/router';
 })
 export class AfelementComponent implements OnInit {
   @Input() item: ElementId = 
-  {name:"undefined",images:{}} as ElementId;
+  {name:"undefined",images:[{url:"",elements:[{url:"∫"}]}]} as ElementId;
   urlPhoto: string = '../../../assets/presets/pat0.patt';
   urls:string[] = [];
   tagNumberinit = 0;
   tagNumberend = 1;
   tagNumberlength = 1;
   currentMarkerIndex = 0;
+  isSingleMarker:boolean = true;
   videoUrl: string= "https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2Ffotos.MP4?alt=media&token=7a6a4f38-47d0-4340-b436-a17d6147182a";
   modelName: string = "../../../assets/models/alien.glb"
   @ViewChild('markr', { static: false }) mrkDiv: ElementRef<HTMLInputElement> = {} as ElementRef;
@@ -30,7 +31,7 @@ export class AfelementComponent implements OnInit {
 		{
       var indexPath = +this.tagNumberinit+i;
 			var url="../../../assets/presets/pat"+indexPath+".patt";
-      var markerIndex = "marker_"+indexPath;
+      var markerIndex = "marker_"+i;
 
 			scene.insertAdjacentHTML('beforeend', 
       '<a-marker id="'+markerIndex+'" type="pattern" registerevents url="'+url+'"></a-marker>');
@@ -53,8 +54,12 @@ export class AfelementComponent implements OnInit {
         '<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
         //'<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="../../../assets/models/hover_board_low_poly.glb" ></a-gltf-model>');
       }else{
+        var imgPath = "#img"+indexPath;
+        if(this.isSingleMarker)
+        imgPath = "multimarkerImg";
+        
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-image position="0 .1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="3" height="3"></a-image>');
+        '<a-image id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="#'+imgPath+'" width="3" height="3"></a-image>');
       }
       
       
@@ -89,5 +94,30 @@ export class AfelementComponent implements OnInit {
     this.currentMarkerIndex = +(<HTMLInputElement> document.getElementById("imgIndex")).value;
     
     //console.log("marker value is: "+markerIndex+"currentmarkerindex: "+this.currentMarkerIndex);
+  }
+  setImage(url: string, index: number){
+    //setting image
+    console.log("setting index image: "+index);
+    (<HTMLInputElement> document.getElementById("multimarkertest")).setAttribute("src",url);
+    (<HTMLInputElement> document.getElementById("imgIndex")).value = index.toString();
+   
+    //this.item.images[0].url = url; 
+  }
+  resize(op: number){
+    var currentWidth = (<HTMLElement> document.getElementById("multimarkertest")).getAttribute("width") != null ? 
+    +(<HTMLElement> document.getElementById("multimarkertest")).getAttribute("width")!+0: 0;
+    //setting image
+    //console.log("setting image: "+; 
+    //textEl.setAttribute('geometry',{width:'3', height:'3'});
+    if(+currentWidth >= 2 && +currentWidth <= 6){
+      //console.log("setting image width: "+(currentWidth+op)); 
+      currentWidth = currentWidth < 3 ? 3: currentWidth;
+      currentWidth = currentWidth > 5 ? 5: currentWidth;
+      (<HTMLElement> document.getElementById("multimarkertest")).setAttribute("width",(currentWidth+op).toString() );
+      (<HTMLElement> document.getElementById("multimarkertest")).setAttribute("height",(currentWidth+op).toString() );
+    }
+    
+   
+    //this.item.images[0].url = url; 
   }
 }

@@ -21,14 +21,21 @@ export class ElementcardComponent implements OnInit {
   ngOnInit(): void {
     if(this.item.type === "photo")
     this.imgs = this.item!.images!
-    else
-    this.imgs = this.item.images![this.currentMarkerIndex].elements !== undefined? this.item.images![this.currentMarkerIndex].elements!:[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
-  }
+    else if(this.item.images![this.currentMarkerIndex].elements)
+    {
+      this.imgs = this.item.images![this.currentMarkerIndex].elements!;
+    }else
+    this.imgs =[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
+    }
   ngOnChanges(changes: SimpleChanges): void {
+    //console.log("index", this.currentMarkerIndex + " and item",JSON.stringify(this.item));
     if(this.item.type === "photo")
     this.imgs = this.item!.images!
-    else
-    this.imgs = this.item.images![this.currentMarkerIndex].elements !== undefined? this.item.images![this.currentMarkerIndex].elements!:[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
+    else if(this.item.images![this.currentMarkerIndex].elements)
+    {
+      this.imgs = this.item.images![this.currentMarkerIndex].elements!;
+    }else
+    this.imgs =[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
   }
   selectedElement(){
     this.elementSelected.emit(this.item);

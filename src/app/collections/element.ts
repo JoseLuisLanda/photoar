@@ -48,6 +48,7 @@ export interface Elemento {
     indexInit? :number;
     indexEnd? :number;
     status?: boolean;
+    codes?: string[];
 }
 
 export interface ElementId extends Elemento { uid: string; }

@@ -2,21 +2,37 @@
 <input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
 <input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
-  <button (click)="homeAction()" class="btn btn-primary">Inicio</button>
-  <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Mostrar más</button>
+
+    <button (click)="homeAction()" class="btn btn-outline-warning">Inicio</button>
+    <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Mostrar más</button>
+      <div *ngFor="let image of item.images; index as i">
+        <button *ngIf="isSingleMarker" (click)="setImage(image.url!,i)" class="btn btn-outline-primary">{{image.name}}</button>
+      </div>  
+    
+        <button *ngIf="isSingleMarker" (click)="resize(1)" class="btn btn-outline-primary">+</button>
+        <button *ngIf="isSingleMarker" (click)="resize(-1)" class="btn btn-outline-primary">-</button>
+     
 </div>
 
 <a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
   gesture-detector class="scene">
   <a-assets>
-    <div *ngFor="let image of item.images; index as i" >
-      <img *ngIf="image.type == 'image' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
-      <video *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
-      controls muted src="{{image.url}}" ></video>
-      <!--a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item-->
-  </div>
+    <div *ngIf="isSingleMarker; else multimarkers" >
+      <div *ngFor="let image of item.images">
+        <img *ngIf="image.type == 'image' || image.type == undefined" crossorigin="anonymous" id="multimarkerImg" src={{image.url}} />
+      </div>
+       </div>
+    <ng-template #multimarkers>
+      <div *ngFor="let image of item.images; index as i" >
+        <img *ngIf="image.type == 'image' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+        <video *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
+        controls muted src="{{image.url}}" ></video>
+        <!--a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item-->
+    </div>
+    </ng-template>
+    
   
 
 		

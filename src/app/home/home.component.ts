@@ -3,7 +3,7 @@ import { ElementId } from '../collections/element';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,18 +23,37 @@ export class HomeComponent implements OnInit {
   place = "lugares";
   showCodeDiv = true;
   users = [{},{},{},{}];
-  constructor( private router: Router, private fotosService: FotosService) { }
+  location:string = "gral";
+  constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
 
   ngOnInit(): void {
+    this.activeRoute.queryParams
+    .subscribe(params => {
+      console.log(params); // { orderby: "location" }
+      if(params.location !== undefined)
+      {
+        this.location = params.location;
+        console.log(this.location); // location
+        this.fotosService.getCollection("lugares", 50,"","","codes",params.location).subscribe((data) => {
+          if(data !== undefined)
+          this.lugares =   data as ElementId[];
+          //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+        });
+      }else{
+        this.fotosService.getCollection("lugares", 50,"","","codes","gral").subscribe((data) => {
+          if(data !== undefined)
+          this.lugares =   data as ElementId[];
+          //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+        });
+      }
+      
+    }
+  );
     //functionality to get all places for dropdown
     //this.getElements("lugares");
     //this.getElements("foto");
    // console.log(this.fotosService.getCollection());
-    this.fotosService.getCollection("lugares", 50,"","","codes","gral").subscribe((data) => {
-      if(data !== undefined)
-      this.lugares =   data as ElementId[];
-      //console.log("GETTING chat messages: "+JSON.stringify(this.users));
-    });
+   
     
   }
   gotTo(page: string){

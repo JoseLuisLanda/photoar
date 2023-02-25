@@ -2,17 +2,21 @@
 <input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
 <input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
-
-    <button (click)="homeAction()" class="btn btn-outline-warning">Inicio</button>
-    <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-lg btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Mostrar más</button>
-      <div *ngFor="let image of item.images; index as i">
-        <button *ngIf="isSingleMarker" (click)="setImage(image.url!,i)" class="btn btn-outline-primary">{{image.name}}</button>
-      </div>  
-    
-        <button *ngIf="isSingleMarker" (click)="resize(1)" class="btn btn-outline-primary">+</button>
-        <button *ngIf="isSingleMarker" (click)="resize(-1)" class="btn btn-outline-primary">-</button>
-     
+      
+</div>
+<div class="buttonsRight row">
+      <button *ngIf="isSingleMarker" style="height: 20%;" (click)="resize(1)" class="btn btn-outline-warning">+</button>
+      <button *ngIf="isSingleMarker" style="height: 20%;" (click)="resize(-1)" class="btn btn-outline-primary">-</button>
+</div>
+<div class="buttonsLeft">
+  <button (click)="homeAction()" style="height: 30%;" class="btn btn-outline-warning"><</button>
+</div>
+<div class="buttonsTop">
+  <div *ngFor="let image of item.images; index as i">
+    <button *ngIf="isSingleMarker" (click)="setImage(image.url!,i)" class="btn btn-sm btn-outline-light">{{image.name}}</button>
+  </div>  
 </div>
 
 <a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"

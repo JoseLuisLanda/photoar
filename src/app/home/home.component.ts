@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   elementNumber = "";
   textError = "";
   place = "lugares";
-  showCodeDiv = true;
+  showCodeDiv = false;
   users = [{},{},{},{}];
   location:string = "gral";
   constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
@@ -173,6 +173,22 @@ export class HomeComponent implements OnInit {
     this.switchTemp = !this.switchTemp;
   }
   onSelectChange(event: string){
+    //getting elements every onchange places dropdown fires
+    this.textError = "";
+     /* if( event.toLowerCase() !=="foto"){
+        this.showCodeDiv = false;
+     
+      }
+      else{
+        this.showCodeDiv = true;
+        //enter and show input for code
+        //(<HTMLInputElement> document.getElementById("codeForElement")).
+        
+       
+      }*/
+      this.getElements( event.toLowerCase());
+  }
+  onSelectBtn(event: string){
     //getting elements every onchange places dropdown fires
     this.textError = "";
      /* if( event.toLowerCase() !=="foto"){

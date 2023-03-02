@@ -59,7 +59,7 @@ export class AfelementComponent implements OnInit {
         imgPath = "multimarkerImg";
         
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-image id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="#'+imgPath+'" width="3" height="3"></a-image>');
+        '<a-image id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="3" height="3"></a-image>');
       }
       
       

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   elementNumber = "";
   textError = "";
   place = "lugares";
-  showCodeDiv = false;
+  showCodeDiv = true;
   users = [{},{},{},{}];
   location:string = "gral";
   constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }

@@ -2,6 +2,7 @@
   <!--div class="main container form-group">
     <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div-->
+<<<<<<< HEAD
     <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
     <div class="form-group mt-3">
         <label class="label text-white mb-2">Carrera/Ocupación</label>
@@ -12,11 +13,52 @@
       <div  *ngIf="!showCodeDiv; else showCodeInput">
         <button (click)="switchToPlace(element)" class="btn btn-outline-primary" *ngFor="let element of elements">{{element.name}}</button>
       </div>
+=======
+
+    <div class="main container bg-black">
+      <h2 class="text-center text-primary m-3">Bienvenido a Publicar-3D</h2>
+      <label class="label text-center text-white col-12 ">Qué deseas buscar hoy?</label>
+      <!--button class="btn btn-warning btn-sm col-6" (click)="showmyCodeDiv(false)">Ver información</button-->
+      <!--button class="btn btn-primary btn-sm col-6" (click)="showmyCodeDiv(true)">Ver foto 3D</button-->
+    </div>
+    
+    
+      <div  *ngIf="!showCodeDiv; else showCodeInput" class="col">
+        <div class="container main form-group mt-3">
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item text-blue placeholder col-12 bg-dark">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button text-white bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                  Lugares
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  <button (click)="onSelectBtn(lugar.name!)"  class="mt-1 col-6 btn btn-sm btn-light"  data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" *ngFor="let lugar of lugares">{{lugar.name}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+           <!--select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
+            <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
+          </select-->
+         </div>
+        <div *ngFor="let element of elements" class="card" class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+  <img src={{element.url}} class="card-img-top" style="max-width: 200px;" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{element.name}}</h5>
+    <p class="card-text">{{element.description}}</p>
+    <button (click)="switchToPlace(element)" class="btn btn-block btn-primary">Ver en QR</button>
+     
+  </div>
+</div>
+        </div>
+>>>>>>> master
       <ng-template #showCodeInput>
         <div class="container center form"  >
             <h4 class="text-center text-warning">Inserta tu codigo</h4>
             <input id="codeForElement" class="form-control form-text m-3" type="text" [(ngModel)]="elementNumber">
-            <button class="form-control btn btn-primary m-3" (click)="switchToPhoto()">Buscar</button>
+            <button class="form-control btn btn-outline-primary m-3" (click)="switchToPhoto()">Buscar</button>
         
          </div>
          

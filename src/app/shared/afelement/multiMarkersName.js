@@ -53,6 +53,8 @@ AFRAME.registerComponent('markers_start',{
 	}
 });
 
+
+
 function handleRotation(event) {
     if (isMarkerVisible) {
       el.object3D.rotation.y +=
@@ -70,38 +72,44 @@ AFRAME.registerComponent('registerevents', {
 
 			marker.addEventListener("markerFound", ()=> {
 				var markerId = marker.id;
+				/*var value = document.getElementById("multimarkerImg").src;
+				var elem = document.getElementById("multimarkertest");
+				elem.setAttribute("src",value);*/
+				
 				//window.location = 'https://www.google.com/';  //works
-				console.log('Marker Found: ', markerId);
+				//console.log('Value to change: ', value);
 				//show button for modal details, 
-				//document.getElementById("showModal").style.visibility = "visible";
-				document.getElementById("imgIndex").value = marker.id;
+				document.getElementById("showModal").style.visibility = "visible";
+				
 
 				marker.setAttribute("position", marker.getAttribute("position"));
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
-				marker.addEventListener("onefingermove", handleRotation);
-				marker.addEventListener("twofingermove", function () {
-					
-						if (isMarkerVisible) {
-						  this.scaleFactor *=
-							1 + detail.spreadChange / detail.startSpread;
-					
-						  this.scaleFactor = Math.min(
-							Math.max(this.scaleFactor, this.data.minScale),
-							this.data.maxScale
-						  );
-					
-						  el.object3D.scale.x = scaleFactor * initialScale.x;
-						  el.object3D.scale.y = scaleFactor * initialScale.y;
-						  el.object3D.scale.z = scaleFactor * initialScale.z;
-						}
-					  
-				});
+				if(marker.id.includes("vid")){
+					var indexVid = marker.title;
+					//console.log("el index es: "+indexVid);
+					var v = document.getElementById(""+indexVid);
+					v.load();
+					v.play();
+					v.muted = false;
+					markerid = marker.id.split("markervid_")[1];
+				}else{
+					markerid = marker.id.split("marker_")[1];
+				}
+
+				document.getElementById("imgIndex").value = markerid;
+				
 			});
 
 			marker.addEventListener("markerLost",() =>{
 				document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
-				console.log('Marker Lost: ', markerId);
+				//console.log('Marker Lost: ', markerId);
+				if(marker.id.includes("vid")){
+					var indexVid = marker.title;
+					//console.log("el index es: "+indexVid);
+					document.querySelector("#"+indexVid).pause();
+				}
+				//var v = document.querySelector('#mivideo2').pause();
 			});
 		},
 	});

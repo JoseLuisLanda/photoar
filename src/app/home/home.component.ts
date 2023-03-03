@@ -3,7 +3,7 @@ import { ElementId } from '../collections/element';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,27 +14,76 @@ export class HomeComponent implements OnInit {
   switchTemp: boolean  = false;
   title = 'Visualiz-AR';
   itemAR:ElementId={uid:"sky",name:"../../../assets/models/Astronaut.glb"};
-  elements?: ElementId[]=[];
+  elements: ElementId[]=[];
   lugares?: ElementId[]=[{uid: "2", name: "Foto", description:"foto"}];
   subElements?: ElementId[];
   myPhoto?: ElementId;
   elementNumber = "";
   textError = "";
   place = "lugares";
-  showCodeDiv = true;
-  constructor( private router: Router, private fotosService: FotosService) { }
+  showCodeDiv = false;
+  users = [{},{},{},{}];
+  location:string = "gral";
+  constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
 
   ngOnInit(): void {
+    this.activeRoute.queryParams
+    .subscribe(params => {
+      console.log(params); // { orderby: "location" }
+      if(params.location !== undefined)
+      {
+        this.location = params.location;
+        console.log(this.location); // location
+        this.fotosService.getCollection("lugares", 50,"","","codes",params.location).subscribe((data) => {
+          if(data !== undefined)
+          this.lugares =   data as ElementId[];
+          //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+        });
+      }else{
+        this.fotosService.getCollection("lugares", 50,"","","codes","gral").subscribe((data) => {
+          if(data !== undefined)
+          this.lugares =   data as ElementId[];
+          //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+        });
+      }
+      
+    }
+  );
     //functionality to get all places for dropdown
-    this.getElements("lugares");
-    this.getElements("foto");
+    //this.getElements("lugares");
+    //this.getElements("foto");
+   // console.log(this.fotosService.getCollection());
+   
+    
   }
   gotTo(page: string){
     this.router.navigateByUrl('/'+page);
   }
   getElements(type: string){
    this.textError = "";
-    this.fotosService.getAllItems(type).snapshotChanges().pipe(map((changes: any[]) =>
+   this.fotosService.getCollection(type, 50,"","").subscribe((data) => {
+    if(data !== undefined)
+    {
+      switch (type){
+          case "lugares":
+            this.lugares =   data as ElementId[];
+            break;
+            default:
+            this.elements =   data.filter(obj => {
+              return obj.name != "default"
+            });
+            if(this.elements!.length<1)
+             {
+              this.textError = "no existe contenido para este lugar";
+             }
+            break;
+      }
+     
+    }
+    
+    //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+  });
+    /*this.fotosService.getAllItems(type).snapshotChanges().pipe(map((changes: any[]) =>
     changes.map(c =>
       ({ id: c.payload.doc.id, ...c.payload.doc.data() })
     )
@@ -58,14 +107,36 @@ export class HomeComponent implements OnInit {
         }
       }
      
-    });
+    });*/
 
   }
   switchToPhoto(){
-   
-    this.getElements(this.place.toLowerCase());
+    this.textError = "";
+    //this.getElements(this.place.toLowerCase());
+    if(this.elementNumber !== ""){
+      this.fotosService.getCollection("foto", 50,"description",this.elementNumber).subscribe((data) => {
+        if(data !== undefined)
+        this.elements =   data as ElementId[];
+        if(this.elements!.length <1){
+          this.textError = "No hay contenido para este código";
+        }else{
+          
+          this.itemAR = this.elements[0];
+        this.itemAR.type = "place";
+        this.switchTemp = true;
+          console.log("img elements: "+JSON.stringify(this.elements))
+        }
+        //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+      });
+    }else{
+      this.textError = "ingresa un código";
+    }
+    
     //validating if there is a foto with code provided as description
-    if(this.elements!.length > 0 && this.elementNumber !== ""){
+
+    
+    
+   /* if(this.elements!.length > 0 && this.elementNumber !== ""){
       this.subElements = this.elements!.filter(obj => {
         return obj.description == this.elementNumber 
       })
@@ -83,7 +154,7 @@ export class HomeComponent implements OnInit {
     }else{
       console.log("empty field to search");
       this.textError = "no tienes contenido que coincida";
-    }
+    }*/
     
   }
   switchToPlace(event: any){
@@ -104,7 +175,7 @@ export class HomeComponent implements OnInit {
   onSelectChange(event: string){
     //getting elements every onchange places dropdown fires
     this.textError = "";
-      if( event.toLowerCase() !=="foto"){
+     /* if( event.toLowerCase() !=="foto"){
         this.showCodeDiv = false;
      
       }
@@ -114,7 +185,26 @@ export class HomeComponent implements OnInit {
         //(<HTMLInputElement> document.getElementById("codeForElement")).
         
        
-      }
+      }*/
       this.getElements( event.toLowerCase());
+  }
+  onSelectBtn(event: string){
+    //getting elements every onchange places dropdown fires
+    this.textError = "";
+     /* if( event.toLowerCase() !=="foto"){
+        this.showCodeDiv = false;
+     
+      }
+      else{
+        this.showCodeDiv = true;
+        //enter and show input for code
+        //(<HTMLInputElement> document.getElementById("codeForElement")).
+        
+       
+      }*/
+      this.getElements( event.toLowerCase());
+  }
+  showmyCodeDiv(value:boolean){
+    this.showCodeDiv = value;
   }
 }

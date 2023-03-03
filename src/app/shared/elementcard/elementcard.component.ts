@@ -15,16 +15,27 @@ export class ElementcardComponent implements OnInit {
   @Input() imgURL: string = "";
   @Output() elementSelected: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   imgs:ElementId[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
-    if(this.item.type == "photo")
+    if(this.item.type === "photo")
     this.imgs = this.item!.images!
-    else
-    this.imgs = this.item.images![this.currentMarkerIndex].elements!
-  }
+    else if(this.item.images![this.currentMarkerIndex].elements)
+    {
+      this.imgs = this.item.images![this.currentMarkerIndex].elements!;
+    }else
+    this.imgs =[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
+    }
   ngOnChanges(changes: SimpleChanges): void {
-    this.imgs = this.item!.images !==undefined ?this.item!.images:this.imgs;
+    //console.log("index", this.currentMarkerIndex + " and item",JSON.stringify(this.item));
+    if(this.item.type === "photo")
+    this.imgs = this.item!.images!
+    else if(this.item.images![this.currentMarkerIndex].elements)
+    {
+      this.imgs = this.item.images![this.currentMarkerIndex].elements!;
+    }else
+    this.imgs =[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
   }
   selectedElement(){
     this.elementSelected.emit(this.item);
@@ -32,7 +43,7 @@ export class ElementcardComponent implements OnInit {
  selectedImage(id: number){
    this.imgURL = this.imgs[id].url!;
    this.showImg = true;
-   console.log("SELECTING: "+this.imgs[id].url);
+   //console.log("SELECTING: "+this.imgs[id].url);
  }
  closeImg(){
    this.showImg = false;

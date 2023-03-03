@@ -26,17 +26,18 @@
               'active': i==0
             }"
             >
-              <img src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
+              <img src="{{image.url}}" class="d-block w-100" alt="i">
             </div>
           </div>
           <ng-template #place>
-            <div *ngFor="let image of item.images![currentMarkerIndex].elements; index as i" [ngClass]="{
+            <div  *ngFor="let image of imgs; index as i" [ngClass]="{
               'carousel-item': true,
               'active': i==0
             }"
             >
               <img src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
             </div>
+          
           </ng-template>
           
           

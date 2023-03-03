@@ -44,9 +44,11 @@ export interface Elemento {
     group?:string;
     mine?: boolean;
     value?: string;
+    baseUrlPat?: string;
     indexInit? :number;
     indexEnd? :number;
     status?: boolean;
+    codes?: string[];
 }
 
 export interface ElementId extends Elemento { uid: string; }

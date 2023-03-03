@@ -114,7 +114,8 @@ export class HomeComponent implements OnInit {
     this.textError = "";
     //this.getElements(this.place.toLowerCase());
     if(this.elementNumber !== ""){
-      this.fotosService.getCollection("foto", 50,"description",this.elementNumber).subscribe((data) => {
+      
+      this.fotosService.getCollection("foto", 50,"description",this.elementNumber.toLowerCase()).subscribe((data) => {
         if(data !== undefined)
         this.elements =   data as ElementId[];
         if(this.elements!.length <1){

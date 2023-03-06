@@ -3,12 +3,18 @@
     <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div-->
 
-    <div class="main container bg-black">
-      <h2 class="text-center text-primary m-5">Publicar-3D</h2>
+    <div class="main bg-dark row">
+      <h2 class="text-center text-primary mt-3 mb-3">Publicar-3D</h2>
+      <div class="mb-3 col container align-center">
+        <button (click)="showmyCodeDiv(true)" class="btn btn-block btn-outline-warning col-6">Lugares</button>
+        <button (click)="showmyCodeDiv(false)" class="btn btn-outline-primary col-6">Fotos</button>
+      </div>
+     
+      
      </div>
     
     
-      <div  *ngIf="showCodeDiv; else showCodeInput" class="main row m-3">
+      <div  *ngIf="showCodeDiv; else showCodeInput" class="main row">
         <div class="container form-group mt-3">
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item text-blue placeholder col-12 bg-dark">
@@ -28,7 +34,7 @@
             <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
           </select-->
          </div>
-        <div *ngFor="let element of elements" class="card" class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+        <div *ngFor="let element of elements" class="card" class="mt-3 col-xs-6 col-sm-6 col-md-3 col-lg-3">
   <img src={{element.url}} class="card-img-top" style="max-width: 200px;" alt="...">
   <div class="card-body">
     <h5 class="card-title">{{element.name}}</h5>

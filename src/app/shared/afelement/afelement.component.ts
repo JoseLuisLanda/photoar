@@ -42,7 +42,7 @@ export class AfelementComponent implements OnInit {
         marker.id = "markervid_"+i;
         marker.title = "video"+indexPath;
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-video id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
+        '<a-video class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
         console.log("asignando a marker: "+marker.id);
       
       }else if(this.item.images![i].type == "model"){
@@ -51,7 +51,7 @@ export class AfelementComponent implements OnInit {
         marker.insertAdjacentHTML('beforeEnd', 
         '<a-asset-item id="model'+indexPath+'" position="0 .1 0" rotation="0, 0, 0" src="'+this.item.images![i].value+'" ></a-asset-item>');
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
+        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
         //'<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="../../../assets/models/hover_board_low_poly.glb" ></a-gltf-model>');
       }else{
         var imgPath = "#img"+indexPath;
@@ -59,7 +59,7 @@ export class AfelementComponent implements OnInit {
         imgPath = "multimarkerImg";
         
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-image id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="3" height="3"></a-image>');
+        '<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="3" height="3"></a-image>');
       }
       
       

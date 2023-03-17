@@ -16,10 +16,12 @@ export class HomeComponent implements OnInit {
   itemAR:ElementId={uid:"sky",name:"../../../assets/models/Astronaut.glb"};
   elements: ElementId[]=[];
   lugares: ElementId[]=[{uid: "2", name: "Foto", description:"foto"}];
+  codes: ElementId = {uid:""};
   subElements?: ElementId[];
   myPhoto?: ElementId;
   elementNumber = "";
   textError = "";
+  caller="Lugares";
   place = "lugares";
   showCodeDiv = true;
   users = [{},{},{},{}];
@@ -36,13 +38,25 @@ export class HomeComponent implements OnInit {
         console.log(this.location); // location
         this.fotosService.getCollection("lugares", 50,"","","codes",params.location).subscribe((data) => {
           if(data !== undefined)
-          this.lugares =   data as ElementId[];
+          
+          this.lugares =   data.filter(obj => {
+            return obj.normalizedName != "general"
+          });
+          this.codes = data.find(obj => {
+            return obj.normalizedName == "general"
+          });
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
       }else{
-        this.fotosService.getCollection("lugares", 50,"","","codes","gral").subscribe((data) => {
+        this.fotosService.getCollection("lugares", 50,"","","codes","general").subscribe((data) => {
           if(data !== undefined)
-          this.lugares =   data as ElementId[];
+          this.lugares =   data.filter(obj => {
+            return obj.normalizedName != "general"
+          });
+          this.codes = data.find(obj => {
+            return obj.normalizedName == "general"
+          });
+          
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
       }
@@ -62,16 +76,23 @@ export class HomeComponent implements OnInit {
   getElements(type: string){
    this.textError = "";
    this.fotosService.getCollection(type, 50,"","","codes",this.location).subscribe((data) => {
-    if(data !== undefined)
+    this.elements = [];
+    if(data !== undefined && data.length > 0)
     {
       switch (type){
           case "lugares":
-            this.lugares =   data as ElementId[];
+            this.lugares =   data.filter(obj => {
+              return obj.normalizedName != "general"
+            });
+            this.codes = data.find(obj => {
+              return obj.normalizedName == "general"
+            });
             break;
             default:
             this.elements =   data.filter(obj => {
               return obj.name != "default"
             });
+            
             if(this.elements!.length<1)
              {
               this.textError = "no existe contenido para este lugar";
@@ -79,8 +100,12 @@ export class HomeComponent implements OnInit {
             break;
       }
      
+    }else{
+      
+      
+      this.textError = "no existe contenido para este lugar";
     }
-    
+    (<HTMLInputElement> document.getElementById("collapseOne")).setAttribute("class","show");
     //console.log("GETTING chat messages: "+JSON.stringify(this.users));
   });
     /*this.fotosService.getAllItems(type).snapshotChanges().pipe(map((changes: any[]) =>
@@ -176,36 +201,22 @@ export class HomeComponent implements OnInit {
   onSelectChange(event: string){
     //getting elements every onchange places dropdown fires
     this.textError = "";
-     /* if( event.toLowerCase() !=="foto"){
-        this.showCodeDiv = false;
-     
-      }
-      else{
-        this.showCodeDiv = true;
-        //enter and show input for code
-        //(<HTMLInputElement> document.getElementById("codeForElement")).
-        
-       
-      }*/
+   
       this.getElements( event.toLowerCase());
   }
   onSelectBtn(event: string){
     //getting elements every onchange places dropdown fires
     this.textError = "";
-     /* if( event.toLowerCase() !=="foto"){
-        this.showCodeDiv = false;
-     
-      }
-      else{
-        this.showCodeDiv = true;
-        //enter and show input for code
-        //(<HTMLInputElement> document.getElementById("codeForElement")).
-        
-       
-      }*/
+ 
       this.getElements( event.toLowerCase());
   }
   showmyCodeDiv(value:boolean){
     this.showCodeDiv = value;
+  }
+  changePlace(place:string){
+    console.log("receiving: "+place);
+    this.location = place;
+    this.getElements("lugares");
+    (<HTMLInputElement> document.getElementById("showingModal")).click();
   }
 }

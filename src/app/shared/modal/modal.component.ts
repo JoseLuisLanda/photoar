@@ -11,10 +11,15 @@ export class ModalComponent implements OnInit {
   @Input() currentMarkerIndex: number = 0;
   @Input() search: boolean = false;
   @Input() detail: boolean = false;
+  @Input() codes: ElementId = {uid:""};
+  @Input() caller: string = "Elemento";
   @Output() valueInputText: EventEmitter<ElementId> = new EventEmitter<ElementId>();
+  @Output() selectedValue: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  returnPlace(place: string){
+    this.selectedValue.emit(place);
+  }
 }

@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { ElementcardComponent } from './shared/elementcard/elementcard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ElementcardComponent } from './shared/elementcard/elementcard.component
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, // for firestore
+    AngularFirestoreModule,
+    BrowserAnimationsModule, // for firestore
   ],
   providers: [],
   bootstrap: [AppComponent],

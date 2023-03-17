@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   title = 'Visualiz-AR';
   itemAR:ElementId={uid:"sky",name:"../../../assets/models/Astronaut.glb"};
   elements: ElementId[]=[];
-  lugares?: ElementId[]=[{uid: "2", name: "Foto", description:"foto"}];
+  lugares: ElementId[]=[{uid: "2", name: "Foto", description:"foto"}];
   subElements?: ElementId[];
   myPhoto?: ElementId;
   elementNumber = "";
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
   getElements(type: string){
    this.textError = "";
-   this.fotosService.getCollection(type, 50,"","").subscribe((data) => {
+   this.fotosService.getCollection(type, 50,"","","codes",this.location).subscribe((data) => {
     if(data !== undefined)
     {
       switch (type){

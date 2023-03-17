@@ -7,10 +7,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div *ngIf="true; else detalle;">
+          <div *ngIf="!search; else detalle;">
             <app-elementcard class="col-sm-6 col-lg-4" [currentMarkerIndex]="currentMarkerIndex" [detail]="detail" [item]="item"></app-elementcard>
           </div>
           <ng-template #detalle>
+            <h1 class="bg-dark text-warning text-center col-12">Busca otro lugar</h1>
             <!--app-elementadd *ngIf="!edit" [item]="item" [element]="element"></app-elementadd-->
             <!--div *ngIf="edit" class="d-flex form-inline">
             <input #valueText type="text" (keyup.enter)="saveMessage(valueText.value)" class="form-control"/>

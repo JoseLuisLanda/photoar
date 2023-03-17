@@ -13,10 +13,11 @@
       
      </div>
     
-    
+     
       <div  *ngIf="showCodeDiv; else showCodeInput" class="main row">
         <div class="container form-group">
           <button id="showingModal" class="btn btn-warning col-3 offset-9 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Buscar</button>
+          <h3 id="error" class="text-warning text-center">{{textError}}</h3>
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
               
@@ -69,6 +70,6 @@
 <ng-template #showPhoto>
     <app-afelement [item]="itemAR"></app-afelement>
   </ng-template>
-  <h3 id="error" class="text-warning text-center">{{textError}}</h3>
+ 
   <app-modal [caller]="caller" [search]="true" [codes]="codes" (selectedValue)="changePlace($event)"></app-modal>
 

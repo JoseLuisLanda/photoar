@@ -45,6 +45,7 @@ export class HomeComponent implements OnInit {
           this.codes = data.find(obj => {
             return obj.normalizedName == "general"
           });
+          
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
       }else{
@@ -87,6 +88,7 @@ export class HomeComponent implements OnInit {
             this.codes = data.find(obj => {
               return obj.normalizedName == "general"
             });
+            (<HTMLInputElement> document.getElementById("collapseOne")).setAttribute("class","show");
             break;
             default:
             this.elements =   data.filter(obj => {
@@ -96,16 +98,17 @@ export class HomeComponent implements OnInit {
             if(this.elements!.length<1)
              {
               this.textError = "no existe contenido para este lugar";
+              
              }
             break;
       }
      
     }else{
-      
+      (<HTMLInputElement> document.getElementById("collapseOne")).setAttribute("class","show");
       
       this.textError = "no existe contenido para este lugar";
     }
-    (<HTMLInputElement> document.getElementById("collapseOne")).setAttribute("class","show");
+    
     //console.log("GETTING chat messages: "+JSON.stringify(this.users));
   });
     /*this.fotosService.getAllItems(type).snapshotChanges().pipe(map((changes: any[]) =>

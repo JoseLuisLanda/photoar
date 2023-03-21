@@ -41,7 +41,7 @@ AFRAME.registerComponent('markers_start',{
 			textEl.setAttribute('id','image');
 			textEl.setAttribute('class','clickable');
 			textEl.setAttribute('gesture-handler',{minScale: '1', maxScale: '10'});
-			textEl.setAttribute('geometry',{width:'3', height:'3'});
+			textEl.setAttribute('geometry',{width:'3', height:'2'});
 			textEl.setAttribute('material',{src: '#img'+[(+tagNumberinit+k)], color: '#FFF'});
 			textEl.object3D.position.set(0, .1, 0);
 			textEl.object3D.rotation.set(-90, 0, 0);

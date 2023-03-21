@@ -79,7 +79,7 @@ AFRAME.registerComponent('registerevents', {
 				//window.location = 'https://www.google.com/';  //works
 				//console.log('Value to change: ', value);
 				//show button for modal details, 
-				document.getElementById("showModal").style.visibility = "visible";
+				//document.getElementById("showModal").style.visibility = "visible";
 				
 
 				marker.setAttribute("position", marker.getAttribute("position"));
@@ -101,7 +101,7 @@ AFRAME.registerComponent('registerevents', {
 			});
 
 			marker.addEventListener("markerLost",() =>{
-				document.getElementById("showModal").style.visibility = "hidden";
+				//document.getElementById("showModal").style.visibility = "hidden";
 				var markerId = marker.id;
 				//console.log('Marker Lost: ', markerId);
 				if(marker.id.includes("vid")){

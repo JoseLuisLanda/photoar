@@ -9,12 +9,15 @@ import { AnnotationsComponent } from './shared/annotations/annotations.component
 import { AfelementComponent } from './shared/afelement/afelement.component';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { ElementcardComponent } from './shared/elementcard/elementcard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UploadimageComponent } from './shared/uploadimage/uploadimage.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgDropFilesDirective } from '../app/directives/ng-drop-files.directive';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 @NgModule({
   declarations: [
@@ -25,9 +28,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AfelementComponent,
     HomeComponent,
     ModalComponent,
-    ElementcardComponent
+    ElementcardComponent,
+    UploadimageComponent,
+    NgDropFilesDirective
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

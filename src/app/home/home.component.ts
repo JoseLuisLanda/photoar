@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ElementId } from '../collections/element';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
+import html2canvas from "html2canvas"; 
+//import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean  = false;
   title = 'Visualiz-AR';
@@ -23,15 +25,23 @@ export class HomeComponent implements OnInit {
   textError = "";
   caller="Lugares";
   place = "lugares";
+  folderToSearch = "foto";
   showCodeDiv = true;
   users = [{},{},{},{}];
-  location:string = "gral";
-  constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
+  location:string = "general";
+  uploadimage: boolean = true;
+  @ViewChild('screen') screen: ElementRef;
+  @ViewChild('canvas') canvas: ElementRef;
+  @ViewChild('downloadLink') downloadLink: ElementRef;
 
+  constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
+  ngAfterViewInit(){
+    //console.log(this.screen)
+ }
   ngOnInit(): void {
     this.activeRoute.queryParams
     .subscribe(params => {
-      console.log(params); // { orderby: "location" }
+      //console.log(params); // { orderby: "location" }
       if(params.location !== undefined)
       {
         this.location = params.location;
@@ -45,7 +55,7 @@ export class HomeComponent implements OnInit {
           this.codes = data.find(obj => {
             return obj.normalizedName == "general"
           });
-          
+
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
       }else{
@@ -64,11 +74,6 @@ export class HomeComponent implements OnInit {
       
     }
   );
-    //functionality to get all places for dropdown
-    //this.getElements("lugares");
-    //this.getElements("foto");
-   // console.log(this.fotosService.getCollection());
-   
     
   }
   gotTo(page: string){
@@ -111,39 +116,17 @@ export class HomeComponent implements OnInit {
     
     //console.log("GETTING chat messages: "+JSON.stringify(this.users));
   });
-    /*this.fotosService.getAllItems(type).snapshotChanges().pipe(map((changes: any[]) =>
-    changes.map(c =>
-      ({ id: c.payload.doc.id, ...c.payload.doc.data() })
-    )
-    )
-    ).subscribe(data => {
-      //filtering only active or type of firs dropdown TODO
-      if(type == "lugares"){
-        this.lugares = data.filter(obj => {
-          return obj.status == true
-        });
-      }
-      else{
-       // console.log("getting elements: "+this.place);
-        this.elements = data.filter(obj => {
-          return obj.name != "default"
-        });
-       // console.log("getting elements: "+this.elements);
-        if(this.elements!.length<1)
-        {
-          this.textError = "no existe contenido para este lugar";
-        }
-      }
-     
-    });*/
+  
 
   }
-  switchToPhoto(){
+  getARElement(){
     this.textError = "";
     //this.getElements(this.place.toLowerCase());
+    console.log("foldersearch: "+this.folderToSearch+" elementnumber"+this.elementNumber);
     if(this.elementNumber !== ""){
-      
-      this.fotosService.getCollection("foto", 50,"description",this.elementNumber.toLowerCase()).subscribe((data) => {
+      console.log("sending request: ");
+      this.fotosService.getCollection(this.folderToSearch, 50,"description",this.elementNumber.toLowerCase()).subscribe((data) => {
+        console.log("getting data: ");
         if(data !== undefined)
         this.elements =   data as ElementId[];
         if(this.elements!.length <1){
@@ -158,32 +141,9 @@ export class HomeComponent implements OnInit {
         //console.log("GETTING chat messages: "+JSON.stringify(this.users));
       });
     }else{
-      this.textError = "ingresa un código";
+      this.textError = "ingresa un código VÁLIDO";
     }
-    
-    //validating if there is a foto with code provided as description
-
-    
-    
-   /* if(this.elements!.length > 0 && this.elementNumber !== ""){
-      this.subElements = this.elements!.filter(obj => {
-        return obj.description == this.elementNumber 
-      })
-
-      if(this.subElements.length>0){
-        this.itemAR = this.subElements[0];
-        this.itemAR.type = "place";
-        this.switchTemp = true;
-        //console.log("SwITCHING TO PHOTO");
-      }else{
-        console.log("no tienes contenido que coincida");
-        this.textError = "no tienes contenido que coincida";
-      }
-      
-    }else{
-      console.log("empty field to search");
-      this.textError = "no tienes contenido que coincida";
-    }*/
+   
     
   }
   switchToPlace(event: any){
@@ -213,7 +173,9 @@ export class HomeComponent implements OnInit {
  
       this.getElements( event.toLowerCase());
   }
-  showmyCodeDiv(value:boolean){
+  showmyCodeDiv(value:boolean, type:string){
+    console.log("Type ",type);
+    this.folderToSearch = type;
     this.showCodeDiv = value;
   }
   changePlace(place:string){
@@ -222,4 +184,14 @@ export class HomeComponent implements OnInit {
     this.getElements("lugares");
     (<HTMLInputElement> document.getElementById("showingModal")).click();
   }
+  downloadImage(){
+    html2canvas(this.screen.nativeElement).then(canvas => {
+      this.canvas.nativeElement.src = canvas.toDataURL();
+      this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
+      this.downloadLink.nativeElement.download = 'marble-diagram.png';
+      this.downloadLink.nativeElement.click();
+    });
+  }
 }
+
+

@@ -8,6 +8,7 @@ import { ElementId } from 'src/app/collections/element';
 })
 export class ModalComponent implements OnInit {
   @Input() item: ElementId = {} as ElementId;
+  @Input() uploadImage: boolean = false;
   @Input() currentMarkerIndex: number = 0;
   @Input() search: boolean = false;
   @Input() detail: boolean = false;

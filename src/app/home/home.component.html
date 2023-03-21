@@ -6,18 +6,39 @@
     <div class="main bg-dark row">
       <h1 class="text-center bg-white text-primary mt-3 mb-3">Publicar-3D</h1>
       <div class="mb-3 col container align-center">
-        <button (click)="showmyCodeDiv(true)" class="btn btn-block btn-outline-warning col-6">Lugares</button>
-        <button (click)="showmyCodeDiv(false)" class="btn btn-outline-primary col-6">Fotos</button>
+        <button (click)="showmyCodeDiv(true,'explore')" class="btn btn-block btn-outline-warning col-12">Explorar Lugares</button>
+        
+        <div class="btn-group col-12 mt-2" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" (click)="showmyCodeDiv(false,'triptico')" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="btnradio1">Tríptico 3d</label>
+        
+          <input type="radio" (click)="showmyCodeDiv(false,'foto')" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btnradio2">Foto 3d</label>
+        
+          <input type="radio" (click)="showmyCodeDiv(false,'tarjeta')" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btnradio3">Tarjeta 3d</label>
+
+          <input type="radio" (click)="showmyCodeDiv(false,'menu')" class="btn-check" name="btnradio" id="btnradio4" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btnradio4">Menú 3d</label>
+        </div>
+        <!--div class="container">
+          
+        <button (click)="showmyCodeDiv(false)" class="btn btn-outline-primary col-6">Tríptico 3d</button>
+          <button class="btn btn-primary col-4">Foto 3d</button>
+          <button class="btn btn-primary col-4">Tarjeta 3d</button>
+          <button class="btn btn-primary col-4">Menú 3d</button>
+          
+       </div-->
       </div>
      
       
      </div>
     
-     
+     <h3 id="error" class="text-warning text-center">{{textError}}</h3>
       <div  *ngIf="showCodeDiv; else showCodeInput" class="main row">
         <div class="container form-group">
           <button id="showingModal" class="btn btn-warning col-3 offset-9 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Buscar</button>
-          <h3 id="error" class="text-warning text-center">{{textError}}</h3>
+          
           <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
               
@@ -59,9 +80,10 @@
         </div>
       <ng-template #showCodeInput>
         <div class="container center form"  >
+         
             <h4 class="text-center text-warning">Inserta tu codigo</h4>
             <input id="codeForElement" class="form-control form-text m-3" type="text" [(ngModel)]="elementNumber">
-            <button class="form-control btn btn-outline-primary m-3" (click)="switchToPhoto()">Buscar</button>
+            <button class="form-control btn btn-outline-primary m-3" (click)="getARElement()">Buscar</button>
         
          </div>
          
@@ -71,5 +93,42 @@
     <app-afelement [item]="itemAR"></app-afelement>
   </ng-template>
  
-  <app-modal [caller]="caller" [search]="true" [codes]="codes" (selectedValue)="changePlace($event)"></app-modal>
+  <app-modal [uploadimage]="uploadimage" [caller]="caller" [search]="true" [codes]="codes" (selectedValue)="changePlace($event)"></app-modal>
 
+  <!--div>HTMLから画像変換してダウンロード</div>
+  <div class="btn btn-primary" (click)="downloadImage()">DL</div>
+  <table #screen id="table" class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div id="download">
+    <img #canvas>
+    <a #downloadLink></a>
+  </div-->

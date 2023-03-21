@@ -85,7 +85,7 @@ export class AfelementComponent implements OnInit {
  
   homeAction(){
     //console.log("home action pressed");
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home?location=citnova'])
   .then(() => {
     window.location.reload();
   });

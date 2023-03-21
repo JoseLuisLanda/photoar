@@ -10,9 +10,9 @@
   },
   "private": true,
   "dependencies": {
-    "@Angular/cli": "npm:@angular/cli@^14.2.10",
     "@angular/animations": "^14.2.4",
     "@angular/cdk": "^13.0.0",
+    "@Angular/cli": "npm:@angular/cli@^14.2.10",
     "@angular/common": "^14.2.4",
     "@angular/compiler": "^14.2.4",
     "@angular/core": "^14.2.4",
@@ -24,6 +24,7 @@
     "@angular/router": "^14.2.4",
     "firebase-tools": "^11.13.0",
     "firestore": "^1.1.6",
+    "html2canvas": "^1.4.1",
     "rxjs": "~6.6.0",
     "three": "^0.145.0",
     "tslib": "^2.1.0",

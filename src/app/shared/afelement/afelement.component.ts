@@ -57,9 +57,13 @@ export class AfelementComponent implements OnInit {
         var imgPath = "#img"+indexPath;
         if(this.isSingleMarker)
         imgPath = "multimarkerImg";
+
+        var width = 3;
+        var height = this.item.type =="vcard" ? 2 : 3;
+
         
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="3" height="3"></a-image>');
+        '<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="'+width+'" height="'+height+'"></a-image>');
       }
       
       

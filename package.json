@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^14.2.4",
     "@angular/router": "^14.2.4",
     "firebase-tools": "^11.13.0",
+    "html2canvas": "^1.4.1",
     "firestore": "^1.1.6",
     "rxjs": "~6.6.0",
     "three": "^0.145.0",

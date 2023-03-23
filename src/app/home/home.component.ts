@@ -4,7 +4,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
-//import html2canvas from "html2canvas"; 
+import html2canvas from "html2canvas"; 
 //import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
@@ -184,14 +184,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.getElements("lugares");
     (<HTMLInputElement> document.getElementById("showingModal")).click();
   }
-  /*downloadImage(){
+  downloadImage(){
     html2canvas(this.screen.nativeElement).then(canvas => {
       this.canvas.nativeElement.src = canvas.toDataURL();
       this.downloadLink.nativeElement.href = canvas.toDataURL('image/png');
       this.downloadLink.nativeElement.download = 'marble-diagram.png';
       this.downloadLink.nativeElement.click();
     });
-  }*/
+  }
 }
 
 

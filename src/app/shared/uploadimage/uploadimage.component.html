@@ -1,5 +1,8 @@
-<br/>
-<div class="main">
+<div class="btn btn-primary mb-2 col-4 offset-8" (click)="uploadImage()">Actualizar</div>
+<div #screen >
+    <app-element-to-img></app-element-to-img>
+</div>
+<div class="main mt-3">
     <!--div class="row">
         <div class="col-md-9">
             <h3>Nuevo Elemento</h3>
@@ -63,5 +66,11 @@
         </div>
      
     </div>
-    
+ 
+
+  
+  <div id="download">
+    <img #canvas>
+    <a #downloadLink></a>
+  </div>
 </div>

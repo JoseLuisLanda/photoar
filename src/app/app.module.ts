@@ -18,6 +18,7 @@ import { UploadimageComponent } from './shared/uploadimage/uploadimage.component
 import { HttpClientModule } from '@angular/common/http';
 import { NgDropFilesDirective } from '../app/directives/ng-drop-files.directive';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ElementToImgComponent } from './shared/element-to-img/element-to-img.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
     ModalComponent,
     ElementcardComponent,
     UploadimageComponent,
-    NgDropFilesDirective
+    NgDropFilesDirective,
+    ElementToImgComponent
   ],
   imports: [
     HttpClientModule,

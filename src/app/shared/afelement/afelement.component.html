@@ -24,7 +24,7 @@
   <a-assets>
     <div *ngIf="isSingleMarker; else multimarkers" >
       <div *ngFor="let image of item.images">
-        <img *ngIf="image.type == 'image' || image.type == undefined" crossorigin="anonymous" id="multimarkerImg" src={{image.url}} />
+        <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == undefined" crossorigin="anonymous" id="multimarkerImg" src={{image.url}} />
       </div>
        </div>
     <ng-template #multimarkers>

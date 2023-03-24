@@ -13,9 +13,9 @@
   <button (click)="homeAction()" style="height: 30%;" class="btn btn-outline-warning"><</button>
 </div>
 <div class="buttonsTop">
-  <div *ngFor="let image of item.images; index as i">
+  <!--div *ngFor="let image of item.images; index as i">
     <button *ngIf="isSingleMarker" (click)="setImage(image.url!,i)" class="btn btn-sm btn-outline-light">{{image.name}}</button>
-  </div>  
+  </div-->  
 </div>
 
 <a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"

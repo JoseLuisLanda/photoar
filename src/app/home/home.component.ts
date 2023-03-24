@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   showCodeDiv = true;
   users = [{},{},{},{}];
   location:string = "general";
+  folder:string = "lugares";
   uploadimage: boolean = true;
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -42,12 +43,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.activeRoute.queryParams
     .subscribe(params => {
       //console.log(params); // { orderby: "location" }
-      if(params.location !== undefined)
+      this.elements = [];
+      if(params.type !== undefined &&  params.code !== undefined)
       {
-        this.location = params.location;
+        this.location = params.code;
+        this.folder = params.type;
         console.log(this.location); // location
-        this.fotosService.getCollection("lugares", 50,"","","codes",params.location).subscribe((data) => {
-          if(data !== undefined)
+        this.fotosService.getCollection(this.folder, 50,"","","codes",this.location).subscribe((data) => {
+          if(data !== undefined && data.length > 0){
+            this.elements =   data as ElementId[];
+            this.itemAR = this.elements[0];
+        //this.itemAR.type = "place";
+        this.switchTemp = true;
+          console.log("img elements: "+JSON.stringify(this.elements))
+          }
           
           this.lugares =   data.filter(obj => {
             return obj.normalizedName != "general"

@@ -59,7 +59,7 @@ export class AfelementComponent implements OnInit {
         imgPath = "multimarkerImg";
 
         var width = 3;
-        var height = this.item.type =="vcard" ? 2 : 3;
+        var height = this.item.images![i].type =="vcard" ? 1.5 : 3;
 
         
         marker.insertAdjacentHTML('beforeEnd', 

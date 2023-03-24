@@ -48,14 +48,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       {
         this.location = params.code;
         this.folder = params.type;
-        console.log(this.location); // location
+        //console.log(this.location); // location
         this.fotosService.getCollection(this.folder, 50,"","","codes",this.location).subscribe((data) => {
           if(data !== undefined && data.length > 0){
             this.elements =   data as ElementId[];
             this.itemAR = this.elements[0];
         //this.itemAR.type = "place";
         this.switchTemp = true;
-          console.log("img elements: "+JSON.stringify(this.elements))
+          //console.log("img elements: "+JSON.stringify(this.elements))
           }
           
           this.lugares =   data.filter(obj => {

@@ -29,7 +29,7 @@
        </div>
     <ng-template #multimarkers>
       <div *ngFor="let image of item.images; index as i" >
-        <img *ngIf="image.type == 'image' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+        <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
         <video *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
         controls muted src="{{image.url}}" ></video>
         <!--a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item-->

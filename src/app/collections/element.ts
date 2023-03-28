@@ -1,3 +1,5 @@
+import { Element } from "@angular/compiler";
+
 export interface Elemento {
     name?: string;
     displayName?: string;
@@ -118,5 +120,21 @@ export class ElementModel {
         this.description = "";
          this.status = true;
          this.dateCreated = new Date();
+    }
+}
+export class UserModel implements Elemento{
+
+    name: string;
+    description: string;
+    password: string;
+    confirmPassword: string;
+    images: ElementId[];
+    
+    constructor() {
+        this.name = "",
+        this.description = "";
+         this.password ="";
+        this.confirmPassword = "";
+        this.images = [];
     }
 }

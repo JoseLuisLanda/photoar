@@ -1,15 +1,18 @@
+<!--div>
+  <button class="btn btn-primary" (click)="signUp()">SignUp</button>
+</div-->
 <div #screen *ngIf="!switchTemp; else showPhoto">
   <!--div class="main container form-group">
     <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div-->
 
     <div class="main bg-dark row">
-      <h1 class="text-center bg-white text-primary mt-3 mb-3">Publicar-3D</h1>
+     
       <div class="mb-3 col container align-center">
-        <button (click)="showmyCodeDiv(true,'explore')" class="btn btn-block btn-outline-warning col-12">Explorar Lugares</button>
+       
         
         <div class="btn-group col-12 mt-2" role="group" aria-label="Basic radio toggle button group">
-          <input type="radio" (click)="showmyCodeDiv(false,'triptico')" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+          <input type="radio" (click)="showmyCodeDiv(true,'explore')" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
           <label class="btn btn-outline-primary" for="btnradio1">Tríptico 3d</label>
         
           <input type="radio" (click)="showmyCodeDiv(false,'foto')" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
@@ -37,13 +40,13 @@
      <h3 id="error" class="text-warning text-center">{{textError}}</h3>
       <div  *ngIf="showCodeDiv; else showCodeInput" class="main row">
         <div class="container form-group">
-          <button id="showingModal" class="btn btn-warning col-3 offset-9 btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Buscar</button>
+          <button id="showingModal" (click)="setLugares()" class="btn btn-warning col-4 btn-sm offset-4" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Buscar en</button>
           
-          <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion pt-2 accordion-flush" id="accordionFlushExample">
             <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
               
-              <h2 class="accordion-header row" id="flush-headingOne">
-                <button class="accordion-button text-white bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+              <h2 class="accordion-header row text-bg-info" id="flush-headingOne">
+                <button class="accordion-button text-bg-success bg-gradient text-white bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                   Sitios de interés en {{location}} 
                 </button>
                 
@@ -93,6 +96,6 @@
     <app-afelement [item]="itemAR"></app-afelement>
   </ng-template>
  
-  <app-modal [uploadimage]="uploadimage" [caller]="caller" [search]="true" [codes]="codes" (selectedValue)="changePlace($event)"></app-modal>
+  <app-modal [uploadimage]="uploadimage" [caller]="caller" [item]="currentItem" [search]="search" [isform]="isForm" [codes]="codes" (selectedValue)="changePlace($event)"></app-modal>
 
   

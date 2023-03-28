@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { ElementId } from '../collections/element';
+import { ElementId, Evento, Grupo, UserModel } from '../collections/element';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   codes: ElementId = {uid:""};
   subElements?: ElementId[];
   myPhoto?: ElementId;
+  search:boolean =  true;
   elementNumber = "";
   textError = "";
   caller="Lugares";
@@ -31,6 +32,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   location:string = "general";
   folder:string = "lugares";
   uploadimage: boolean = true;
+  userItem : UserModel = new UserModel();
+  currentItem: any ={};
+  isForm = false;
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
@@ -40,6 +44,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //console.log(this.screen)
  }
   ngOnInit(): void {
+    console.log("EVENTO ITEM: "+JSON.stringify(this.userItem));
+    //console.log("grupo ITEM: "+JSON.stringify(this.groupItem));
     this.activeRoute.queryParams
     .subscribe(params => {
       //console.log(params); // { orderby: "location" }
@@ -201,6 +207,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.downloadLink.nativeElement.click();
     });
   }
+  signUp(){
+    this.uploadimage = false;
+    this.caller = "SingUp";
+    this.isForm = true;
+    this.currentItem = this.userItem;
+    (<HTMLInputElement> document.getElementById("showingModal")).click();
+  }
+  setLugares(){
+    this.uploadimage = false;
+    this.caller = "Lugares";
+    this.isForm = false;
+  }
+
 }
 
 

@@ -8,3 +8,24 @@ body {
     color: transparent;
     background-image: url("assets/img/rpowall.jpg");
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+    .containermain{
+     bottom:0;
+     left:0;
+     right:0;
+     overflow:hidden;
+     background-color: red;
+     z-index:-1; 
+ }
+ .full-height {
+     height: 100%;
+     background-color: black;
+   }
+ .containerHalf{
+   border-radius: 10px;
+   background: rgba(0, 0, 0, 0.5) !important;
+   }
+   .container85{
+     border-radius: 10px;
+     background: rgba(0, 0, 0, 0.85) !important;
+     }

@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid bg-gradient bg-dark">
+      <img src="{{ 'assets/img/logopublicar3d.png' }}" class="logo"  width="100vw" height="50vh"/>
+      <ng-template #login>
+     
+        <li  class="nav-item" >
+          <a class="btn btn-sm text-white btn btn-outline-primary" routerLink="/login">login</a>
+        </li>
+        <li class="nav-item" >
+          <a class="btn btn-sm text-white btn btn-outline-warning" routerLink="/register">register</a>
+        </li>
+      
+
+      </ng-template>
+    
+      <a class="navbar-brand text-white btn btn-outline-success" style="margin-left: 10px;" routerLink="home">Inicio</a>
+       <ul class="navbar-nav mx-auto" *ngIf="user$ | async as user; else login">  
+      
+      <div class="dropdown" *ngIf="user$ | async as user">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ user?.email }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li><i class="fas fa-user-circle fa-1x"></i><a class="dropdown-item" routerLink="/register">Mi Perfil</a></li>
+          <li><a class="dropdown-item" (click)="onLogout()">Salir</a></li>
+        </ul>
+      </div>
+     
+    </ul>
+   
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon bg-white bg-opacity-50"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+            <li *ngIf="user$ | async as user" class="nav-item" >
+                <a class="btn btn-sm text-white btn btn-outline-primary" routerLink="/login">dashboard</a>
+              </li>
+        
+        </ul>
+        
+       
+        
+        
+      </div>
+    </div>
+  </nav>

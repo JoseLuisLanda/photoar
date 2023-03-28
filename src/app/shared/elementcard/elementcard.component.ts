@@ -19,9 +19,9 @@ export class ElementcardComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if(this.item.type === "photo")
+    if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
-    else if(this.item.images![this.currentMarkerIndex].elements)
+    else if(this.item.images![this.currentMarkerIndex])
     {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else
@@ -29,9 +29,9 @@ export class ElementcardComponent implements OnInit {
     }
   ngOnChanges(changes: SimpleChanges): void {
     //console.log("index", this.currentMarkerIndex + " and item",JSON.stringify(this.item));
-    if(this.item.type === "photo")
+    if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
-    else if(this.item.images![this.currentMarkerIndex].elements)
+    else if(this.item!.images![this.currentMarkerIndex])
     {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else

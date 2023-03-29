@@ -60,6 +60,7 @@ export class AfelementComponent implements OnInit {
 
         var width = 3;
         var height = this.item.images![i].type =="vcard" ? 2 : 3;
+        height = this.item.images![i].type =="poster" ? 4 : 3;
 
         
         marker.insertAdjacentHTML('beforeEnd', 

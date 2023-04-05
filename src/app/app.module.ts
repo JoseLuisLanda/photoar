@@ -23,6 +23,7 @@ import { ElementformComponent } from './shared/elementform/elementform.component
 import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { HeaderComponent } from './shared/header/header.component';
     ElementformComponent,
     LoginComponent,
     RegisterComponent,
-    HeaderComponent
+    HeaderComponent,
+    DashboardComponent
   ],
   imports: [
     HttpClientModule,

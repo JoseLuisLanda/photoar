@@ -10,7 +10,7 @@ AFRAME.registerComponent('markers_start',{
 		var tagNumberinit = document.getElementById("tagNumberinit").value;
 		var tagNumberlength = document.getElementById("tagNumberlength").value;
 		var tagNumberend = document.getElementById("tagNumberend").value;
-		console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
+		//console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
 		//list of the markers
 		for(var i=0; i<=tagNumberlength; i++)
 		{

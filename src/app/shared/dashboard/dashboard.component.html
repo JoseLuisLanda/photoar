@@ -1,0 +1,100 @@
+
+<div *ngIf="verified; else verifyemail">
+
+    <div class="container form-group">
+        
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
+            
+            <h2 class="accordion-header rounded-2 row text-bg-info" id="flush-headingOne">
+              <button id="btnCollapse" class="accordion-button form-check-input text-bg-success bg-gradient text-white bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+               Buscar
+              </button>
+              
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body row">
+                <h3 class="text-warning">Item</h3>
+                <select class="form-select form-select-md mb-3" (change)="setFolderSearch($event)"  name="title" ng-Model="element" aria-label="element">
+                    <option class="text-bg-secondary" selected disabled>--Selecciona un Producto 3D--</option>
+                  <option *ngFor="let element of elements; index as i" [ngValue]="element.name">{{element.name}}</option>
+                </select>
+               <div >
+                <h3 class="text-warning">Código</h3>
+                <input class="form-control" type="text" id="inputSearch" [(ngModel)]="itemCode" placeholder="Inserta un código válido"/>
+                <button  class="btn btn-primary mt-3 col-12" (click)="searchItem()">Buscar</button>
+               
+               </div>
+               <label class="text center col-12 text-warning">{{errormsg}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
+            
+            <h2 class="accordion-header rounded-2 row text-bg-info" id="flush-headingTwo">
+              <button id="btnCollapseTwo" class="accordion-button form-check-input text-bg-success bg-gradient text-white bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+               Mis Objetos 3D
+              </button>
+              
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body row">
+               
+              <div *ngFor="let item of fbUser.items">
+                <button class="btn btn-warning mb-2 col-12">{{item.split("/")[0]}}</button>
+              </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+         <!--select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
+          <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
+        </select-->
+       </div>
+    <!--div class="form-group mt-3 text-center">
+        <h2 class="label text-warning mb-2">¿Que item deseas buscar?</h2>
+        
+        <select class="form-select form-select-md mb-3" (change)="setFolderSearch($event)"  name="title" ng-Model="element" aria-label="element">
+            <option class="text-bg-secondary" selected disabled>--Selecciona un Producto 3D--</option>
+          <option *ngFor="let element of elements; index as i" [ngValue]="element.name">{{element.name}}</option>
+        </select>
+       <div *ngIf="showSearchBtn" >
+        <h3 class="text-warning">Código</h3>
+        <input class="form-control" type="text" id="inputSearch" [(ngModel)]="itemCode" placeholder="Inserta un código válido"/>
+        <button class="btn btn-primary mt-2" (click)="searchItem()">Buscar</button>
+       
+       </div>
+       <label class="text center col-12 text-warning">{{errormsg}}</label>
+      </div-->
+    
+</div>
+<ng-template #verifyemail>
+    <div *ngIf="!messageSent" class="bg-dark text-center"> 
+        <h3 class="text-warning pt-2">Verifica tu dirección de correo</h3>
+        <p class="text-white">Para que puedas agregar elementos 3d a tu cuenta (playeras, fotos, tarjetas etc.)</p>
+        <button class="btn btn-warning mb-2" id="sendVerification" (click)="verifyEmail()">Enviar correo</button>
+        <button class="btn btn-warning mb-2" (click)="reloadPage()">Ya lo verifiqué</button>
+    </div>
+    <div *ngIf="messageSent" class="bg-dark text-center"> 
+        <p class="text-white">Se ha enviado un mensaje a tu email para verificar tu dirección de correo, en caso de no recibirlo busca en tu bandeja de correo no deseado o bien recarga la página e intentalo de nuevo.</p>
+        <button class="btn btn-warning mb-2" (click)="reloadPage()">Ya lo verifiqué</button>
+    </div>
+   
+</ng-template>
+<div *ngFor="let element of items" class="card" class="mt-3 col-xs-6 col-sm-6 col-md-3 col-lg-3">
+  
+    <div class="card-body bg-info rounded m-2">
+
+      <div class="container mt-2">
+        <h2 class="text-center text-info mt-3 bg-white">{{element.name}}</h2> 
+        <button *ngIf="!element.owner" (click)="saveItemUser(element.id!)" class="btn col-12 btn-warning">Asociar</button>  
+        <img src={{element.url}} class="card-img-top"  alt="...">
+       <p class="mb-2 text-bg-secondary mt-2">{{element.description}}</p>
+      </div>
+
+
+
+    </div>
+  </div>

@@ -7,13 +7,14 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { AfsService } from './afs.service';
-import { ElementId } from '../../collections/element';
+import { ElementId, Elemento } from '../../collections/element';
 import { UserModel } from '../../collections/user.model';
 import { RoleValidator } from '../../helpers/roleValidator';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
+import {getFirestore, arrayUnion, updateDoc, doc } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,9 +23,13 @@ export class AuthService extends RoleValidator{
   //private apiKey: string = 'apiKey';
   private url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty';
   private apiKey = 'AIzaSyDHxlKfchpJrycT_fAOX3JjBCWp_uFlcjI';
+ 
   credentialEmail : any;
   public userToken: string = '';
-  userData: any
+  userData: any;
+  usertoUpdate: any=[];
+  userFB:any=[];
+  
 
   constructor(public afAuth: AngularFireAuth,
     private http: HttpClient,
@@ -36,8 +41,13 @@ export class AuthService extends RoleValidator{
   this.afAuth.authState.subscribe((user) => {
     if (user) {
       this.userData = user;
-      localStorage.setItem('user', JSON.stringify(this.userData));
-      JSON.parse(localStorage.getItem('user')!);
+      const userFb = this.afsService.doc$(`users/${user.uid}`).subscribe((data) => {
+        if(data !== undefined)
+        this.userFB =   data as ElementId;
+        localStorage.setItem('user', JSON.stringify(this.userFB));
+      });
+      
+      //JSON.parse(localStorage.getItem('user')!);
     } else {
       localStorage.setItem('user', 'null');
       JSON.parse(localStorage.getItem('user')!);
@@ -80,7 +90,7 @@ SendVerificationMail() {
   return this.afAuth.currentUser
     .then((u: any) => u.sendEmailVerification())
     .then(() => {
-      this.router.navigate(['verify-email-address']);
+      //this.router.navigate(['verify-email-address']);
     });
 }
 // Reset Forggot password
@@ -135,6 +145,7 @@ SetUserData(user: any) {
     merge: true,
   });
 }
+
 // Sign out
 SignOut() {
   return this.afAuth.signOut().then(() => {
@@ -142,27 +153,42 @@ SignOut() {
     this.router.navigate(['sign-in']);
   });
 }
-
-
-
-
   isAuthenticated() {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
-
-  private updateUserData(user: any) {
-    const userRef: AngularFirestoreDocument<ElementId> = this.db.doc(
-      `usuario/${user.uid}`
-    );
-    user.password = "";
-    user.normalizedName = user.displayName.toLowerCase();
-    user.photoURL = user.photoURL ? user.photoURL : 'assets/photo';
-    user.refreshToken = user.refreshToken ? user.refreshToken : '';
-    user.organization = user.email!.split('@')[1];
-    user.type = user.email!.split('@')[1] === "upt.edu.mx" ? "interno":"user";
-    user.url = `usuario/${user.uid}`;
   
-    //console.log("storing: ", JSON.stringify(user));
-    return userRef.set(user, { merge: true });
+async setUserItems(folder: string,id: string, item: any){
+ 
+  const dba = getFirestore();
+  const pathRef = doc(dba, folder, id);
+
+  const unionRes = await updateDoc(pathRef , item);
+  this.afAuth.authState.subscribe((user) => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(this.userFB));
+      window.location.reload();
+    }
+  });
+    //this.updateUserData(this.usertoUpdate);
+}
+  async updateUserData(user: ElementId) {
+   /* this.usertoUpdate={
+    uid: user.uid,
+    email: user.email,
+    displayName: user.displayName?user.displayName:user.email!.split('@')[0],
+    emailVerified: user.emailVerified,
+    url : `users/${user.uid}`,
+    normalizedName : user.displayName? user.displayName.toLowerCase():user.email!.split('@')[0],
+    photoURL : user.photoURL ? user.photoURL : 'assets/photo',
+    refreshToken : user.refreshToken ? user.refreshToken : '',
+    type : "user",
+  };
+  this.usertoUpdate.items = [];
+  this.usertoUpdate.items.push(item);*/
+    const userRef: AngularFirestoreDocument<ElementId> = this.db.doc(
+      `users/${user.uid}`
+    );
+   
+    return userRef.set(JSON.parse(JSON.stringify(user)), { merge: true });
   }
 }

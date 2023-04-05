@@ -28,6 +28,7 @@ export interface Elemento {
     talleres?: ElementId[];
     images?: ElementId[];
     item?: ElementId;
+    items?: string[];
     dateBirth?: string;
     pais?: string;
     genero?: string;
@@ -51,6 +52,7 @@ export interface Elemento {
     indexEnd? :number;
     status?: boolean;
     codes?: string[];
+    code?: string;
 }
 
 export interface ElementId extends Elemento { uid: string; }

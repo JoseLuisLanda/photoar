@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     //console.log(this.screen)
  }
   ngOnInit(): void {
-    console.log("EVENTO ITEM: "+JSON.stringify(this.userItem));
+    //console.log("EVENTO ITEM: "+JSON.stringify(this.userItem));
     //console.log("grupo ITEM: "+JSON.stringify(this.groupItem));
     this.activeRoute.queryParams
     .subscribe(params => {
@@ -137,11 +137,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   getARElement(){
     this.textError = "";
     //this.getElements(this.place.toLowerCase());
-    console.log("foldersearch: "+this.folderToSearch+" elementnumber"+this.elementNumber);
+    //console.log("foldersearch: "+this.folderToSearch+" elementnumber"+this.elementNumber);
     if(this.elementNumber !== ""){
       console.log("sending request: ");
       this.fotosService.getCollection(this.folderToSearch, 50,"description",this.elementNumber.toLowerCase()).subscribe((data) => {
-        console.log("getting data: ");
+        //console.log("getting data: ");
         if(data !== undefined)
         this.elements =   data as ElementId[];
         if(this.elements!.length <1){
@@ -151,7 +151,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
           this.itemAR = this.elements[0];
         this.itemAR.type = "place";
         this.switchTemp = true;
-          console.log("img elements: "+JSON.stringify(this.elements))
+          //console.log("img elements: "+JSON.stringify(this.elements))
         }
         //console.log("GETTING chat messages: "+JSON.stringify(this.users));
       });
@@ -189,12 +189,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.getElements( event.toLowerCase());
   }
   showmyCodeDiv(value:boolean, type:string){
-    console.log("Type ",type);
+    //console.log("Type ",type);
     this.folderToSearch = type;
     this.showCodeDiv = value;
   }
   changePlace(place:string){
-    console.log("receiving: "+place);
+    //console.log("receiving: "+place);
     this.location = place;
     this.getElements("lugares");
     (<HTMLInputElement> document.getElementById("showingModal")).click();

@@ -9,7 +9,10 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
   nombreModelo: Elemento[] = [
     //models tuzo
-    
+    { name: "Backboard", url: "../../../assets/models/backboardv.glb", },
+    { name: "PubTal23", url: "../../../assets/models/publictalent2023.glb", },
+
+
     { name: "Chase", url: "../../../assets/models/chase.glb", },
     { name: "Everest", url: "../../../assets/models/everest.glb", },
     { name: "Marshall", url: "../../../assets/models/marshall.glb", },
@@ -23,7 +26,7 @@ export class ARHeaderComponent implements OnInit, OnChanges {
     //{ name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
     //{ name: "Rubble", url: "../../../assets/models/rubble_tuzoo.glb", },
   
-    { name: "Backboard", url: "../../../assets/models/backboardv.glb", },
+    
     { name: "Luli tuzo", url: "../../../assets/models/lulilast.glb", },
     /*{ name: "Duende", url: "../../../assets/models/duende.glb", },
     { name: "Gnomo", url: "../../../assets/models/nomocut.glb", },//      36
@@ -70,7 +73,7 @@ export class ARHeaderComponent implements OnInit, OnChanges {
 
     { name: "Delorean", url: "../../../assets/models/delorean_highpoly.glb", },
     { name: "DMC", url: "../../../assets/models/delorean_dmc_12.glb", },
-    { name: "Nasi", url: "../../../assets/models/nasi_lemak.glb", },
+   // { name: "Nasi", url: "../../../assets/models/nasi_lemak.glb", },
     { name: "DMC12", url: "../../../assets/models/delorean__dmc-12.glb", },
     { name: "Parzival", url: "../../../assets/models/parzivals_delorean_dmc-12.glb", },//     34
     { name: "Patineta", url: "../../../assets/models/hoverboard.glb", },

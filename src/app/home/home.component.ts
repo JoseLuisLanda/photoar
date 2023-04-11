@@ -5,13 +5,15 @@ import { FotosService } from 'src/app/shared/services/fotos.service'
 import { map } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import html2canvas from "html2canvas"; 
+import { Observable } from 'rxjs';
+import { AuthService } from '../shared/services/auth.service';
 //import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean  = false;
   title = 'Visualiz-AR';
@@ -35,17 +37,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
   userItem : UserModel = new UserModel();
   currentItem: any ={};
   isForm = false;
+  emailConfirmed = false;
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
-
-  constructor( private router: Router, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
+  public user$: Observable<any> = this.authSvc.afAuth.user;
+  constructor( private router: Router, private authSvc: AuthService, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
   ngAfterViewInit(){
     //console.log(this.screen)
+    this.emailConfirmed = this.authSvc.isLoggedIn;
  }
   ngOnInit(): void {
     //console.log("EVENTO ITEM: "+JSON.stringify(this.userItem));
     //console.log("grupo ITEM: "+JSON.stringify(this.groupItem));
+    this.emailConfirmed = this.authSvc.isLoggedIn;
     this.activeRoute.queryParams
     .subscribe(params => {
       //console.log(params); // { orderby: "location" }
@@ -93,6 +98,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
   gotTo(page: string){
     this.router.navigateByUrl('/'+page);
+  }
+  ngOnChanges(){
+    this.emailConfirmed = this.authSvc.isLoggedIn;
   }
   getElements(type: string){
    this.textError = "";

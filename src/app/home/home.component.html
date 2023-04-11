@@ -2,8 +2,8 @@
   <button class="btn btn-primary" (click)="signUp()">SignUp</button>
 </div-->
 <div #screen *ngIf="!switchTemp; else showPhoto">
-  <div class="main container form-group">
-    <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
+  <div *ngIf="user$ | async as user" class="main container form-group">
+    <button *ngIf="emailConfirmed" (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
 </div>
 
     <div class="main bg-dark row">

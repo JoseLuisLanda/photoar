@@ -9,22 +9,23 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
   nombreModelo: Elemento[] = [
     //models tuzo
-    { name: "Backboard", url: "../../../assets/models/backboard.glb", },
+    
     { name: "Chase", url: "../../../assets/models/chase.glb", },
     { name: "Everest", url: "../../../assets/models/everest.glb", },
     { name: "Marshall", url: "../../../assets/models/marshall.glb", },
-    { name: "Paw", url: "../../../assets/models/patrol_all_tuzoo.glb", },
-    { name: "Patrulla", url: "../../../assets/models/paw_patrol_all.glb", },
+    //{ name: "Paw", url: "../../../assets/models/patrol_all_tuzoo.glb", },
+    //{ name: "Patrulla", url: "../../../assets/models/paw_patrol_all.glb", },
     { name: "Skye", url: "../../../assets/models/skye.glb", },
-    { name: "Tracker", url: "../../../assets/models/tracker_tuzoo.glb", },
-    { name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
+    //{ name: "Tracker", url: "../../../assets/models/tracker_tuzoo.glb", },
+    //{ name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
     { name: "Rubble", url: "../../../assets/models/rubble.glb", },
     { name: "Tracker", url: "../../../assets/models/tracker.glb", },
-    { name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
-    { name: "Rubble", url: "../../../assets/models/rubble_tuzoo.glb", },
+    //{ name: "Zuma", url: "../../../assets/models/zuma_tuzoo.glb", },
+    //{ name: "Rubble", url: "../../../assets/models/rubble_tuzoo.glb", },
   
+    { name: "Backboard", url: "../../../assets/models/backboardv.glb", },
     { name: "Luli tuzo", url: "../../../assets/models/lulilast.glb", },
-    { name: "Duende", url: "../../../assets/models/duende.glb", },
+    /*{ name: "Duende", url: "../../../assets/models/duende.glb", },
     { name: "Gnomo", url: "../../../assets/models/nomocut.glb", },//      36
     { name: "Gnomo 2", url: "../../../assets/models/gnomo1.glb", },
     { name: "Pitufo", url: "../../../assets/models/pitufo.glb", },
@@ -32,7 +33,7 @@ export class ARHeaderComponent implements OnInit, OnChanges {
     { name: "Bengali", url: "../../../assets/modelstuzofari/bengal_cat.glb", },//5   1
     { name: "Lobo", url: "../../../assets/modelstuzofari/lobo_anim.glb", },//1    3 ok gde
     { name: "Pinguino", url: "../../../assets/modelstuzofari/pinguino.glb", },//.900   6
-    { name: "Husky", url: "../../../assets/modelstuzofari/siberian_husky.glb", },//.925    7
+    { name: "Husky", url: "../../../assets/modelstuzofari/siberian_husky.glb", },//.925    7*/
     //models dino
     { name: "Quetzal", url: "../../../assets/modelsjurassic/quetzalcoatlus.glb", },//21    15 ok muy grande
     { name: "Spinosaurus", url: "../../../assets/modelsjurassic/spinosaurus.glb", },//7    16 ok gde
@@ -49,7 +50,7 @@ export class ARHeaderComponent implements OnInit, OnChanges {
     { name: "Venom war", url: "../../../assets/models/venom_marvel_super_war.glb", },//2.07        27
     { name: "Spide red", url: "../../../assets/models/spider-man_-_hybrid_suit.glb", },//1.24      28   16
 
-    { name: "OFO", url: "../../../assets/models/ufo_doodle.glb", },//9.12
+   /* { name: "OFO", url: "../../../assets/models/ufo_doodle.glb", },//9.12
     { name: "Alien", url: "../../../assets/models/alien.glb", },//3.17
     { name: "Astronauta", url: "../../../assets/models/Astronaut.glb", },//2.74
     { name: "Piramide", url: "../../../assets/models/egyptian_pyramid.glb", },//4.41
@@ -65,7 +66,7 @@ export class ARHeaderComponent implements OnInit, OnChanges {
     { name: "Ovni", url: "../../../assets/models/ovni_low_poly.glb", },
     { name: "Piramide", url: "../../../assets/models/piramid.glb", },
 
-    { name: "Platillo", url: "../../../assets/models/plato_volador_amina.glb", },//      29
+    { name: "Platillo", url: "../../../assets/models/plato_volador_amina.glb", },//      29*/
 
     { name: "Delorean", url: "../../../assets/models/delorean_highpoly.glb", },
     { name: "DMC", url: "../../../assets/models/delorean_dmc_12.glb", },

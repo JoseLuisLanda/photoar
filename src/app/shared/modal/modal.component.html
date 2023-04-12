@@ -16,7 +16,7 @@
             <app-elementform *ngIf="isform" [item]="item" [type]="type"></app-elementform>
             <div *ngIf="!isform"> 
               <h1 class="bg-dark text-warning text-center col-12">Escanea en otro lugar</h1>
-              <button (click)="returnPlace(code)" class="btn btn-light btn-close-white m-1" *ngFor="let code of codes.codes">{{code}}</button>
+              <button (click)="returnPlace(code)" class="btn btn-light btn-white m-1" *ngFor="let code of codes.codes">{{code}}</button>
             </div>
             <!--app-elementadd *ngIf="!edit" [item]="item" [element]="element"></app-elementadd-->
             <!--div *ngIf="edit" class="d-flex form-inline">

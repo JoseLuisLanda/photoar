@@ -4,8 +4,22 @@
 var markersURLArray=[];
 var markersNameArray=[];
 console.log('Add markers to the scene');
+
+			/*const recognition = new webkitSpeechRecognition();
+			recognition.continuous = true;
+			recognition.lang = 'es-mx';
+			recognition.interimResult = false;
+			recognition.start();
+			recognition.onresult = (event) =>{
+				const texto = event.results[event.results.length - 1][0].transcript;
+
+				console.log(texto);
+			}*/
+
 AFRAME.registerComponent('markers_start',{
 	init:function(){
+		
+
 		var sceneEl = document.querySelector('a-scene');
 		var tagNumberinit = document.getElementById("tagNumberinit").value;
 		var tagNumberlength = document.getElementById("tagNumberlength").value;
@@ -50,7 +64,9 @@ AFRAME.registerComponent('markers_start',{
 
 			markerEl.appendChild(textEl);
 		}
+		
 	}
+	
 });
 
 
@@ -69,6 +85,8 @@ function handleRotation(event) {
 AFRAME.registerComponent('registerevents', {
 		init: function () {
 			const marker = this.el;
+			//speech recognition
+			
 
 			marker.addEventListener("markerFound", ()=> {
 				var markerId = marker.id;
@@ -109,8 +127,10 @@ AFRAME.registerComponent('registerevents', {
 					//console.log("el index es: "+indexVid);
 					document.querySelector("#"+indexVid).pause();
 				}
+				recognition.abort();
 				//var v = document.querySelector('#mivideo2').pause();
 			});
+			
 		},
 	});
 	// Component that detects and emits events for touch gestures

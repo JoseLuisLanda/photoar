@@ -7,11 +7,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import html2canvas from "html2canvas"; 
 import { Observable } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
+import { speechrecognition } from '../shared/services/speechrecognition.service'
 //import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [speechrecognition]
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
@@ -42,12 +44,22 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
   public user$: Observable<any> = this.authSvc.afAuth.user;
-  constructor( private router: Router, private authSvc: AuthService, private activeRoute: ActivatedRoute, private fotosService: FotosService) { }
+  constructor(public serviceRecognition : speechrecognition, private router: Router, private authSvc: AuthService, private activeRoute: ActivatedRoute, private fotosService: FotosService) {
+    this.serviceRecognition.init()
+   }
   ngAfterViewInit(){
     //console.log(this.screen)
     this.emailConfirmed = this.authSvc.isLoggedIn;
  }
+ startService(){
+  this.serviceRecognition.start()
+}
+
+stopService(){
+  this.serviceRecognition.stop()
+}
   ngOnInit(): void {
+    this.startService();
     //console.log("EVENTO ITEM: "+JSON.stringify(this.userItem));
     //console.log("grupo ITEM: "+JSON.stringify(this.groupItem));
     this.emailConfirmed = this.authSvc.isLoggedIn;

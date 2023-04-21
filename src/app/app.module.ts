@@ -24,6 +24,7 @@ import { LoginComponent } from './shared/login/login.component';
 import { RegisterComponent } from './shared/register/register.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { WebSpeechModule } from './shared/web-speech/web-speech.module';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     HttpClientModule,
@@ -53,7 +54,8 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserAnimationsModule, 
-    ReactiveFormsModule// for firestore
+    ReactiveFormsModule,
+    WebSpeechModule// for firestore
   ],
   providers: [],
   bootstrap: [AppComponent],

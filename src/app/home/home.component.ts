@@ -2,12 +2,17 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnChanges, O
 import { ElementId, Evento, Grupo, UserModel } from '../collections/element';
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { FotosService } from 'src/app/shared/services/fotos.service'
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import html2canvas from "html2canvas"; 
-import { Observable } from 'rxjs';
+import { Observable, Subject, merge, of } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 import { speechrecognition } from '../shared/services/speechrecognition.service'
+import { SpeechRecognizerService } from '../shared/services/speech-recognizer.service';
+import { SpeechError } from '../model/speech-error';
+import { SpeechEvent } from '../model/speech-event';
+import { defaultLanguage, languages } from '../model/languages';
+import { SpeechNotification } from '../model/speech-notification';
 //import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
@@ -16,13 +21,21 @@ import { speechrecognition } from '../shared/services/speechrecognition.service'
   providers: [speechrecognition]
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
+  totalTranscript?: string;
+  transcript$?: Observable<string>;
+  listening$?: Observable<boolean>;
+  errorMessage$?: Observable<string>;
+  defaultError$ = new Subject<string | undefined>();
+  languages: string[] = languages;
+  currentLanguage: string = defaultLanguage;
+
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean  = false;
   title = 'Visualiz-AR';
   itemAR:ElementId={uid:"sky",name:"../../../assets/models/Astronaut.glb"};
   elements: ElementId[]=[];
   lugares: ElementId[]=[{uid: "2", name: "Foto", description:"foto"}];
-  codes: ElementId = {uid:""};
+  codes: ElementId = {uid:"",codes:["general"]};
   subElements?: ElementId[];
   myPhoto?: ElementId;
   search:boolean =  true;
@@ -44,8 +57,21 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
   public user$: Observable<any> = this.authSvc.afAuth.user;
-  constructor(public serviceRecognition : speechrecognition, private router: Router, private authSvc: AuthService, private activeRoute: ActivatedRoute, private fotosService: FotosService) {
-    this.serviceRecognition.init()
+  constructor( private speechRecognizer: SpeechRecognizerService, public serviceRecognition : speechrecognition, private router: Router, private authSvc: AuthService, private activeRoute: ActivatedRoute, private fotosService: FotosService) {
+    console.log("getting places");
+    this.fotosService.getCollection("lugares", 50,"","","codes","general").subscribe((data) => {
+      if(data !== undefined)
+      this.lugares =   data.filter(obj => {
+        return obj.normalizedName != "general"
+      });
+      this.codes = data.find(obj => {
+        return obj.normalizedName == "general"
+      });
+      
+      //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+    });
+    
+    //this.serviceRecognition.init()
    }
   ngAfterViewInit(){
     //console.log(this.screen)
@@ -58,16 +84,38 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 stopService(){
   this.serviceRecognition.stop()
 }
+startSpeech(){
+  this.listening$ = merge(
+    this.speechRecognizer.onStart(),
+    this.speechRecognizer.onEnd()
+  ).pipe(map((notification) => notification.event === SpeechEvent.Start));
+
+  this.serviceRecognition.speechNow("llamandote desde home");
+}
+start(): void {
+  if (this.speechRecognizer.isListening) {
+    this.stop();
+    return;
+  }
+
+  this.defaultError$.next(undefined);
+  this.speechRecognizer.start();
+}
+
+stop(): void {
+  this.speechRecognizer.stop();
+}
   ngOnInit(): void {
-    this.startService();
-    //console.log("EVENTO ITEM: "+JSON.stringify(this.userItem));
-    //console.log("grupo ITEM: "+JSON.stringify(this.groupItem));
+   
     this.emailConfirmed = this.authSvc.isLoggedIn;
     this.activeRoute.queryParams
     .subscribe(params => {
       //console.log(params); // { orderby: "location" }
       this.elements = [];
-      if(params.type !== undefined &&  params.code !== undefined)
+      if(params.caller !== undefined){
+        this.location = params.code !== undefined ? params.code : "general";
+        this.getElements(params.type);
+      }else if(params.type !== undefined &&  params.code !== undefined)
       {
         this.location = params.code;
         this.folder = params.type;
@@ -90,7 +138,8 @@ stopService(){
 
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
-      }else{
+      }
+      if(params.code !== undefined){
         this.fotosService.getCollection("lugares", 50,"","","codes","general").subscribe((data) => {
           if(data !== undefined)
           this.lugares =   data.filter(obj => {
@@ -103,11 +152,16 @@ stopService(){
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
       }
+     
+       
+      
       
     }
   );
     
   }
+
+
   gotTo(page: string){
     this.router.navigateByUrl('/'+page);
   }

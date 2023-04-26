@@ -15,13 +15,14 @@ export class ElementcardComponent implements OnInit {
   @Input() imgURL: string = "";
   @Output() elementSelected: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   imgs:ElementId[] = [];
+  tempImg: string = "";
 
   constructor() { }
 
   ngOnInit(): void {
     if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
-    else if(this.item.images![this.currentMarkerIndex])
+    else if(this.item.images![this.currentMarkerIndex] || this.item.type == "poster")
     {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else
@@ -31,7 +32,7 @@ export class ElementcardComponent implements OnInit {
     //console.log("index", this.currentMarkerIndex + " and item",JSON.stringify(this.item));
     if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
-    else if(this.item!.images![this.currentMarkerIndex])
+    else if(this.item!.images![this.currentMarkerIndex] || this.item.type == "poster")
     {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else
@@ -45,7 +46,19 @@ export class ElementcardComponent implements OnInit {
    this.showImg = true;
    //console.log("SELECTING: "+this.imgs[id].url);
  }
+ selectedTempImage(id: string){
+  this.tempImg = this.imgURL;
+  this.imgURL = id;
+  this.showImg = true;
+  //console.log("SELECTING: "+this.imgs[id].url);
+}
+selectedTempMarker(id: number){
+  this.tempImg = this.imgURL;
+  this.imgURL = "../assets/img-presets/"+id+".png";
+  this.showImg = true;
+}
  closeImg(){
+  this.imgURL = this.tempImg;
    this.showImg = false;
  }
 }

@@ -158,11 +158,16 @@
           <h2 class="text-center text-info mt-3 bg-white">
             {{ element.name }}
           </h2>
+
           <button
             (click)="switchToPlace(element)"
-            class="btn col-12 btn-warning"
+            class="btn col-6 btn-dark"
           >
-            Ver en 3D
+            3D
+          </button>
+          <button (click)="showItem(element)" class="btn col-6 btn-primary" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+            Normal
           </button>
           <img src="{{ element.url }}" class="card-img-top" alt="..." />
           <p class="mb-2 text-bg-secondary mt-2">{{ element.description }}</p>
@@ -199,5 +204,6 @@
   [search]="search"
   [isform]="isForm"
   [codes]="codes"
+  [currentMarkerIndex]="currentMarkerIndex"
   (selectedValue)="changePlace($event)"
 ></app-modal>

@@ -32,6 +32,7 @@ import { SpeechNotification } from '../model/speech-notification';
   providers: [speechrecognition],
 })
 export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
+  currentMarkerIndex = 0;
   totalTranscript?: string;
   transcript$?: Observable<string>;
   listening$?: Observable<boolean>;
@@ -309,8 +310,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     (<HTMLInputElement>document.getElementById('showingModal')).click();
   }
   setLugares() {
+    this.search = true;
     this.uploadimage = false;
     this.caller = 'Lugares';
     this.isForm = false;
+  }
+  showItem(itemSelected: ElementId){
+    this.caller = 'Detalle de '+itemSelected.name;
+    this.search = false;
+    this.currentItem = itemSelected;
+    
   }
 }

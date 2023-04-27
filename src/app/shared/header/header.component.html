@@ -1,13 +1,58 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar row navbar-expand-lg">
     <div class="main container bg-gradient bg-dark">
       <img routerLink="home" src="{{ 'assets/img/logopublicar3d.png' }}" class="col-sm-2 col-md-2 logo"  width="100vw" height="50vh"/>
       <ng-template #login>
-        <li  class="nav-item col-3" >
-          <a class="btn mb-2 btn-block text-white btn btn-outline-primary" routerLink="/login">login</a>
-        </li>
-        <li class="nav-item col-3" >
-          <a class="btn mb-2 btn-block text-white btn btn-outline-warning" routerLink="/register">register</a>
-        </li>
+        <div class="main bg-dark row">
+          <div class="mb-3 col container align-center">
+            <div
+              class="btn-group col-12 mt-2"
+              role="group"
+              aria-label="Basic radio toggle button group"
+            >
+              <input
+                type="radio"
+                (click)="goTo('products')"
+                class="btn-check"
+                name="btnradio"
+                id="btnradio11"
+                autocomplete="off"
+                checked
+              />
+              <label class="btn btn-info text-bg-light" for="btnradio11">Productos</label>
+      
+              <input
+                type="radio"
+                (click)="goTo('login')"
+                class="btn-check btn-primary"
+                name="btnradio"
+                id="btnradio22"
+                autocomplete="off"
+              />
+              <label class="btn btn-primary text-white text-bg-warning" for="btnradio22">Login</label>
+      
+              <input
+                type="radio"
+                (click)="goTo('register')"
+                class="btn-check btn-success"
+                name="btnradio"
+                id="btnradio33"
+                autocomplete="off"
+              />
+              <label class="btn btn-dark btn-outline-danger text-white" for="btnradio33">Registro</label>
+      
+              
+            </div>
+            <!--div class="container">
+                
+              <button (click)="showmyCodeDiv(false)" class="btn btn-outline-primary col-6">Tríptico 3d</button>
+                <button class="btn btn-primary col-4">Foto 3d</button>
+                <button class="btn btn-primary col-4">Tarjeta 3d</button>
+                <button class="btn btn-primary col-4">Menú 3d</button>
+                
+             </div-->
+          </div>
+        </div>
+      
       </ng-template>
     
        <ul class="navbar-nav mx-auto col-4" *ngIf="user$ | async as user; else login">  
@@ -44,3 +89,4 @@
       </div-->
     </div>
   </nav>
+  

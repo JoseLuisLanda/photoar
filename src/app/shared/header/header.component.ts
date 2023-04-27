@@ -63,4 +63,8 @@ export class HeaderComponent implements OnInit {
   },err=>{console.log("error: "+err);})
   }
 
+  goTo(url: string){
+    this.router.navigateByUrl(`/${url}`);
+  }
+
 }

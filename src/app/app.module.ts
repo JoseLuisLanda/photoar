@@ -25,6 +25,8 @@ import { RegisterComponent } from './shared/register/register.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { WebSpeechModule } from './shared/web-speech/web-speech.module';
+import { FooterComponent } from './shared/footer/footer.component';
+import { ProductsComponent } from './shared/products/products.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { WebSpeechModule } from './shared/web-speech/web-speech.module';
     RegisterComponent,
     HeaderComponent,
     DashboardComponent,
+    FooterComponent,
+    ProductsComponent,
   ],
   imports: [
     HttpClientModule,

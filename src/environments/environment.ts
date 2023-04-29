@@ -26,9 +26,9 @@ export const environment = {
   prompts : 
     ["quiero","dame","enseñame","dime","proyecta","muestrame","muéstrame", "busca","búscame","buscame","muestra","buscar","mostrar","listar"],
 
-  folders :  
-    ["postgrado","posgrado","beca", "anuncio", "curso","laboratorio","convocatoria","edificio","aviso"]
-  ,
+    folders :  
+    ["postgrado","negocio","negocios","vulcanizadora","posgrado","beca", "anuncio", "curso","laboratorio","convocatoria","edificio","aviso"]
+    ,
   places : ["upt","tulancingo","region","alrededor"],
   conectors : ["en","de","el","al","sobre"]
 };

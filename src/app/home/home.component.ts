@@ -80,20 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     private activeRoute: ActivatedRoute,
     private fotosService: FotosService
   ) {
-    console.log('getting places');
-    this.fotosService
-      .getCollection('lugares', 50, '', '', 'codes', 'general')
-      .subscribe((data) => {
-        if (data !== undefined)
-          this.lugares = data.filter((obj) => {
-            return obj.normalizedName != 'general';
-          });
-        this.codes = data.find((obj) => {
-          return obj.normalizedName == 'general';
-        });
-
-        //console.log("GETTING chat messages: "+JSON.stringify(this.users));
-      });
+   
 
     //this.serviceRecognition.init()
   }
@@ -129,7 +116,24 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   stop(): void {
     this.speechRecognizer.stop();
   }
+  buscarLugares(){
+   // console.log('getting places',this.location);
+    this.fotosService
+      .getCollection('lugares', 50, '', '', 'codes', this.location)
+      .subscribe((data) => {
+        if (data !== undefined)
+          this.lugares = data.filter((obj) => {
+            return obj.normalizedName != 'general';
+          });
+        this.codes = data.find((obj) => {
+          return obj.normalizedName == 'general';
+        });
+
+        //console.log("GETTING chat messages: "+JSON.stringify(this.users));
+      });
+  }
   ngOnInit(): void {
+   this.buscarLugares();
     this.emailConfirmed = this.authSvc.isLoggedIn;
     this.activeRoute.queryParams.subscribe((params) => {
       //console.log(params); // { orderby: "location" }
@@ -185,6 +189,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   }
   ngOnChanges() {
     this.emailConfirmed = this.authSvc.isLoggedIn;
+    if(this.elements.length > 0)
+    (<HTMLInputElement>(
+      document.getElementById('flush-headingOne')
+    )).click();
+
   }
   getElements(type: string) {
     this.textError = '';
@@ -212,19 +221,27 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
               if (this.elements!.length < 1) {
                 this.textError = 'no existe contenido para este lugar';
-              }
+               
+              }/*else  
+              (<HTMLInputElement>(
+                document.getElementById('flush-headingOne')
+              )).click();*/
               break;
+              
           }
+          this.buscarLugares();
         } else {
           (<HTMLInputElement>(
             document.getElementById('collapseOne')
           )).setAttribute('class', 'show');
 
           this.textError = 'no existe contenido para este lugar';
+          this.buscarLugares();
         }
 
         //console.log("GETTING chat messages: "+JSON.stringify(this.users));
       });
+      
   }
   getARElement() {
     this.textError = '';
@@ -280,7 +297,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   onSelectBtn(event: string) {
     //getting elements every onchange places dropdown fires
     this.textError = '';
-
+    //console.log("this.location= ", this.location);
     this.getElements(event.toLowerCase());
   }
   showmyCodeDiv(value: boolean, type: string) {

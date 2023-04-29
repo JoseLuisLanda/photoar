@@ -23,7 +23,7 @@ export const environment = {
     ["quiero","dame","enseñame","dime","proyecta","muestrame","muéstrame", "busca","búscame","buscame","muestra","buscar","mostrar","listar"],
 
   folders :  
-  ["postgrado","negocio","negocios","vulcanizadora","posgrado","beca", "anuncio", "curso","laboratorio","convocatoria","edificio","aviso"]
+  ["servicio","servicios","producto","productos","postgrado","negocio","negocios","vulcanizadora","posgrado","beca", "anuncio", "curso","laboratorio","convocatoria","edificio","aviso"]
   ,
   places : ["upt","tulancingo","region","alrededor"],
   conectors : ["en","de","el","al","sobre"]

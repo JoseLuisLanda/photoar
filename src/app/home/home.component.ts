@@ -101,7 +101,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       this.speechRecognizer.onEnd()
     ).pipe(map((notification) => notification.event === SpeechEvent.Start));
 
-    this.serviceRecognition.speechNow('llamandote desde home');
+    this.serviceRecognition.speechNow('Había una vez un perrito cayejero llamado Pancho, vivía en la bulliciosa ciudad de México. Pancho era un perrito simpático y juguetón, pero a menudo se sentía solo y triste porque no tenía un hogar al que llamar suyo.');
   }
   start(): void {
     if (this.speechRecognizer.isListening) {

@@ -21,13 +21,13 @@ export class speechrecognition {
   init() {
     
     this.recognition.continuous = true;
-    this.recognition.lang = 'es-ES';
+    this.recognition.lang = 'es-US';
     this.recognition.interimResult = false;
 
         this.speech.volume = 1;
-        this.speech.rate = 0.8;
-        this.speech.pitch = 0.4;
-        this.speech.lang = 'es-ES';
+        this.speech.rate = 0.2;
+        this.speech.pitch = 0.3;
+        this.speech.lang = 'es-MX';
 
    /* this.recognition.addEventListener('result', (e: { results: Iterable<unknown> | ArrayLike<unknown>; }) => {
       const transcript = Array.from(e.results)

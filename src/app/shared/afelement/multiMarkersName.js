@@ -26,7 +26,7 @@ AFRAME.registerComponent('markers_start',{
 		var tagNumberend = document.getElementById("tagNumberend").value;
 		//console.log('Add markers to the scene'+tagNumberinit+" "+tagNumberlength+" "+tagNumberend);
 		//list of the markers
-		for(var i=0; i<=tagNumberlength; i++)
+		/*for(var i=0; i<=tagNumberlength; i++)
 		{
 			var indexPath = +tagNumberinit+i;
 			var url="../../../assets/presets/pat"+indexPath+".patt";
@@ -63,7 +63,7 @@ AFRAME.registerComponent('markers_start',{
 
 
 			markerEl.appendChild(textEl);
-		}
+		}*/
 		
 	}
 	

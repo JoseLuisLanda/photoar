@@ -15,7 +15,7 @@ export class AfelementComponent implements OnInit {
   tagNumberend = 1;
   tagNumberlength = 1;
   currentMarkerIndex = 0;
-  isSingleMarker:boolean = true;
+  isSingleMarker:boolean = false;
   videoUrl: string= "https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2Ffotos.MP4?alt=media&token=7a6a4f38-47d0-4340-b436-a17d6147182a";
   modelName: string = "../../../assets/models/alien.glb"
   @ViewChild('markr', { static: false }) mrkDiv: ElementRef<HTMLInputElement> = {} as ElementRef;
@@ -64,7 +64,7 @@ export class AfelementComponent implements OnInit {
 
         
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="multimarkertest" position="0 1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="'+width+'" height="'+height+'"></a-image>');
+        '<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="'+width+'" height="'+height+'"></a-image>');
       }
       
       

@@ -64,7 +64,7 @@ export class AfelementComponent implements OnInit {
         var yvalue = 0;
         var entities ='';
           if(this.item.images![i].elements?.length!>0){
-            for(var j=0; j< this.item.images![i].elements?.length!; j++){
+            for(var j=0; j< this.item.images![i].elements?.length!-2; j++){
               if(j%2!=0)
               {
                 xvalue -= (2-j);

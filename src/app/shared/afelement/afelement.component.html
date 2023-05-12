@@ -20,7 +20,13 @@
 
 <a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
-  gesture-detector class="scene">
+  gesture-detector class="scene" renderer="precision:mediump;
+  antialias: true;
+  colorManagement: true;
+  sortObjects: true;
+  physicallyCorrectLights: true;
+  maxCanvasWidth: 1920;
+  maxCanvasHeight: 1920;">
   <a-assets>
             <!--img id="city-thumb" src="https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2FIMG_8980.JPG?alt=media&token=2741e0dd-f9fa-4920-8152-fc80aeb686fe" /-->
     <!--img crossorigin="anonymous"  id="city0-thumb" src="https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2FIMG_8841.JPG?alt=media&token=2278948c-71da-4833-884a-72a0a4328795" />

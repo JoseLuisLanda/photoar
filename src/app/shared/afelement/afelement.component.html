@@ -22,6 +22,10 @@
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'
   gesture-detector class="scene">
   <a-assets>
+            <!--img id="city-thumb" src="https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2FIMG_8980.JPG?alt=media&token=2741e0dd-f9fa-4920-8152-fc80aeb686fe" /-->
+    <!--img crossorigin="anonymous"  id="city0-thumb" src="https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2FIMG_8841.JPG?alt=media&token=2278948c-71da-4833-884a-72a0a4328795" />
+    <img crossorigin="anonymous" id="city1-thumb" src="https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2FIMG_8851.JPG?alt=media&token=afa6c001-c534-417f-b80f-16f0b62a5e73" />
+    <img crossorigin="anonymous" id="city2-thumb" src="https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/undefined%20%2FIMG_8848.JPG?alt=media&token=ddd8c6a6-f8c6-4682-befc-49f5e527d4c8" /-->
     <div *ngIf="isSingleMarker; else multimarkers" >
       <div *ngFor="let image of item.images">
         <img *ngIf="image.type == 'image' || image.type == 'vcard'|| image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="multimarkerImg" src={{image.url}} />
@@ -29,11 +33,16 @@
        </div>
     <ng-template #multimarkers>
       <div *ngFor="let image of item.images; index as i" >
-        <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+        <div *ngFor="let imageElem of image.elements; index as j" >
+          <img crossorigin="anonymous" id="{{'elem'+(j)+'-thumb'}}" src={{imageElem.url}} />
+        </div>
+        <!--img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} /-->
+        <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'city'+(i)+'-thumb'}}" src={{image.url}} />
         <video *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
         controls muted src="{{image.url}}" ></video>
         <!--a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item-->
     </div>
+   
     </ng-template>
     
   

@@ -127,7 +127,7 @@ AFRAME.registerComponent('registerevents', {
 					//console.log("el index es: "+indexVid);
 					document.querySelector("#"+indexVid).pause();
 				}
-				recognition.abort();
+				//recognition.abort();
 				//var v = document.querySelector('#mivideo2').pause();
 			});
 			

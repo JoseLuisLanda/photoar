@@ -9,7 +9,12 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <!--script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script-->
+  <!--script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script-->
   <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.x.x/dist/aframe-template-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.x.x/dist/aframe-layout-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
+     <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
   <!-- we import arjs version without NFT but with marker + location based support -->
   <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
   <!--script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script-->
@@ -30,6 +35,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script id="plane" type="text/html" crossOrigin="anonymous">
+
+      <a-entity class="link" crossOrigin="anonymous"
+        geometry="primitive: plane; height: 3; width: 3"
+        material="shader: flat; src: ${thumb}"
+        rotation="-90 0 0"
+        position="0 1 0"
+        event-set__mouseenter="scale: 1.2 1.2 1"
+        event-set__mouseleave="scale: 1 1 1"
+        event-set__click="_target: #city0-thumb; _delay: 300; material.src: ${src}"
+        proxy-event="event: click; to: #city0-thumb; as: fade"
+        ></a-entity>
+    </script>
 </head>
 <body style="margin : 0px; overflow: auto;" class="mat-typography">
   

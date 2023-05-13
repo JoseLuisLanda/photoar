@@ -63,7 +63,7 @@ export class AfelementComponent implements OnInit {
         var xvalue = 0;
         var yvalue = 0;
         var entities ='';
-          if(this.item.images![i].elements?.length!>0){
+         /* if(this.item.images![i].elements?.length!>0){
             for(var j=0; j< this.item.images![i].elements?.length!-2; j++){
               if(j%2!=0)
               {
@@ -76,7 +76,7 @@ export class AfelementComponent implements OnInit {
                entities +='<a-entity position="'+xvalue+' 1 '+yvalue+'" template="src: #plane" data-src="#elem'+(j)+'" data-thumb="#elem'+(j)+'-thumb"></a-entity>' 
            
             }
-             }
+             }*/
         
         marker.insertAdjacentHTML('beforeEnd', 
         entities+'<a-entity position="0 1 0" template="src: #plane" data-src="#city'+i+'" data-thumb="#city'+i+'-thumb"></a-entity>');

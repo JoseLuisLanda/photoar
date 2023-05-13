@@ -9,6 +9,8 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
   nombreModelo: Elemento[] = [
     //models tuzo
+    { name: "Comida", url: "../../../assets/models/menu_both.glb", },
+    { name: "bebida", url: "../../../assets/models/menu_oriented.glb", },
     { name: "delorean Cube", url: "../../../assets/models/delorean_cube.glb", },
     { name: "orange Cube", url: "../../../assets/models/orange_cube.glb", },
     { name: "ChaseCube", url: "../../../assets/models/chase_cube.glb", },

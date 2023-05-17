@@ -12,11 +12,11 @@
   </a-scene-->
   <button (click)="goToHome()" class="btn btn-primary btn-sm">Home</button>
   <div class="scroll-auto">
-    <app-arheader (changeModel)="receiveModel($event)"></app-arheader>
+    <app-arheader [modelos]="modelos" (changeModel)="receiveModel($event)"></app-arheader>
   </div>
   
   <div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;">
-  <model-viewer src="{{itemAR.name}}" 
+  <model-viewer src="{{itemAR.url}}" 
   ar ar-scale="auto" camera-controls touch-action="pan-y" 
   alt="A 3D model of an astronaut" 
   xr-environment

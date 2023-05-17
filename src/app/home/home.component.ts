@@ -40,6 +40,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   defaultError$ = new Subject<string | undefined>();
   languages: string[] = languages;
   currentLanguage: string = defaultLanguage;
+  afelement = false;
+  arelement = false;
+  models:ElementId[];
 
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean = false;
@@ -138,7 +141,23 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     this.activeRoute.queryParams.subscribe((params) => {
       //console.log(params); // { orderby: "location" }
       this.elements = [];
-      if (params.caller !== undefined) {
+      if (params.url !== undefined) {
+        console.log("params: ", params.url);
+        this.fotosService
+        .getCollection('urls', 1, 'code', params.url)
+        .subscribe((data) => {
+          console.log("data: ", JSON.stringify(data));
+          if (data !== undefined && data.length > 0) {
+            this.elements = data as ElementId[];
+            console.log("ARELEMENT")
+            this.models = this.elements[0].elements?this.elements[0].elements:[];
+            this.itemAR = this.models[0];
+            this.switchTemp = true;
+            this.arelement = true;
+          }
+        });
+      }
+      else if (params.caller !== undefined) {
         this.location = params.code !== undefined ? params.code : 'general';
         this.getElements(params.type);
       } else if (params.type !== undefined && params.code !== undefined) {
@@ -151,8 +170,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             if (data !== undefined && data.length > 0) {
               this.elements = data as ElementId[];
               this.itemAR = this.elements[0];
-              //this.itemAR.type = "place";
+              
               this.switchTemp = true;
+              this.afelement = true;
               //console.log("img elements: "+JSON.stringify(this.elements))
             }
 
@@ -183,8 +203,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       }
     });
   }
-
+  goToUrlWithParams(page: string, param:string) {
+    this.router.navigate(
+      [`/${page}`],
+      {
+        queryParams: { url: param },
+        queryParamsHandling: 'merge' }
+      );
+  }
   gotTo(page: string) {
+    
     this.router.navigateByUrl('/' + page);
   }
   ngOnChanges() {

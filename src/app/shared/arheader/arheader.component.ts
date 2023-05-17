@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Elemento } from 'src/app/collections/element';
 @Component({
   selector: 'app-arheader',
@@ -7,7 +7,7 @@ import { Elemento } from 'src/app/collections/element';
 })
 export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
-  nombreModelo: Elemento[] = [
+  @Input() modelos: Elemento[] = [
     //models tuzo
     { name: "Comida", url: "../../../assets/models/menu_chico.glb", },
     { name: "bebida", url: "../../../assets/models/menu_close.glb", },
@@ -96,14 +96,14 @@ export class ARHeaderComponent implements OnInit, OnChanges {
   ];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("onchanges arheader");
+    //console.log("onchanges arheader");
 
   }
 
   ngOnInit(): void {
   }
   sendModel(modelName: any) {
-    console.log("sending modelo: " + modelName);
+    //console.log("sending modelo: " + modelName);
 
     this.changeModel.emit(modelName);
 

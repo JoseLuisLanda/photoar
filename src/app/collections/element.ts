@@ -55,7 +55,7 @@ export interface Elemento {
     code?: string;
 }
 
-export interface ElementId extends Elemento { uid: string; }
+export interface ElementId extends Elemento { uid?: string; }
 
 export class Item implements Elemento{
     name:string;

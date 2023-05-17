@@ -195,7 +195,8 @@
   </ng-template>
 </div>
 <ng-template #showPhoto>
-  <app-afelement [item]="itemAR"></app-afelement>
+  <app-afelement *ngIf="afelement" [item]="itemAR"></app-afelement>
+  <app-arelement *ngIf="arelement" [itemAR]="itemAR" [modelos]="models"></app-arelement>
 </ng-template>
 
 <app-modal

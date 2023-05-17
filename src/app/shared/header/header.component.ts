@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
    
    var doc = this.afsService.doc$(`usuario/${ userId }`).subscribe(res=>{
    this.currentUser = res as ElementId;
-   localStorage.setItem("userId", this.currentUser.uid);
+   localStorage.setItem("userId", this.currentUser.uid!);
     localStorage.setItem("userName", this.currentUser.displayName ? this.currentUser.displayName! : this.currentUser.email!);
    if(this.currentUser.images){
     this.imagePath = this.currentUser.images[0].url!;

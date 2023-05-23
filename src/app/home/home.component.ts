@@ -146,10 +146,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         this.fotosService
         .getCollection('urls', 1, 'code', params.url)
         .subscribe((data) => {
-          console.log("data: ", JSON.stringify(data));
+          //console.log("data: ", JSON.stringify(data));
           if (data !== undefined && data.length > 0) {
             this.elements = data as ElementId[];
-            console.log("ARELEMENT")
+            //console.log("ARELEMENT")
             this.models = this.elements[0].elements?this.elements[0].elements:[];
             this.itemAR = this.models[0];
             this.switchTemp = true;
@@ -158,9 +158,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         });
       }
       else if (params.caller !== undefined) {
+        console.log("caller: ");
         this.location = params.code !== undefined ? params.code : 'general';
         this.getElements(params.type);
-      } else if (params.type !== undefined && params.code !== undefined) {
+      } 
+      else if (params.type !== undefined && params.code !== undefined) {
+        console.log("type and code: ");
         this.location = params.code;
         this.folder = params.type;
         //console.log(this.location); // location
@@ -186,7 +189,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             //console.log("GETTING chat messages: "+JSON.stringify(this.users));
           });
       }
-      if (params.code !== undefined) {
+      else if(params.code !== undefined) {
+        console.log("code: ");
         this.fotosService
           .getCollection('lugares', 50, '', '', 'codes', 'general')
           .subscribe((data) => {
@@ -200,6 +204,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
             //console.log("GETTING chat messages: "+JSON.stringify(this.users));
           });
+      }else{
+        console.log("No params");
+        this.switchTemp = false;
+            this.arelement = false;
       }
     });
   }

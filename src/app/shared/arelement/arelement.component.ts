@@ -9,14 +9,16 @@ import { Router } from '@angular/router';
 export class ARElementComponent implements OnInit {
   @Input() modelos: ElementId [] = [{name:"chase"},{name:"rubble"}];
   @Input() itemAR:ElementId={uid:"sky",url:"../../assets/models/Astronaut.glb"};
+  urlItem: string="";
   constructor(private router: Router) { }
 
   ngOnInit(): void {
    // console.log(JSON.stringify(this.item));
+   this.urlItem = this.itemAR.url?this.itemAR.url:"";
   }
   receiveModel(modelName: string){
     //console.log("otro modelo received: " + modelName);
-    this.itemAR.name = modelName;
+    this.urlItem = modelName;
   }
   goToHome(){
     this.router.navigateByUrl('/home');

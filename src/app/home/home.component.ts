@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   currentLanguage: string = defaultLanguage;
   afelement = false;
   arelement = false;
-  models:ElementId[];
+  models:ElementId[]=[];
 
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean = false;
@@ -142,18 +142,30 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       //console.log(params); // { orderby: "location" }
       this.elements = [];
       if (params.url !== undefined) {
+        var redirect = false;
+        var type = "";
+        
         console.log("params: ", params.url);
         this.fotosService
         .getCollection('urls', 1, 'code', params.url)
         .subscribe((data) => {
           //console.log("data: ", JSON.stringify(data));
           if (data !== undefined && data.length > 0) {
+            var mainElement:ElementId;
             this.elements = data as ElementId[];
             //console.log("ARELEMENT")
+            mainElement = this.elements[0];
             this.models = this.elements[0].elements?this.elements[0].elements:[];
             this.itemAR = this.models[0];
-            this.switchTemp = true;
-            this.arelement = true;
+            redirect = mainElement.redirect?mainElement.redirect:false;
+            type = mainElement.type?mainElement.type:"";
+            console.log("redirect "+redirect+"type "+type);
+            if(redirect && type == "model")
+            {
+              this.switchTemp = true;
+              this.arelement = true;
+            }
+            
           }
         });
       }
@@ -219,9 +231,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         queryParamsHandling: 'merge' }
       );
   }
-  gotTo(page: string) {
+  gotTo(showPage: boolean) {
+    if(showPage)
+    {
+      this.switchTemp = true;
+      this.arelement = true;
+    }else{
+      this.switchTemp = false;
+      this.arelement = false;
+    }
     
-    this.router.navigateByUrl('/' + page);
+    //this.router.navigateByUrl('/' + page);
   }
   ngOnChanges() {
     this.emailConfirmed = this.authSvc.isLoggedIn;
@@ -310,8 +330,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
   switchToPlace(event: any) {
-    //console.log("otro modelo received: " + JSON.stringify(event));
-
+    console.log("otro modelo received: " + JSON.stringify(event));
+    this.afelement = true;
+    this.arelement = false;
     this.itemAR = event;
     this.itemAR.type = 'photos';
     this.switchTemp = true;

@@ -53,6 +53,7 @@ export interface Elemento {
     status?: boolean;
     codes?: string[];
     code?: string;
+    redirect?: boolean;
 }
 
 export interface ElementId extends Elemento { uid?: string; }

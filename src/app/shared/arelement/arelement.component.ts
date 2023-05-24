@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ElementId } from 'src/app/collections/element';
 import { Router } from '@angular/router';
 @Component({
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class ARElementComponent implements OnInit {
   @Input() modelos: ElementId [] = [{name:"chase"},{name:"rubble"}];
   @Input() itemAR:ElementId={uid:"sky",url:"../../assets/models/Astronaut.glb"};
+  @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
   urlItem: string="";
   constructor(private router: Router) { }
 
@@ -21,8 +22,9 @@ export class ARElementComponent implements OnInit {
     this.urlItem = modelName;
   }
   goToHome(){
-    this.router.navigateByUrl('/home');
-    
+    //this.router.navigateByUrl('/home');
+  
+    this.returnBtn.emit(false);
   }
   
 }

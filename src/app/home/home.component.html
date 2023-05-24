@@ -17,12 +17,12 @@
     <textarea matInput [value]="totalTranscript || ''" placeholder="Speech Input Result" rows="15" disabled="true"></textarea>
   </mat-form-field>
 </section-->
-
+<app-header></app-header>
 <div #screen *ngIf="!switchTemp; else showPhoto">
   <div *ngIf="user$ | async as user" class="main container form-group">
     <button
-      *ngIf="emailConfirmed"
-      (click)="gotTo('arelement')"
+      *ngIf="emailConfirmed && models.length > 0"
+      (click)="gotTo(true)"
       class="btn btn-primary btn-sm form-control"
     >
       Models 3D
@@ -196,7 +196,7 @@
 </div>
 <ng-template #showPhoto>
   <app-afelement *ngIf="afelement" [item]="itemAR"></app-afelement>
-  <app-arelement *ngIf="arelement" [itemAR]="itemAR" [modelos]="models"></app-arelement>
+  <app-arelement *ngIf="arelement" (returnBtn)="gotTo($event)" [itemAR]="itemAR" [modelos]="models"></app-arelement>
 </ng-template>
 
 <app-modal

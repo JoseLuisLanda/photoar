@@ -319,9 +319,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             this.textError = 'No hay contenido para este código';
           } else {
             this.itemAR = this.elements[0];
-            this.itemAR.type = 'place';
+            this.afelement = true;
+            this.arelement = false;
+            this.itemAR.type = 'photos';
             this.switchTemp = true;
-            //console.log("img elements: "+JSON.stringify(this.elements))
+            console.log("img elements: "+JSON.stringify(this.elements))
           }
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });

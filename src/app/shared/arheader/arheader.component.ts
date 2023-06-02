@@ -8,7 +8,7 @@ import { Elemento } from 'src/app/collections/element';
 export class ARHeaderComponent implements OnInit, OnChanges {
   @Output() changeModel: EventEmitter<string> = new EventEmitter<string>();
   @Input() modelos: Elemento[] = [];
-  localModels:Elemento[]=[];
+  localModels:Elemento[]=[{name:"back",url:"../../../assets/models/delorean__dmc-12.glb"},{name:"back",url:"../../../assets/models/hover_board_low_poly.glb"}];
   constructor() { }
   ngOnChanges(changes: SimpleChanges): void {
     //console.log("onchanges arheader", JSON.stringify(this.modelos));

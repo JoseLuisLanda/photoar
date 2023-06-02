@@ -21,7 +21,7 @@
 <div #screen *ngIf="!switchTemp; else showPhoto">
   <div *ngIf="user$ | async as user" class="main container form-group">
     <button
-      *ngIf="emailConfirmed && models.length > 0"
+      *ngIf="emailConfirmed"
       (click)="gotTo(true)"
       class="btn btn-primary btn-sm form-control"
     >

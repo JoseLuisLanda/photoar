@@ -104,7 +104,7 @@ AFRAME.registerComponent('registerevents', {
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
 				if(marker.id.includes("vid")){
 					var indexVid = marker.title;
-					//console.log("el index es: "+indexVid);
+					console.log("PLAYING VIDEO: "+indexVid);
 					var v = document.getElementById(""+indexVid);
 					v.load();
 					v.play();

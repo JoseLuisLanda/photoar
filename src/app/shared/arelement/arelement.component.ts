@@ -7,11 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./arelement.component.css']
 })
 export class ARElementComponent implements OnInit {
-<<<<<<< HEAD
-  @Input() modelos: ElementId [] = [];
-=======
+
   @Input() modelos: ElementId [] = [{name:"chase"},{name:"rubble"}];
->>>>>>> master
+
   @Input() itemAR:ElementId={uid:"sky",url:"../../assets/models/Astronaut.glb"};
   @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
   urlItem: string="";

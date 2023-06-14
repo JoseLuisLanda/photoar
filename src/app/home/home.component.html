@@ -1,21 +1,4 @@
-<<<<<<< HEAD
-<div *ngIf="!switchTemp; else showPhoto">
-  <!--div class="main container form-group">
-    <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
-</div-->
-<<<<<<< HEAD
-    <h1 class="text-center text-primary m-3">Bienvenido a tu foto 3D</h1>
-    <div class="form-group mt-3">
-        <label class="label text-white mb-2">Carrera/Ocupación</label>
-        <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
-          <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
-        </select>
-      </div>
-      <div  *ngIf="!showCodeDiv; else showCodeInput">
-        <button (click)="switchToPlace(element)" class="btn btn-outline-primary" *ngFor="let element of elements">{{element.name}}</button>
-      </div>
-=======
-=======
+
 <!--div>
   <button mat-fab *ngIf="listening$ | async; else mic" (click)="stop()">
     <mat-icon class="soundwave">mic</mat-icon>
@@ -74,7 +57,7 @@
           autocomplete="off"
         />
         <label class="btn btn-outline-primary" for="btnradio2">Foto</label>
->>>>>>> master
+
 
         <input
           type="radio"
@@ -192,18 +175,7 @@
           <img src="{{ element.url }}" class="card-img-top" alt="..." />
           <p class="mb-2 text-bg-secondary mt-2">{{ element.description }}</p>
         </div>
-<<<<<<< HEAD
->>>>>>> master
-      <ng-template #showCodeInput>
-        <div class="container center form"  >
-            <h4 class="text-center text-warning">Inserta tu codigo</h4>
-            <input id="codeForElement" class="form-control form-text m-3" type="text" [(ngModel)]="elementNumber">
-            <button class="form-control btn btn-outline-primary m-3" (click)="switchToPhoto()">Buscar</button>
-        
-         </div>
-         
-    </ng-template>
-=======
+
       </div>
     </div>
   </div>
@@ -224,7 +196,7 @@
       </button>
     </div>
   </ng-template>
->>>>>>> master
+
 </div>
 <ng-template #showPhoto>
   <app-afelement *ngIf="afelement" [item]="itemAR"></app-afelement>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ElementId } from 'src/app/collections/element';
 import { Router } from '@angular/router';
 @Component({
@@ -7,20 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./arelement.component.css']
 })
 export class ARElementComponent implements OnInit {
-  @Input() item: ElementId = 
-  {name:"../../assets/models/alien.glb"} as ElementId;
-  itemAR:ElementId={uid:"sky",name:"../../assets/models/Astronaut.glb"};
+  @Input() modelos: ElementId [] = [];
+  @Input() itemAR:ElementId={uid:"sky",url:"../../assets/models/Astronaut.glb"};
+  @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
+  urlItem: string="";
   constructor(private router: Router) { }
 
+
   ngOnInit(): void {
-    console.log(JSON.stringify(this.item));
+   // console.log(JSON.stringify(this.item));
+   this.urlItem = this.itemAR.url?this.itemAR.url:"";
   }
   receiveModel(modelName: string){
-    console.log("otro modelo received: " + modelName);
-    this.itemAR.name = modelName;
+    //console.log("otro modelo received: " + modelName);
+    this.urlItem = modelName;
   }
   goToHome(){
-    this.router.navigateByUrl('/home');
-    
+    //this.router.navigateByUrl('/home');
+  
+    this.returnBtn.emit(false);
   }
+  
 }

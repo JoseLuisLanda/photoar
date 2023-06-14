@@ -7,13 +7,27 @@ import { ARHeaderComponent } from './shared/arheader/arheader.component';
 import { ARElementComponent } from './shared/arelement/arelement.component';
 import { AnnotationsComponent } from './shared/annotations/annotations.component';
 import { AfelementComponent } from './shared/afelement/afelement.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { ElementcardComponent } from './shared/elementcard/elementcard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UploadimageComponent } from './shared/uploadimage/uploadimage.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgDropFilesDirective } from '../app/directives/ng-drop-files.directive';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { ElementToImgComponent } from './shared/element-to-img/element-to-img.component';
+import { ElementformComponent } from './shared/elementform/elementform.component';
+import { LoginComponent } from './shared/login/login.component';
+import { RegisterComponent } from './shared/register/register.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { DashboardComponent } from './shared/dashboard/dashboard.component';
+import { WebSpeechModule } from './shared/web-speech/web-speech.module';
+import { FooterComponent } from './shared/footer/footer.component';
+import { ProductsComponent } from './shared/products/products.component';
+
 
 @NgModule({
   declarations: [
@@ -24,14 +38,28 @@ import { ElementcardComponent } from './shared/elementcard/elementcard.component
     AfelementComponent,
     HomeComponent,
     ModalComponent,
-    ElementcardComponent
+    ElementcardComponent,
+    UploadimageComponent,
+    NgDropFilesDirective,
+    ElementToImgComponent,
+    ElementformComponent,
+    LoginComponent,
+    RegisterComponent,
+    HeaderComponent,
+    DashboardComponent,
+    FooterComponent,
+    ProductsComponent,
   ],
   imports: [
+    HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule, // for firestore
+    AngularFirestoreModule,
+    BrowserAnimationsModule, 
+    ReactiveFormsModule,
+    WebSpeechModule// for firestore
   ],
   providers: [],
   bootstrap: [AppComponent],

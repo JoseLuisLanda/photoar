@@ -1,5 +1,16 @@
+<div *ngIf="item.code">
+  <button (click)="selectedTempMarker(item.indexInit!)" class="btn btn-outline-light col-4">Marcador</button>
+  <button (click)="selectedTempImage(item.code)" class="btn btn-outline-light col-4">Show QR</button>
+  <button  class="btn btn-warning col-4">Descargar</button>
+</div>
 <div *ngIf="!showImg" class="card h-100 containerHalf">
-  
+  <div class="card-body">
+    <!--h4 *ngIf="item.name" class="card-title text-white">{{ item.name }}</h4-->
+    <h5 *ngIf="item.title" class="card-title text-warning">{{ item.title }}</h5>
+    <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>
+    <p *ngIf="item.description!" class="card-text text-white">{{ item.description }}</p>
+    <button *ngIf="false" class="btn btn-outline-warning" (click)="selectedElement()">Seleccionar</button>
+  </div>
     <div *ngIf="true; else imgDefault">
       <!-- Carousel images-->
       <!--div
@@ -63,13 +74,7 @@
         alt="image"
       />
     </ng-template>
-    <div class="card-body">
-      <h4 *ngIf="item.name" class="card-title text-white">{{ item.name }}</h4>
-      <h5 *ngIf="item.title" class="card-title text-warning">{{ item.title }}</h5>
-      <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>
-      <p *ngIf="item.description!" class="card-text text-white">{{ item.description }}</p>
-      <button *ngIf="false" class="btn btn-outline-warning" (click)="selectedElement()">Seleccionar</button>
-    </div>
+   
   </div>
   <div *ngIf="showImg">
     <button class="btn btn-danger" (click)="closeImg()">Cerrar</button>

@@ -2,15 +2,24 @@
 <div class="modal fade opacity-100" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg ">
       <div class="modal-content container85" >
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel" style="color:white;">Elemento</h5>
+        <div class="modal-header bg-info">
+          <h1 class="modal-title" id="exampleModalLabel" style="color:white;">{{caller}}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div *ngIf="true; else detalle;">
+          <div *ngIf="!search; else detalle;">
             <app-elementcard class="col-sm-6 col-lg-4" [currentMarkerIndex]="currentMarkerIndex" [detail]="detail" [item]="item"></app-elementcard>
+            
           </div>
           <ng-template #detalle>
+            <app-uploadimage *ngIf="uploadImage"></app-uploadimage>
+            <app-elementform *ngIf="isform" [item]="item" [type]="type"></app-elementform>
+            <div *ngIf="!isform"> 
+              <h1 class="bg-dark text-warning text-center col-12">Escanea en otro lugar</h1>
+              <div *ngIf="codes !== undefined"> 
+                 <button (click)="returnPlace(code)" class="btn btn-light btn-white m-1"  *ngFor="let code of codes.codes">{{code}}</button>
+              </div>
+             </div>
             <!--app-elementadd *ngIf="!edit" [item]="item" [element]="element"></app-elementadd-->
             <!--div *ngIf="edit" class="d-flex form-inline">
             <input #valueText type="text" (keyup.enter)="saveMessage(valueText.value)" class="form-control"/>
@@ -19,8 +28,8 @@
           <!--app-elementsearch *ngIf="edit" [item]="item" (searchParams)="saveMessage($event)"></app-elementsearch-->
           </ng-template>
         </div>
-        <div class="modal-footer">
-          <button type="button" id="dismissModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="modal-footer text-bg-secondary bg-secondary">
+          <button type="button" id="dismissModal" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
           <button *ngIf="false" type="button" class="btn btn-primary">Guardar</button>
         </div>
       </div>

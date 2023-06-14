@@ -1,0 +1,76 @@
+<div class="btn btn-primary mb-2 col-4 offset-8" (click)="uploadImage()">Actualizar</div>
+<div #screen >
+    <app-element-to-img></app-element-to-img>
+</div>
+<div class="main mt-3">
+    <!--div class="row">
+        <div class="col-md-9">
+            <h3>Nuevo Elemento</h3>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-danger btn-block" routerLink="/elements">Regresar</button>
+        </div>
+
+    </div-->
+    <div class="col">
+        <input appNgDropFiles [archivos]="archivos" type="file" id="file"  
+    style="margin: 8px;
+        padding: 8px 5px;
+        color: #333;
+        width: auto;
+        cursor: pointer;"
+>
+    </div>
+
+    <div class="col 12">
+        <div class="row">
+            <!--div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento = $event" [ngClass]="{ 'file-over': estaSobreElemento}" class="col-md-4 well drop-zone">
+                <label>Suelta Archivo aquí</label>
+                <br>
+                <img src="assets/img/drop-images.png " alt=" ">
+            </div-->
+            <div class="col-md-12 ">
+                
+                <table class="table ">
+                    <thead class="thead-dark ">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Progreso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let archivo of archivos">
+                            <td [ngClass]=" {'text-green': archivo.progreso >= 100}">{{ archivo.nombreArchivo }}</td>
+                           
+
+                            <td>
+                                <div class="progress ">
+                                    <div class="progress-bar " role="progressbar " [ngStyle]="{ 'width': archivo.progreso + '%' }"><small>{{ archivo.progreso| number : '.0-0'}}%</small></div>
+                                </div>
+                            </td>
+                            <td *ngIf = "archivo.progreso >= 100">
+                                <button class="btn btn-success">OK</button>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div class="container">
+                    <button (click)="cargarImagenes() "  class="btn col-6 btn-success ">Cargar</button>
+
+                    <button (click)="borrarElementos()" class="btn col-6 btn-warning ">Limpiar</button>
+                </div>
+               
+            </div>
+
+        </div>
+     
+    </div>
+ 
+
+  
+  <div id="download">
+    <img #canvas>
+    <a #downloadLink></a>
+  </div>
+</div>

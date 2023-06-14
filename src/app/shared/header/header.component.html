@@ -1,0 +1,92 @@
+<nav class="navbar row navbar-expand-lg">
+    <div class="main container bg-gradient bg-dark">
+      <img routerLink="home" src="{{ 'assets/img/logopublicar3d.png' }}" class="col-sm-2 col-md-2 logo"  width="100vw" height="50vh"/>
+      <ng-template #login>
+        <div class="main bg-dark row">
+          <div class="mb-3 col container align-center">
+            <div
+              class="btn-group col-12 mt-2"
+              role="group"
+              aria-label="Basic radio toggle button group"
+            >
+              <input
+                type="radio"
+                (click)="goTo('products')"
+                class="btn-check"
+                name="btnradio"
+                id="btnradio11"
+                autocomplete="off"
+                checked
+              />
+              <label class="btn btn-info text-bg-light" for="btnradio11">Productos</label>
+      
+              <input
+                type="radio"
+                (click)="goTo('login')"
+                class="btn-check btn-primary"
+                name="btnradio"
+                id="btnradio22"
+                autocomplete="off"
+              />
+              <label class="btn btn-primary text-white text-bg-warning" for="btnradio22">Login</label>
+      
+              <input
+                type="radio"
+                (click)="goTo('register')"
+                class="btn-check btn-success"
+                name="btnradio"
+                id="btnradio33"
+                autocomplete="off"
+              />
+              <label class="btn btn-dark btn-outline-danger text-white" for="btnradio33">Registro</label>
+      
+              
+            </div>
+            <!--div class="container">
+                
+              <button (click)="showmyCodeDiv(false)" class="btn btn-outline-primary col-6">Tríptico 3d</button>
+                <button class="btn btn-primary col-4">Foto 3d</button>
+                <button class="btn btn-primary col-4">Tarjeta 3d</button>
+                <button class="btn btn-primary col-4">Menú 3d</button>
+                
+             </div-->
+          </div>
+        </div>
+      
+      </ng-template>
+    
+       <ul class="navbar-nav mx-auto col-4" *ngIf="user$ | async as user; else login">  
+      
+      <div class="dropdown col-5" *ngIf="user$ | async as user">
+        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ user?.email }}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li *ngIf="user$ | async as user" >
+                <a class="dropdown-item" routerLink="/dashboard">Dashboard</a>
+              </li>
+          <li><i class="fas fa-user-circle fa-1x"></i><a class="dropdown-item" routerLink="/register">Mi Perfil</a></li>
+          <li><a class="dropdown-item" (click)="onLogout()">Salir</a></li>
+        </ul>
+      </div>
+     
+    </ul>
+   
+      <!--button class="navbar-toggler col-2 ms-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon bg-white bg-opacity-50"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+            <li *ngIf="user$ | async as user" class="nav-item" >
+                <a class="btn btn-sm text-white btn btn-outline-primary" routerLink="/login">dashboard</a>
+            </li>
+        
+        </ul>
+        
+       
+        
+        
+      </div-->
+    </div>
+  </nav>
+  

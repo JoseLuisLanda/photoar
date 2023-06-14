@@ -42,7 +42,7 @@ export class AfelementComponent implements OnInit {
         marker.id = "markervid_"+i;
         marker.title = "video"+indexPath;
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-video id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
+        '<a-video class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
         console.log("asignando a marker: "+marker.id);
       
       }else if(this.item.images![i].type == "model"){
@@ -51,15 +51,37 @@ export class AfelementComponent implements OnInit {
         marker.insertAdjacentHTML('beforeEnd', 
         '<a-asset-item id="model'+indexPath+'" position="0 .1 0" rotation="0, 0, 0" src="'+this.item.images![i].value+'" ></a-asset-item>');
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
+        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
         //'<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="../../../assets/models/hover_board_low_poly.glb" ></a-gltf-model>');
       }else{
         var imgPath = "#img"+indexPath;
         if(this.isSingleMarker)
         imgPath = "multimarkerImg";
+
+        var width = this.item.images![i].type =="poster" ? 2 : 3;
+        var height = this.item.images![i].type =="vcard" ? 2 : 3;
+        var xvalue = 0;
+        var yvalue = 0;
+        var entities ='';
+         /* if(this.item.images![i].elements?.length!>0){
+            for(var j=0; j< this.item.images![i].elements?.length!-2; j++){
+              if(j%2!=0)
+              {
+                xvalue -= (2-j);
+                yvalue += (2+j);
+              }else{
+                xvalue += (2+j);
+                yvalue -= (2-j);
+              }
+               entities +='<a-entity position="'+xvalue+' 1 '+yvalue+'" template="src: #plane" data-src="#elem'+(j)+'" data-thumb="#elem'+(j)+'-thumb"></a-entity>' 
+           
+            }
+             }*/
         
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-image id="multimarkertest" position="0 .1 0" rotation="-90, 0, 0" src="'+imgPath+'" width="3" height="3"></a-image>');
+        entities+'<a-entity position="0 1 0" template="src: #plane" data-src="#city'+i+'" data-thumb="#city'+i+'-thumb"></a-entity>');
+        //'<a-entity template="src: #plane" data-thumb="#img123" class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" rotation="-90, 0, 0" geometry="primitive: plane; height: '+height+'; width: '+width+'" material="shader: flat; src: #img'+indexPath+'"></a-entity>');
+        //'<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="'+width+'" height="'+height+'"></a-image>');
       }
       
       
@@ -85,7 +107,7 @@ export class AfelementComponent implements OnInit {
  
   homeAction(){
     //console.log("home action pressed");
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home?location=citnova'])
   .then(() => {
     window.location.reload();
   });

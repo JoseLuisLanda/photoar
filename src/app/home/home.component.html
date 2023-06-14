@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div *ngIf="!switchTemp; else showPhoto">
   <!--div class="main container form-group">
     <button (click)="gotTo('arelement')" class="btn btn-primary btn-sm form-control">Models 3D</button>
@@ -14,45 +15,184 @@
         <button (click)="switchToPlace(element)" class="btn btn-outline-primary" *ngFor="let element of elements">{{element.name}}</button>
       </div>
 =======
+=======
+<!--div>
+  <button mat-fab *ngIf="listening$ | async; else mic" (click)="stop()">
+    <mat-icon class="soundwave">mic</mat-icon>
+  </button>
+  <ng-template #mic>
+    <button mat-fab (click)="start()">
+      <mat-icon>mic</mat-icon>
+    </button>
+  </ng-template>
+  <button class="btn btn-primary" (click)="startSpeech()">Speech</button>
+</div>
+<section *ngIf="transcript$ | async">
+  <mat-card class="notification mat-elevation-z4">{{transcript$ | async}}</mat-card>
+</section>
+<section>
+  <mat-form-field class="speech-result-width">
+    <textarea matInput [value]="totalTranscript || ''" placeholder="Speech Input Result" rows="15" disabled="true"></textarea>
+  </mat-form-field>
+</section-->
+<app-header></app-header>
+<div #screen *ngIf="!switchTemp; else showPhoto">
+  <div *ngIf="user$ | async as user" class="main container form-group">
+    <button
+      *ngIf="emailConfirmed"
+      (click)="gotTo(true)"
+      class="btn btn-primary btn-sm form-control"
+    >
+      Models 3D
+    </button>
+  </div>
 
-    <div class="main container bg-black">
-      <h2 class="text-center text-primary m-3">Bienvenido a Publicar-3D</h2>
-      <label class="label text-center text-white col-12 ">Qué deseas buscar hoy?</label>
-      <!--button class="btn btn-warning btn-sm col-6" (click)="showmyCodeDiv(false)">Ver información</button-->
-      <!--button class="btn btn-primary btn-sm col-6" (click)="showmyCodeDiv(true)">Ver foto 3D</button-->
+  <div class="main bg-dark row">
+    <div class="mb-3 col container align-center">
+      <div
+        class="btn-group col-12 mt-2"
+        role="group"
+        aria-label="Basic radio toggle button group"
+      >
+        <input
+          type="radio"
+          (click)="showmyCodeDiv(true, 'explore')"
+          class="btn-check"
+          name="btnradio"
+          id="btnradio1"
+          autocomplete="off"
+          checked
+        />
+        <label class="btn btn-outline-primary" for="btnradio1">Tríptico</label>
+
+        <input
+          type="radio"
+          (click)="showmyCodeDiv(false, 'foto')"
+          class="btn-check"
+          name="btnradio"
+          id="btnradio2"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="btnradio2">Foto</label>
+>>>>>>> master
+
+        <input
+          type="radio"
+          (click)="showmyCodeDiv(false, 'tarjeta')"
+          class="btn-check"
+          name="btnradio"
+          id="btnradio3"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="btnradio3">Tarjeta</label>
+
+        <input
+          type="radio"
+          (click)="showmyCodeDiv(false, 'playera')"
+          class="btn-check"
+          name="btnradio"
+          id="btnradio4"
+          autocomplete="off"
+        />
+        <label class="btn btn-outline-primary" for="btnradio4">Playera</label>
+      </div>
+      <!--div class="container">
+          
+        <button (click)="showmyCodeDiv(false)" class="btn btn-outline-primary col-6">Tríptico 3d</button>
+          <button class="btn btn-primary col-4">Foto 3d</button>
+          <button class="btn btn-primary col-4">Tarjeta 3d</button>
+          <button class="btn btn-primary col-4">Menú 3d</button>
+          
+       </div-->
     </div>
-    
-    
-      <div  *ngIf="!showCodeDiv; else showCodeInput" class="col">
-        <div class="container main form-group mt-3">
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item text-blue placeholder col-12 bg-dark">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button text-white bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                  Lugares
+  </div>
+
+  <h3 id="error" class="text-warning text-center">{{ textError }}</h3>
+  <div *ngIf="showCodeDiv; else showCodeInput" class="main row">
+    <div class="container form-group">
+      <button
+        id="showingModal"
+        (click)="setLugares()"
+        class="btn btn-warning col-4 btn-md offset-1 text-bg-primary"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Búsqueda manual
+      </button>
+      <button
+        class="btn btn-warning col-4 btn-md offset-2 text-bg-dark"
+        (click)="startSpeech()"
+        
+      >
+        Búsqueda por Voz
+      </button>
+      <div class="accordion pt-2 accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
+          <h2 class="accordion-header row text-bg-info" id="flush-headingOne">
+            <button
+              class="accordion-button text-bg-success bg-gradient text-white bg-transparent"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="false"
+              aria-controls="collapseOne"
+            >
+              Sitios de interés en {{ location }}
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="flush-headingOne"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body row">
+              <div class="col-6" *ngFor="let lugar of lugares">
+                <button
+                  (click)="onSelectBtn(lugar.name!)"
+                  class="btn m-1 col-12 btn-light"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  {{ lugar.name }}
                 </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
-                  <button (click)="onSelectBtn(lugar.name!)"  class="mt-1 col-6 btn btn-sm btn-light"  data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" *ngFor="let lugar of lugares">{{lugar.name}}</button>
-                </div>
               </div>
             </div>
           </div>
-           <!--select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
+        </div>
+      </div>
+      <!--select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
             <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
           </select-->
-         </div>
-        <div *ngFor="let element of elements" class="card" class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-  <img src={{element.url}} class="card-img-top" style="max-width: 200px;" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{element.name}}</h5>
-    <p class="card-text">{{element.description}}</p>
-    <button (click)="switchToPlace(element)" class="btn btn-block btn-primary">Ver en QR</button>
-     
-  </div>
-</div>
+    </div>
+    <div
+      *ngFor="let element of elements"
+      class="card"
+      class="mt-3 col-xs-6 col-sm-6 col-md-3 col-lg-3"
+    >
+      <div class="card-body bg-info rounded m-2">
+        <div class="container mt-2">
+          <h2 class="text-center text-info mt-3 bg-white">
+            {{ element.name }}
+          </h2>
+
+          <button
+            (click)="switchToPlace(element)"
+            class="btn col-6 btn-dark"
+          >
+            3D
+          </button>
+          <button (click)="showItem(element)" class="btn col-6 btn-primary" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+            Normal
+          </button>
+          <img src="{{ element.url }}" class="card-img-top" alt="..." />
+          <p class="mb-2 text-bg-secondary mt-2">{{ element.description }}</p>
         </div>
+<<<<<<< HEAD
 >>>>>>> master
       <ng-template #showCodeInput>
         <div class="container center form"  >
@@ -63,9 +203,41 @@
          </div>
          
     </ng-template>
+=======
+      </div>
+    </div>
+  </div>
+  <ng-template #showCodeInput>
+    <div class="container center form">
+      <h4 class="text-center text-warning">Inserta tu codigo</h4>
+      <input
+        id="codeForElement"
+        class="form-control form-text m-3"
+        type="text"
+        [(ngModel)]="elementNumber"
+      />
+      <button
+        class="form-control btn btn-outline-primary m-3"
+        (click)="getARElement()"
+      >
+        Buscar
+      </button>
+    </div>
+  </ng-template>
+>>>>>>> master
 </div>
 <ng-template #showPhoto>
-    <app-afelement [item]="itemAR"></app-afelement>
-  </ng-template>
-  <h5 id="error" class="text-danger text-center">{{textError}}</h5>
+  <app-afelement *ngIf="afelement" [item]="itemAR"></app-afelement>
+  <app-arelement *ngIf="arelement" (returnBtn)="gotTo($event)" [itemAR]="itemAR" [modelos]="models"></app-arelement>
+</ng-template>
 
+<app-modal
+  [uploadimage]="uploadimage"
+  [caller]="caller"
+  [item]="currentItem"
+  [search]="search"
+  [isform]="isForm"
+  [codes]="codes"
+  [currentMarkerIndex]="currentMarkerIndex"
+  (selectedValue)="changePlace($event)"
+></app-modal>

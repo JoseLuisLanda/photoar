@@ -1,0 +1,171 @@
+<div class="limiter animated fadeInDown">
+    <div class="main m-4">
+      <div style="padding-left: 20px;padding-right: 20px; padding: 1vw;" class="wrap-login200 containerHalf">
+        <form (ngSubmit)="onSubmit( f )" #f="ngForm" class="login100-form validate-form flex-sb m-2 flex-w">
+          
+         
+        <div class="paddingcontainer" *ngIf = "!logged">
+  
+           <h2 class="text-center text-white mt-3">Regístrate</h2> 
+        
+          <div class="row mt-3 mb-4" style="padding-left: 20px; padding-right: 20px;">
+            <!--div class="containerHalf col-md-6 col-sm-12">
+              <div class="form-group mt-3">
+                <label class="label text-white mb-2">Carrera/Ocupación</label>
+                <select class="form-select form-select-md mb-3" name="title" [(ngModel)]="user.title" aria-label=".form-select-lg example">
+                  
+                  <option *ngFor="let rol of roles" [ngValue]="rol.name">{{rol.name}}</option>
+                </select>
+              </div>
+          <span *ngIf="f.submitted && f.controls['displayName'].errors" class="text-danger animated fadeIn">
+            El nombre es obligatorio, al menos 5 caracteres.
+          </span>
+          <div class="form-group mt-3">
+            <label class="label text-white mb-2">Nombre</label>
+            <input [(ngModel)]="user.displayName" required minlength="5" name="displayName" class="form-control" type="text" placeholder="Nombre">
+            <span class="focus-input100"></span>
+          </div>
+          
+          <div class="form-group mt-3" *ngIf="user.title != 'Visitante/Aspirante'">
+  
+          <span *ngIf="f.submitted && f.controls['noCtrl'].errors" class="text-danger animated fadeIn">
+            Número de control o en su defecto inserta 0000.
+          </span>
+            <label class="label text-white mb-2">Número de Control</label>
+            <input [(ngModel)]="user.noCtrl" required minlength="4" name="noCtrl" class="form-control" type="text" placeholder="Núm. de Control">
+            <span class="focus-input100"></span>
+          </div>
+          <div class="form-group mt-3">
+  
+            <span *ngIf="f.submitted && f.controls['phone'].errors" class="text-danger animated fadeIn">
+              Debe ser un número a 10 dígitos
+            </span>
+              <label class="label text-white mb-2">Teléfono</label>
+              <input [(ngModel)]="user.phone" required minlength="4" name="phone" class="form-control" type="text" placeholder="10 dígitos">
+              <span class="focus-input100"></span>
+            </div>
+         
+       
+            </div-->
+        <div class="containerHalf col-md-6 col-sm-12">
+          <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">
+            Un correo válido es obligatorio.
+          </span>
+          <div class="form-group  mt-3">
+            <label class="label text-white mb-2">Correo</label>
+            <input [(ngModel)]="user.email" name="email" maxlength="30" type="email" required class="form-control" name="email" placeholder="Correo electrónico" email>
+            <span class="focus-input100"></span>
+          </div>
+  
+          <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger animated fadeIn">
+            El password es obligatorio, al menos 5 caracteres.
+          </span>
+          <span *ngIf="f.submitted && user.password !== passwordConfirm" class="text-danger animated fadeIn">
+            La contraseñas no coinciden
+          </span>
+          <div class="form-group mt-3" data-validate="Password is required">
+            <label class="label text-white mb-2">Contraseña</label>
+            <input [(ngModel)]="user.password" required minlength="6" class="form-control" type="password" name="pass" placeholder="Contraseña">
+            <span class="focus-input100"></span>
+          </div>
+  
+          <div class="form-group  mt-3" data-validate="Password is required">
+            <label class="label text-white mb-2">Repite Contraseña</label>
+            <input
+              [(ngModel)]="passwordConfirm"
+              required
+              minlength="6"
+              class="form-control"
+              type="password"
+              name="pass"
+              placeholder="Confirmar contraseña"
+            >
+            <span class="focus-input100"></span>
+          </div>
+  
+          <div class="container-login100-form-btn mt-3">
+            <button class="login100-form-btn" type="submit">
+              Crear cuenta
+            </button>
+          </div>
+  
+          <div class="container-login100-form-btn m-t-15" style="text-align: justify;">
+            <p>
+              Al registrarte aceptas nuestra política de
+              <a routerLink="/terms" class="txt1">
+                Terminos y condiciones.
+              </a>
+              así como nuestra
+              <a routerLink="/copyright" class="txt1">
+                Politica de privacidad y protección de datos.
+              </a>
+            </p>
+          </div>
+        </div>
+     </div>
+        </div>
+        <div class="paddingcontainer" *ngIf = "logged">
+          <span  class="login100-form-title p-b-20 text-white mt-3">
+            Actualiza tu Información
+        </span>
+        <div class="row mt-3 mb-4" style="padding-left: 20px; padding-right: 20px;">
+        <div class="containerHalf col-md-6 col-sm-12">
+          <div class="form-group mt-3">
+            <label class="label text-white mb-2">Carrera/Ocupación</label>
+            <select class="form-select form-select-md mb-3" name="title" [(ngModel)]="user.title" aria-label=".form-select-lg example">
+              
+              <option *ngFor="let rol of roles" [ngValue]="rol.name">{{rol.name}}</option>
+            </select>
+          </div>
+      <span *ngIf="f.submitted && f.controls['displayName'].errors" class="text-danger animated fadeIn">
+        El nombre es obligatorio, al menos 5 caracteres.
+      </span>
+      <div class="form-group mt-3">
+        <label class="label text-white mb-2">Nombre</label>
+        <input [(ngModel)]="user.displayName" required minlength="5" name="displayName" class="form-control" type="text" placeholder="Nombre">
+        <span class="focus-input100"></span>
+      </div>
+      
+      <div class="form-group mt-3" *ngIf="user.title != 'Visitante/Aspirante'">
+  
+      <span *ngIf="f.submitted && f.controls['noCtrl'].errors" class="text-danger animated fadeIn">
+        Número de control o en su defecto inserta 0000.
+      </span>
+        <label class="label text-white mb-2">Número de Control</label>
+        <input [(ngModel)]="user.noCtrl" required minlength="4" name="noCtrl" class="form-control" type="text" placeholder="Núm. de Control">
+        <span class="focus-input100"></span>
+      </div>
+     
+   
+        </div>
+        <div class="containerHalf col-md-6 col-sm-12">
+          <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger animated fadeIn">
+            Un correo válido es obligatorio.
+          </span>
+          <div class="form-group  mt-3">
+            <label class="label text-white mb-2">Correo</label>
+            <input [(ngModel)]="user.email" name="email" maxlength="30" type="email" required class="form-control" name="email" placeholder="Correo electrónico" email>
+            <span class="focus-input100"></span>
+          </div>
+  
+          
+  
+      
+  
+          <div class="container-login100-form-btn mt-3">
+            <button class="login100-form-btn" type="submit">
+              Actualizar
+            </button>
+          </div>
+  
+        </div>
+      </div>
+  
+        </div>
+      
+  
+        </form>
+    </div>
+    </div>
+  </div>
+  

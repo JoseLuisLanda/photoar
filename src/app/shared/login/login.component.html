@@ -1,0 +1,89 @@
+<div class="limiter animated fadeInLeft" >
+    <div class="main p-4">
+        <div id="loginDiv" class="containerHalf container">
+            <form (ngSubmit)="onLogin(f) " #f="ngForm"  class="login100-form validate-form m-2 flex-sb flex-w">
+  
+                <span class="login100-form-title">
+                  <h2 class="text-white text-center p-2">Iniciar Sesión</h2>
+              </span>
+  
+                
+  
+  <div class="row containerHalf mb-4" style="padding-left: 20px; padding-right: 20px;">
+  <div class="paddingcontainer col-md-6 col-sm-12">
+    <span *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">Un correo válido es obligatorio</span>
+    <div class="form-group mb-3">
+      <label class="label text-white mb-2">Usuario:</label>
+      <input [(ngModel)]="user.email" required maxlength="30" class="form-control" type="email" name="email" placeholder="Email" email>
+  
+      <span class="focus-input100"></span>
+  </div>
+  
+  <span *ngIf="f.submitted && f.controls['pass'].errors" class="text-danger">La contraseña debe contener más de 6 caracteres.</span>
+  <div class="form-group mb-3" data-validate="Password is required">
+    <label class="label text-white mb-2">Password:</label>
+      <input [(ngModel)]="user.password" required minlength="5" class="form-control" type="password" name="pass" placeholder="Contraseña">
+      <span class="focus-input100"></span>
+  </div>
+  
+  <div class="flex-sb-m w-full p-t-1 p-b-20">
+      <div class="contact100-form-checkbox">
+          <input [(ngModel)]="user.rememberme" class="input-checkbox100" id="ckb1" type="checkbox" name="rememberme">
+          <label class="label-checkbox100" for="ckb1">
+            Recordar mi usuario
+        </label>
+      </div>
+  
+      <div>
+          <a routerLink="/register" class="txt1">
+            ¿No tienes cuenta?
+        </a>
+      </div>
+  </div>
+  
+  <div class="container-login100-form-btn m-t-15">
+      <button class="btn btn-lg col-12 btn-primary" type="submit">
+        Ingresar
+    </button>
+   
+  </div>
+  
+  </div>
+               
+  <!--div class="paddingcontainer col-md-6 col-sm-12">
+    <div class="row">
+      <h3 class="text-white text-center">Identificate con Redes sociales</h3>
+    </div>
+                <div class="row mt-4">
+                    <div class="col-6 text-center">
+                      <button (click)="loginFace()" type="button"  class="btn btn-lg btn-outline-info text-white btn-block col-12 ">Facebook</button>
+                    </div>
+                    <div class="col-6 text-center">
+                      <button (click)="loginGmail()" type="button" class="btn btn-lg btn-outline-warning text-white btn-block col-12">Gmail</button>
+                    </div>
+                  </div>
+                  <div class="container-login100-form-btn m-t-15">
+                    <div class="col-12  text-center">
+                      <button (click)="recoveryPass(user.email)" type="button"  class="btn btn-lg btn-danger text-white btn-block col-12">Recuperar mi contraseña</button>
+                    </div>
+                  </div>
+                  <div class="container-login100-form-btn m-t-15">
+                    <div style="text-align: justify;">
+                      <p>Al registrarte aceptas nuestra política de <a routerLink="/terms" class="txt1">
+                        Términos y condiciones.
+                    </a>
+                    así como nuestra
+                    <a routerLink="/copyright" class="txt1">
+                      Política de privacidad y protección de datos.
+                  </a></p>
+              
+                </div>
+                  </div>
+  </div-->
+  
+  </div>
+                <p class="text-danger">{{errMsg}}</p>
+            </form>
+        </div>
+    </div>
+  </div>

@@ -4,13 +4,7 @@
 <div class="buttons">
     <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-lg btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Mostrar más</button>
-<<<<<<< HEAD
-</div>
-<div class="buttonsRight row">
-      <button *ngIf="isSingleMarker" style="height: 20%;" (click)="resize(1)" class="btn btn-outline-warning">+</button>
-      <button *ngIf="isSingleMarker" style="height: 20%;" (click)="resize(-1)" class="btn btn-outline-primary">-</button>
-=======
->>>>>>> master
+
 </div>
 <!--div class="buttonsRight row">
       <button style="height: 20%;" (click)="resize(1)" class="btn btn-outline-warning">+</button>
@@ -49,8 +43,8 @@
         <div *ngFor="let imageElem of image.elements; index as j" >
           <img crossorigin="anonymous" id="{{'elem'+(j)+'-thumb'}}" src={{imageElem.url}} />
         </div>
-        <!--img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} /-->
-        <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'city'+(i)+'-thumb'}}" src={{image.url}} />
+        <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+        <!--img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'city'+(i)+'-thumb'}}" src={{image.url}} /-->
         <video autoplay *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
         controls muted src="{{image.url}}" ></video>
         <!--a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item-->

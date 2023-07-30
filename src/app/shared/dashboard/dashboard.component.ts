@@ -5,6 +5,7 @@ import { FotosService } from '../services/fotos.service';
 import { User } from 'firebase/auth';
 import { AfsService } from '../services/afs.service';
 import { arrayUnion } from 'firebase/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,9 +22,9 @@ export class DashboardComponent implements OnInit {
   user: any;
   fbUser: ElementId; 
   showSearchBtn = false;
-  elements : ElementId[]=[{uid: "1", name: "Foto"},{uid: "2", name: "Tarjeta"},{uid: "2", name: "Playera"}];
+  elements : ElementId[]=[{uid: "1", name: "Foto"},{uid: "2", name: "Tarjeta"},{uid: "2", name: "Playera"},{uid: "3", name: "Avatar"}];
   items : ElementId[]=[];
-  constructor(private authLogin: AuthService,private fotosService: FotosService, private afsService: AfsService) { }
+  constructor(private router: Router,private authLogin: AuthService,private fotosService: FotosService, private afsService: AfsService) { }
 
   ngOnInit(): void {
     this.checkUserIsVerified();
@@ -102,12 +103,18 @@ export class DashboardComponent implements OnInit {
         items: arrayUnion(this.element+"/"+id)
        };
        const owner = {
-        owner: this.user.uid
+        codes: arrayUnion(this.user.uid)
        };
       const updateUser = this.authLogin.setUserItems("users",this.user.uid,items);
-      const updateItem = this.authLogin.setUserItems("playera",id,owner);
+      const updateItem = this.authLogin.setUserItems(this.element,id,owner);
       
       //const saveElement = 
     }
+  }
+  searchItemHome(folder:string){
+    folder = folder.split("/")[0];
+    var routerLink="/home?location=playera"
+    this.router.navigateByUrl('/home?type='+folder+"&code="+this.user.uid);
+   
   }
 }

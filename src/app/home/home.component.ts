@@ -121,6 +121,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   }
   buscarLugares(){
    // console.log('getting places',this.location);
+   
     this.fotosService
       .getCollection('lugares', 50, '', '', 'codes', this.location)
       .subscribe((data) => {
@@ -178,6 +179,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         console.log("type and code: ");
         this.location = params.code;
         this.folder = params.type;
+        //confirmed then look for all cards with userid code
+        if(this.emailConfirmed){
+          
+          const searchCards = this.onSelectBtn(this.folder);
+         
+          
+
+        }else{//if user is not logged and email confirmed... once time access
+        
         //console.log(this.location); // location
         this.fotosService
           .getCollection(this.folder, 50, '', '', 'codes', this.location)
@@ -200,6 +210,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
             //console.log("GETTING chat messages: "+JSON.stringify(this.users));
           });
+        }
       }
       else if(params.code !== undefined) {
         console.log("code: ");
@@ -249,7 +260,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     (<HTMLInputElement>(
       document.getElementById('flush-headingOne')
     )).click();
-
+     
   }
   getElements(type: string) {
     this.textError = '';
@@ -285,6 +296,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
               break;
               
           }
+          
           this.buscarLugares();
         } else {
           (<HTMLInputElement>(
@@ -339,7 +351,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     this.itemAR.type = 'photos';
     this.switchTemp = true;
   }
-
+  switchTo3D(event: any) {
+    this.models.pop();
+    this.models.push(event.images[0]);
+   /* if(showPage)
+    {*/
+      this.switchTemp = true;
+      this.arelement = true;
+    /*}else{
+      this.switchTemp = false;
+      this.arelement = false;
+    }*/
+  }
+  
   receiveModel(modelName: string) {
     //console.log("otro modelo received: " + modelName);
     this.itemAR.name = modelName;
@@ -361,6 +385,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   }
   showmyCodeDiv(value: boolean, type: string) {
     //console.log("Type ",type);
+    if(value){
+      this.location = "general";
+      this.getElements("lugares");
+    }
     this.folderToSearch = type;
     this.showCodeDiv = value;
   }

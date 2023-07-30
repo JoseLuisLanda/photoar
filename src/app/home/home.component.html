@@ -46,7 +46,7 @@
           autocomplete="off"
           checked
         />
-        <label class="btn btn-outline-primary" for="btnradio1">Tríptico</label>
+        <label class="btn btn-outline-light" for="btnradio1">Explorar</label>
 
         <input
           type="radio"
@@ -71,13 +71,13 @@
 
         <input
           type="radio"
-          (click)="showmyCodeDiv(false, 'playera')"
+          (click)="showmyCodeDiv(false, 'avatar')"
           class="btn-check"
           name="btnradio"
           id="btnradio4"
           autocomplete="off"
         />
-        <label class="btn btn-outline-primary" for="btnradio4">Playera</label>
+        <label class="btn btn-outline-primary" for="btnradio4">Avatar</label>
       </div>
       <!--div class="container">
           
@@ -96,20 +96,20 @@
       <button
         id="showingModal"
         (click)="setLugares()"
-        class="btn btn-warning col-4 btn-md offset-1 text-bg-primary"
+        class="btn btn-warning col-4 btn-md offset-4 text-bg-primary"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        Búsqueda manual
+        Cambiar locación
       </button>
-      <button
+      <!--button
         class="btn btn-warning col-4 btn-md offset-2 text-bg-dark"
         (click)="startSpeech()"
         
       >
         Búsqueda por Voz
-      </button>
+      </button-->
       <div class="accordion pt-2 accordion-flush" id="accordionFlushExample">
         <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
           <h2 class="accordion-header row text-bg-info" id="flush-headingOne">
@@ -121,7 +121,7 @@
               aria-expanded="false"
               aria-controls="collapseOne"
             >
-              Sitios de interés en {{ location }}
+              Buscar en
             </button>
           </h2>
           <div
@@ -164,13 +164,20 @@
 
           <button
             (click)="switchToPlace(element)"
-            class="btn col-6 btn-dark"
+            class="btn col-6 btn-warning"
+          >
+            QR
+          </button>
+          <button
+          *ngIf="emailConfirmed"
+            (click)="switchTo3D(element)"
+            class="btn col-6 btn-light"
           >
             3D
           </button>
           <button (click)="showItem(element)" class="btn col-6 btn-primary" data-bs-toggle="modal"
           data-bs-target="#exampleModal">
-            Normal
+            Galeria
           </button>
           <img src="{{ element.url }}" class="card-img-top" alt="..." />
           <p class="mb-2 text-bg-secondary mt-2">{{ element.description }}</p>

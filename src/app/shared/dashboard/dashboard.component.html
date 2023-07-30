@@ -41,7 +41,7 @@
               <div class="accordion-body row">
                
               <div *ngFor="let item of fbUser.items">
-                <button class="btn btn-warning mb-2 col-12">{{item.split("/")[0]}}</button>
+                <button (click)="searchItemHome(item)" class="xbtn btn-warning mb-2 col-12">{{item.split("/")[0]}}</button>
               </div>
 
 
@@ -89,9 +89,10 @@
 
       <div class="container mt-2">
         <h2 class="text-center text-info mt-3 bg-white">{{element.name}}</h2> 
-        <button *ngIf="!element.owner" (click)="saveItemUser(element.id!)" class="btn col-12 btn-warning">Asociar</button>  
+        <button *ngIf="!element.codes!.includes(user.uid)" (click)="saveItemUser(element.id!)" class="btn col-12 btn-warning">Agregar</button>  
         <img src={{element.url}} class="card-img-top"  alt="...">
        <p class="mb-2 text-bg-secondary mt-2">{{element.description}}</p>
+      
       </div>
 
 

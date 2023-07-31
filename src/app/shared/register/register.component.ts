@@ -68,7 +68,9 @@ export class RegisterComponent implements OnInit {
         //console.log("No user"+JSON.stringify(userDta))
       }
     }
-  
+    goToHome(){
+      this.router.navigateByUrl('/home');
+    }
     loginFace(): void {
       /*this.authLogin
         .FacebookAuth()

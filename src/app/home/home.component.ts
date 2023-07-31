@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   userItem: UserModel = new UserModel();
   currentItem: any = {};
   isForm = false;
+  creator = false;
   emailConfirmed = false;
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -139,6 +140,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {
    this.buscarLugares();
     this.emailConfirmed = this.authSvc.isLoggedIn;
+    if(this.emailConfirmed)
+    this.creator = this.authSvc.isAdmin(JSON.parse(localStorage.getItem('user')!));
     this.activeRoute.queryParams.subscribe((params) => {
       //console.log(params); // { orderby: "location" }
       this.elements = [];
@@ -256,6 +259,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   }
   ngOnChanges() {
     this.emailConfirmed = this.authSvc.isLoggedIn;
+
     if(this.elements.length > 0)
     (<HTMLInputElement>(
       document.getElementById('flush-headingOne')

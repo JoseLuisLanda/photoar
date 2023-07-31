@@ -10,6 +10,7 @@ export class RoleValidator {
   }
 
   isAdmin(user: UserModel): boolean {
-    return user.role === 'ADMIN';
+    //console.log("USERNAME"+JSON.stringify(user));
+    return user.uid === '71rUZlmcM7bps0AqmGZcSLqfLJh2' || user.uid === '0qj5AEnJoiQnSjMqS6HwMs1xR5i2';
   }
 }

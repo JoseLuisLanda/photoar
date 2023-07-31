@@ -113,8 +113,10 @@ export class DashboardComponent implements OnInit {
   }
   searchItemHome(folder:string){
     folder = folder.split("/")[0];
-    var routerLink="/home?location=playera"
     this.router.navigateByUrl('/home?type='+folder+"&code="+this.user.uid);
    
+  }
+  goToHome(){
+    this.router.navigateByUrl('/home');
   }
 }

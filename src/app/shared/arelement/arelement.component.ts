@@ -10,7 +10,7 @@ export class ARElementComponent implements OnInit {
 
   @Input() modelos: ElementId [] = [{name:"chase"},{name:"rubble"}];
 
-  @Input() itemAR:ElementId={uid:"sky",url:"../../assets/models/Astronaut.glb"};
+  @Input() itemAR:ElementId={};
   @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
   urlItem: string="";
   constructor(private router: Router) { }

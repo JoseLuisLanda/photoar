@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AfelementComponent implements OnInit {
   @Input() item: ElementId = 
-  {name:"undefined",images:[{url:"",elements:[{url:"∫"}]}]} as ElementId;
+  {} as ElementId;
   urlPhoto: string = '../../../assets/presets/pat0.patt';
   urls:string[] = [];
   tagNumberinit = 0;

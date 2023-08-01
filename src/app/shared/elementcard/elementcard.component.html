@@ -46,7 +46,10 @@
               'active': i==0
             }"
             >
-              <img src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
+            <video class="d-block w-100"  *ngIf="image.type === 'video'" autoplay>
+              <source src="../../../assets/videos/replay.mp4" type="video/mp4">
+        </video>
+              <img *ngIf="image.type === 'image'" src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
             </div>
           
           </ng-template>

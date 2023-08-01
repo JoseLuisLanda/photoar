@@ -2,8 +2,8 @@
 <input id="tagNumberlength" type="hidden" value="{{tagNumberlength}}" />
 <input id="tagNumberend" type="hidden" value="{{tagNumberend}}" />
 <div class="buttons">
-    <button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-lg btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Mostrar más</button>
+    <!--button (click)="setMarkerIndex()" type="button" id="showModal" class="btn btn-lg btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Mostrar más</button-->
 
 </div>
 <!--div class="buttonsRight row">
@@ -44,6 +44,7 @@
           <img crossorigin="anonymous" id="{{'elem'+(j)+'-thumb'}}" src={{imageElem.url}} />
         </div>
         <img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'img'+(i+tagNumberinit)}}" src={{image.url}} />
+        <!--img *ngIf="image.type == 'model'" crossorigin="anonymous" id="{{'model'+(i+tagNumberinit)}}" src={{image.url}} /-->
         <!--img *ngIf="image.type == 'image' || image.type == 'vcard' || image.type == 'poster' || image.type == undefined" crossorigin="anonymous" id="{{'city'+(i)+'-thumb'}}" src={{image.url}} /-->
         <video  *ngIf="image.type == 'video'" id="{{'video'+(i+tagNumberinit)}}" crossOrigin="anonymous" playsinline webkitplaysinline 
         controls muted src="{{image.url}}" ></video>

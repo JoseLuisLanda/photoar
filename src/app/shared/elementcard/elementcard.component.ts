@@ -18,7 +18,8 @@ export class ElementcardComponent implements OnInit {
   tempImg: string = "";
 
   constructor() { }
-
+ 
+  
   ngOnInit(): void {
     if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
@@ -61,4 +62,7 @@ selectedTempMarker(id: number){
   this.imgURL = this.tempImg;
    this.showImg = false;
  }
+ stopVideo() {
+  console.log("stop video");
+}
 }

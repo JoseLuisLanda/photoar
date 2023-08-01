@@ -356,8 +356,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     this.switchTemp = true;
   }
   switchTo3D(event: any) {
-    this.models.pop();
-    this.models.push(event.images[0]);
+    //this.models=[];
+    //this.models.push(event.images[0]);
+this.itemAR = event;
+
    /* if(showPage)
     {*/
       this.switchTemp = true;
@@ -426,6 +428,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   showItem(itemSelected: ElementId){
     this.caller = 'Detalle de '+itemSelected.name;
     this.search = false;
+    this.itemAR = itemSelected;
     this.currentItem = itemSelected;
     
   }

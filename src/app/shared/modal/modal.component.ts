@@ -6,7 +6,7 @@ import { ElementId } from 'src/app/collections/element';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent implements OnInit{
   @Input() item: ElementId = {name:"example",description:"hola"} as ElementId;
   @Input() uploadImage: boolean = false;
   @Input() isform: boolean = true;
@@ -19,6 +19,7 @@ export class ModalComponent implements OnInit {
   @Output() valueInputText: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   @Output() selectedValue: EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
+  
 
   ngOnInit(): void {
   }

@@ -357,7 +357,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   }
   switchTo3D(event: any) {
     this.models=[];
-    this.models.push(event.images);
+    event.images.forEach((element: ElementId) => {
+      this.models.push(element);
+    });
+    
     //this.itemAR = event;
 
    /* if(showPage)

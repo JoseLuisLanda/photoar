@@ -51,7 +51,7 @@ export class AfelementComponent implements OnInit {
         marker.insertAdjacentHTML('beforeEnd', 
         '<a-asset-item id="model'+indexPath+'" position="0 0 0" rotation="0, 90, 0" src="'+this.item.images![i].value+'" ></a-asset-item>');
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
+        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 0 0" rotation="-90, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
         //'<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="../../../assets/models/hover_board_low_poly.glb" ></a-gltf-model>');
       }else{
         var imgPath = "#img"+indexPath;

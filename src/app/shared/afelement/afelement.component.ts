@@ -49,9 +49,9 @@ export class AfelementComponent implements OnInit {
         //console.log("inserting model: "+this.item.images![i].value)
         // <a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item>
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-asset-item id="model'+indexPath+'" position="0 0 0" rotation="0, 90, 0" src="'+this.item.images![i].value+'" ></a-asset-item>');
+        '<a-asset-item id="model'+indexPath+'" position="0 .1 0" rotation="0, 0, 0" src="'+this.item.images![i].value+'" ></a-asset-item>');
         marker.insertAdjacentHTML('beforeEnd', 
-        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 0 0" rotation="-90, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
+        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 .1 0" rotation="0, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
         //'<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="../../../assets/models/hover_board_low_poly.glb" ></a-gltf-model>');
       }else{
         var imgPath = "#img"+indexPath;
@@ -82,7 +82,7 @@ export class AfelementComponent implements OnInit {
         entities+'<a-entity crossorigin="anonymous" template="src: #plane" data-thumb="#img123" class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" rotation="-90, 0, 0" geometry="primitive: plane; height: '+height+'; width: '+width+'" material="shader: standard; src: url('+this.item.images![i].url+')"></a-entity>');
         //'<a-entity template="src: #plane" data-thumb="#img123" class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" rotation="-90, 0, 0" geometry="primitive: plane; height: '+height+'; width: '+width+'" material="shader: flat; src: #img'+indexPath+'"></a-entity>');
         //'<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="'+width+'" height="'+height+'"></a-image>');
-      }
+    }
       
       
       
@@ -91,7 +91,7 @@ export class AfelementComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-   console.log("AFELEMENT receiving"+JSON.stringify(this.item));
+   //console.log("AFELEMENT receiving"+JSON.stringify(this.item));
     this.urlPhoto = this.item.images![0].url!;
     
     this.tagNumberlength = this.item.images!.length !== undefined 

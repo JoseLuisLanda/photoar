@@ -40,12 +40,14 @@
   <script id="plane" type="text/html" crossOrigin="anonymous">
 
       <a-entity class="link"
-        geometry="primitive: plane; height: 3; width: 3"
-        material="flatShading: false; src: ../assets/images/menu.jpg"
-        rotation="0 0 0"
-        position="1 1 .5"
-        event-set__mouseenter="scale: 1.2 1.2 1"
-        event-set__mouseleave="scale: 1 1 1"
+      geometry="primitive: plane; height: 3; width: 3"
+      material="flatShading: true; src: ../assets/images/dato1.jpg"
+      rotation="-90 0 0"
+      position="0 1 0"
+      event-set__mouseenter="scale: 1.2 1.2 1"
+      event-set__mouseleave="scale: 1 1 1"
+      event-set__click="_target: #city0-thumb; _delay: 300; material.src: ${src}"
+      proxy-event="event: click; to: #city0-thumb; as: fade"
         ></a-entity>
     </script>
 </head>

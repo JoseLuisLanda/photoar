@@ -149,7 +149,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         var redirect = false;
         var type = "";
         
-        console.log("params: ", params.url);
+        //console.log("params: ", params.url);
         this.fotosService
         .getCollection('urls', 1, 'code', params.url)
         .subscribe((data) => {
@@ -163,7 +163,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             this.itemAR = this.models[0];
             redirect = mainElement.redirect?mainElement.redirect:false;
             type = mainElement.type?mainElement.type:"";
-            console.log("redirect "+redirect+"type "+type);
+            //console.log("redirect "+redirect+"type "+type);
             if(redirect && type == "model")
             {
               this.switchTemp = true;
@@ -174,12 +174,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         });
       }
       else if (params.caller !== undefined) {
-        console.log("caller: ");
+        //e.log("caller: ");
         this.location = params.code !== undefined ? params.code : 'general';
         this.getElements(params.type);
       } 
       else if (params.type !== undefined && params.code !== undefined) {
-        console.log("type and code: ");
+       // console.log("type and code: ");
         this.location = params.code;
         this.folder = params.type;
         //confirmed then look for all cards with userid code
@@ -216,7 +216,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         }
       }
       else if(params.code !== undefined) {
-        console.log("code: ");
+        //console.log("code: ");
         this.fotosService
           .getCollection('lugares', 50, '', '', 'codes', 'general')
           .subscribe((data) => {
@@ -231,7 +231,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             //console.log("GETTING chat messages: "+JSON.stringify(this.users));
           });
       }else{
-        console.log("No params");
+        //console.log("No params");
         this.switchTemp = false;
             this.arelement = false;
       }
@@ -320,7 +320,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     //this.getElements(this.place.toLowerCase());
     //console.log("foldersearch: "+this.folderToSearch+" elementnumber"+this.elementNumber);
     if (this.elementNumber !== '') {
-      console.log('sending request: ');
+      //console.log('sending request: ');
       this.fotosService
         .getCollection(
           this.folderToSearch,
@@ -339,7 +339,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             this.arelement = false;
             this.itemAR.type = 'photos';
             this.switchTemp = true;
-            console.log("img elements: "+JSON.stringify(this.elements))
+           // console.log("img elements: "+JSON.stringify(this.elements))
           }
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
         });
@@ -348,7 +348,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
   switchToPlace(event: any) {
-    console.log("otro modelo received: " + JSON.stringify(event));
+    //console.log("otro modelo received: " + JSON.stringify(event));
     this.afelement = true;
     this.arelement = false;
     this.itemAR = event;

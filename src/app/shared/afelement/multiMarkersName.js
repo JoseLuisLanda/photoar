@@ -97,7 +97,7 @@ AFRAME.registerComponent('registerevents', {
 				//window.location = 'https://www.google.com/';  //works
 				//console.log('Value to change: ', value);
 				//show button for modal details, 
-				document.getElementById("showModal").style.visibility = "visible";
+				//document.getElementById("showModal").style.visibility = "visible";
 				
 
 				marker.setAttribute("position", marker.getAttribute("position"));

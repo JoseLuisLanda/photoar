@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ElementId } from 'src/app/collections/element';
-
+declare function playVideo(url:string) : any;
+declare function stopVideo(url:string) : any;
 @Component({
   selector: 'app-elementcard',
   templateUrl: './elementcard.component.html',
@@ -17,7 +18,11 @@ export class ElementcardComponent implements OnInit {
   imgs:ElementId[] = [];
   tempImg: string = "";
 
-  constructor() { }
+  @ViewChild('videplayer', { static: true }) myVideo: ElementRef;
+
+  constructor() {
+   
+   }
  
   
   ngOnInit(): void {
@@ -62,7 +67,16 @@ selectedTempMarker(id: number){
   this.imgURL = this.tempImg;
    this.showImg = false;
  }
- stopVideo() {
+ stopVideo(videoUrl:string) {
   console.log("stop video");
+  stopVideo(videoUrl);
+ // this.myVideo.nativeElement.play();
+  //(<HTMLVideoElement> document.getElementById("videplayer")).play();
+}
+startVideo(videoUrl:string) {
+  console.log("stop video");
+  playVideo(videoUrl);
+ // this.myVideo.nativeElement.play();
+  //(<HTMLVideoElement> document.getElementById("videplayer")).play();
 }
 }

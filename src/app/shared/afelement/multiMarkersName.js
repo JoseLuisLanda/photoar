@@ -3,7 +3,7 @@
 //Global Variable
 var markersURLArray=[];
 var markersNameArray=[];
-console.log('Add markers to the scene');
+//console.log('Add markers to the scene');
 
 			/*const recognition = new webkitSpeechRecognition();
 			recognition.continuous = true;
@@ -69,7 +69,13 @@ AFRAME.registerComponent('markers_start',{
 	
 });
 
-
+function playVideo(event) {
+   var videoPlayer = document.getElementById(event).play();
+  
+  }
+  function stopVideo(event) {
+	var videoPlayer = document.getElementById(event).pause();
+   }
 
 function handleRotation(event) {
     if (isMarkerVisible) {
@@ -104,7 +110,7 @@ AFRAME.registerComponent('registerevents', {
                 marker.setAttribute("rotation", marker.getAttribute("rotation"));
 				if(marker.id.includes("vid")){
 					var indexVid = marker.title;
-					console.log("PLAYING VIDEO: "+indexVid);
+					//console.log("PLAYING VIDEO: "+indexVid);
 					var v = document.getElementById(""+indexVid);
 					v.load();
 					v.play();

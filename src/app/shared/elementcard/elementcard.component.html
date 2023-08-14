@@ -1,6 +1,6 @@
-<div *ngIf="item.code">
+<div *ngIf="false">
   <button (click)="selectedTempMarker(item.indexInit!)" class="btn btn-outline-light col-4">Marcador</button>
-  <button (click)="selectedTempImage(item.code)" class="btn btn-outline-light col-4">Show QR</button>
+  <button (click)="selectedTempImage(item.code!)" class="btn btn-outline-light col-4">Show QR</button>
   <button  class="btn btn-warning col-4">Descargar</button>
 </div>
 <div *ngIf="!showImg" class="card h-100 containerHalf">
@@ -28,7 +28,7 @@
         </div>
   
       </div-->
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleControls" class="carousel " data-bs-ride="carousel">
 
         <div class="carousel-inner">
           <div *ngIf="item.name!.includes('photo'); else place">
@@ -47,11 +47,11 @@
             }"
             >
             
-            <video class="d-block w-100" id="videoplayer"  *ngIf="image.type === 'video'" autoplay>
+            <video class="d-block w-100" id="videoplayer"  *ngIf="image.type === 'video'" >
               <source src="{{image.url}}" type="video/mp4">
         </video>
     
-              <img *ngIf="image.type === 'image'" src="{{image.url}}" class="d-block w-100" (click)="selectedImage(i)" alt="i">
+              <img *ngIf="image.type === 'image'" src="{{image.url}}" class="d-block w-100" style="max-height: 200px;" (click)="selectedImage(i)" alt="i">
             </div>
           
           </ng-template>

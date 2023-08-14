@@ -191,8 +191,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
         }else{//if user is not logged and email confirmed... once time access
         
+          this.getElements(this.folder);
         //console.log(this.location); // location
-        this.fotosService
+        /*this.fotosService
           .getCollection(this.folder, 50, '', '', 'codes', this.location)
           .subscribe((data) => {
             if (data !== undefined && data.length > 0) {
@@ -212,7 +213,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
             });
 
             //console.log("GETTING chat messages: "+JSON.stringify(this.users));
-          });
+          });*/
         }
       }
       else if(params.code !== undefined) {

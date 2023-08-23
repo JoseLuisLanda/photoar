@@ -206,7 +206,7 @@
 
 </div>
 <ng-template #showPhoto>
-  <app-afelement *ngIf="afelement" [item]="itemAR"></app-afelement>
+  <app-afelement *ngIf="afelement" (returnBtn)="gotTo($event)" [item]="itemAR"></app-afelement>
   <app-arelement *ngIf="arelement" (returnBtn)="gotTo($event)" [itemAR]="itemAR" [modelos]="models"></app-arelement>
 </ng-template>
 

@@ -247,15 +247,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       );
   }
   gotTo(showPage: boolean) {
-    if(showPage)
+    /*if(showPage)
     {
       this.switchTemp = true;
       this.arelement = true;
     }else{
       this.switchTemp = false;
       this.arelement = false;
-    }
-    
+    }*/
+    window.location.reload();
     //this.router.navigateByUrl('/' + page);
   }
   ngOnChanges() {

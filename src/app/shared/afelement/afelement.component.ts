@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ElementId } from 'src/app/collections/element';
 import { Router } from '@angular/router';
 @Component({
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AfelementComponent implements OnInit {
   @Input() item: ElementId = 
   {} as ElementId;
+  @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
   urlPhoto: string = '../../../assets/presets/pat0.patt';
   urls:string[] = [];
   tagNumberinit = 0;
@@ -104,7 +105,11 @@ export class AfelementComponent implements OnInit {
     
     
   }
- 
+  goToHome(){
+    //this.router.navigateByUrl('/home');
+  
+    this.returnBtn.emit(false);
+  }
   homeAction(){
     //console.log("home action pressed");
     this.router.navigate(['/home?location=citnova'])

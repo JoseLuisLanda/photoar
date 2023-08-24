@@ -5,10 +5,29 @@
 </div>
 <div *ngIf="!showImg" class="card h-100 containerHalf">
   <div class="card-body">
-    <!--h4 *ngIf="item.name" class="card-title text-white">{{ item.name }}</h4-->
-    <h5 *ngIf="item.title" class="card-title text-warning">{{ item.title }}</h5>
+    <h4 *ngIf="item.description || item.description !==''" class="card-title text-white">{{ item.description }}</h4>
+    <div class="row text-white" *ngIf="item.type == 'vcard'">
+          <!-- Facebook -->
+          <a href="{{item.facebook}}" *ngIf="item.facebook || item.facebook !==''" class="text-white btn col-4" style="background-color: #46139d;" href="{{item.facebook}}" role="button"
+          ><img src="../../../assets/img/facebook.png" style="width: 25px;height: 25px;" alt="Black Icon"> Facebook</a
+          >
+
+
+<!-- Twitter -->
+<a href="{{item.twitter}}" *ngIf="item.twitter || item.twitter !==''" class="text-white btn col-4" style="background-color: #55acee;" href="{{item.twitter}}" role="button"
+><img src="../../../assets/img/twitter.png" style="width: 20px;height: 20px;" alt="Black Icon"> Twitter</a
+>
+
+<!-- Linkedin -->
+<a href="{{item.linkedin}}" *ngIf="item.linkedin || item.linkedin !==''" class="text-white btn col-4" style="background-color: #5711e2;" href="{{item.linkedin}}" role="button"
+><img src="../../../assets/img/linkedin.png" style="width: 20px;height: 20px;" alt="Black Icon"> LinkedIn</a
+>
+
+
+    </div>
+
+   <h5 *ngIf="item.title" class="card-title text-warning">{{ item.title }}</h5>
     <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>
-    <p *ngIf="item.description!" class="card-text text-white">{{ item.description }}</p>
     <button *ngIf="false" class="btn btn-outline-warning" (click)="selectedElement()">Seleccionar</button>
   </div>
   
@@ -43,6 +62,7 @@
             </div>
           </div>
           <ng-template #place>
+           
             <div  *ngFor="let image of imgs; index as i" [ngClass]="{
               'carousel-item': true,
               'active': i==0

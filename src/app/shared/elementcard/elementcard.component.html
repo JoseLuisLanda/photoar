@@ -32,26 +32,14 @@
   </div>
   
     <div *ngIf="true; else imgDefault">
-      <!-- Carousel images-->
-      <!--div
-        id="img{{ item.id }}"
-        class="carousel slide"
-        data-ride="carousel"
-        data-bs-ride="carousel">
-        <div class="row">
-          <div *ngFor="let image of item.images; let i = index" class="col-5">
-        
-            <img class="d-block" style="max-height: 150px;max-width: 150px;cursor:pointer" [src]="image.url"
-      (click)="selectedImage(i)"/>
-      
-          </div>
-        </div>
-  
-      </div-->
-      <div id="carouselExampleControls" class="carousel" >
+   
+      <div id="{{ item.id }}" class="carousel" >
 
         <div class="carousel-inner">
-          <div *ngIf="item.name!.includes('photo'); else place">
+          <div class="row" style="margin-bottom: 50px;" *ngFor="let url of item.externalUrls;index as i">
+              <a href="{{url.url}}" class="btn btn-primary col-4">{{url.title}}</a>
+          </div>
+          <div *ngIf="item.type!.includes('photo'); else place">
             <div *ngFor="let image of item.images; index as i" [ngClass]="{
               'carousel-item': true,
               'active': i==0
@@ -93,25 +81,38 @@
           
          
         </div>
-        <button class="carousel-control-prev" style="max-height: 30px;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <div *ngIf="item.images!.length>1 || imgs.length >1">
+          <button class="carousel-control-prev" style="max-height: 40px;margin-top: 50px;background-color: black;" type="button" [attr.data-bs-target]="'#'+item.id" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" style="height: 30px;" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <button class="carousel-control-next" style="height: 40px;margin-top: 50px;background-color: black;" type="button" [attr.data-bs-target]="'#'+item.id" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
+        </div>
+       
       </div>
       <!--END CAROUSEL-->
      
     </div>
     <ng-template #imgDefault>
-      <img
-        src="{{'assets/img/noimage.png'}}"
-        class="card-img-top"
-        style="max-height: 150px"
-        alt="image"
-      />
+        <!-- Carousel images-->
+        <div
+        id="img{{ item.id }}"
+        class="carousel slide"
+        data-ride="carousel"
+        data-bs-ride="carousel">
+        <div class="row">
+          <div *ngFor="let image of item.images; let i = index" class="">
+        
+            <img class="d-block w-100" [src]="image.url"
+      (click)="selectedImage(i)"/>
+      
+          </div>
+        </div>
+  
+      </div>
     </ng-template>
    
   </div>

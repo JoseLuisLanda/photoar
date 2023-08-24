@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   textError = '';
   caller = 'Lugares';
   place = 'lugares';
-  folderToSearch = 'foto';
+  folderToSearch = 'item';
   showCodeDiv = true;
   users = [{}, {}, {}, {}];
   location: string = 'general';
@@ -72,6 +72,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   isForm = false;
   creator = false;
   emailConfirmed = false;
+  folders: ElementId[]=[{ uid: '1', name: 'Producto3D', description: 'item' },{ uid: '2', name: 'Playera', description: 'playera' },{ uid: '3', name: 'Foto', description: 'foto' }];
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('downloadLink') downloadLink: ElementRef;
@@ -267,12 +268,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     )).click();
      
   }
-  getElements(type: string) {
+        getElements(type: string) {
     this.textError = '';
+    
+
+   // console.log("searchfolder: "+type+" location: "+this.location)
     this.fotosService
       .getCollection(type, 50, '', '', 'codes', this.location)
       .subscribe((data) => {
         this.elements = [];
+        //console.log("data: "+JSON.stringify(data))
         if (data !== undefined && data.length > 0) {
           switch (type) {
             case 'lugares':
@@ -301,16 +306,17 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
               break;
               
           }
-          
+          this.showmyCodeDiv(true, 'explorer')
           this.buscarLugares();
         } else {
-          (<HTMLInputElement>(
+          /*(<HTMLInputElement>(
             document.getElementById('collapseOne')
-          )).setAttribute('class', 'show');
+          )).setAttribute('class', 'show');*/
 
           this.textError = 'no existe contenido para este lugar';
           this.buscarLugares();
         }
+        
 
         //console.log("GETTING chat messages: "+JSON.stringify(this.users));
       });
@@ -318,11 +324,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   }
   getARElement() {
     this.textError = '';
+   
     //this.getElements(this.place.toLowerCase());
     //console.log("foldersearch: "+this.folderToSearch+" elementnumber"+this.elementNumber);
     if (this.elementNumber !== '') {
       //console.log('sending request: ');
-      this.fotosService
+      this.location = this.elementNumber;
+      this.getElements(this.folderToSearch);
+     /* this.fotosService
         .getCollection(
           this.folderToSearch,
           50,
@@ -343,7 +352,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
            // console.log("img elements: "+JSON.stringify(this.elements))
           }
           //console.log("GETTING chat messages: "+JSON.stringify(this.users));
-        });
+        });*/
     } else {
       this.textError = 'ingresa un código VÁLIDO';
     }
@@ -387,6 +396,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
     this.getElements(event.toLowerCase());
   }
+  onItemSelectChange(event: string) {
+    //getting elements every onchange places dropdown fires
+   
+    this.folderToSearch = event;
+   // console.log("folder to search: "+this.folderToSearch);
+    this.textError = '';
+
+   // this.getElements(event.toLowerCase());
+  }
   onSelectBtn(event: string) {
     //getting elements every onchange places dropdown fires
     this.textError = '';
@@ -397,7 +415,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     //console.log("Type ",type);
     if(value){
       this.location = "general";
-      this.getElements("lugares");
+      //this.getElements("lugares");
     }
     this.folderToSearch = type;
     this.showCodeDiv = value;

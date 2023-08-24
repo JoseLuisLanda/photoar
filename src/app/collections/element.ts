@@ -54,6 +54,7 @@ export interface Elemento {
     codes?: string[];
     code?: string;
     redirect?: boolean;
+    externalUrls?:ElementId[];
 }
 
 export interface ElementId extends Elemento { uid?: string; }

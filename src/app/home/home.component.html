@@ -40,6 +40,8 @@
         <input
           type="radio"
           (click)="showmyCodeDiv(true, 'explore')"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
           class="btn-check"
           name="btnradio"
           id="btnradio1"
@@ -90,10 +92,10 @@
     </div>
   </div>
 
-  <h3 id="error" class="text-warning text-center">{{ textError }}</h3>
+  <h1 id="error" class="text-bg-danger text-center ms-5 me-5 mt-1">{{ textError }}</h1>
   <div *ngIf="showCodeDiv; else showCodeInput" class="main row">
     <div class="container form-group">
-      <button
+      <!--button
         id="showingModal"
         (click)="setLugares()"
         class="btn btn-warning col-4 btn-md offset-4 text-bg-primary"
@@ -102,7 +104,7 @@
         data-bs-target="#exampleModal"
       >
         Cambiar locación
-      </button>
+      </button-->
       <!--button
         class="btn btn-warning col-4 btn-md offset-2 text-bg-dark"
         (click)="startSpeech()"
@@ -112,8 +114,9 @@
       </button-->
       <div class="accordion pt-2 accordion-flush" id="accordionFlushExample">
         <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
-          <h2 class="accordion-header row text-bg-info" id="flush-headingOne">
+          <h2 class="accordion-header row text-bg-warning" id="flush-headingOne">
             <button
+            id="accordionBtn"
               class="accordion-button text-bg-success bg-gradient text-white bg-transparent"
               type="button"
               data-bs-toggle="collapse"
@@ -121,7 +124,7 @@
               aria-expanded="false"
               aria-controls="collapseOne"
             >
-              Buscar en
+              Buscar en {{location}}
             </button>
           </h2>
           <div
@@ -131,7 +134,29 @@
             data-bs-parent="#accordionFlushExample"
           >
             <div class="accordion-body row">
-              <div class="col-6" *ngFor="let lugar of lugares">
+              
+              <div class="col-md-6 col-sm-6 col-xs-12 mb-2 row bg-light bg-opacity-50 rounded-4">
+                <h3 class="bg-light rounded mb-5 text-center me-3">Buscar por lugar</h3>
+                <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select text-bg-warning text-center text-white form-select-sm mb-3" name="title"  aria-label=".form-select-lg example">
+                  <option *ngFor="let lugar of lugares" [ngValue]="lugar.normalizedName">{{lugar.name}}</option>
+                </select>
+              </div>
+          
+          <div class="bg-dark col-md-6 col-sm-6 col-xs-12 ms-md-3 ms-sm-4 ms-xs-0 rounded-4 row">
+            <h3 class="text-bg-warning text-white text-center rounded mb-4" >Buscar por producto</h3>
+            <div class="col-8 mb-2">
+              <input type="text" class="form-control-sm ms-2" placeholder="playera, pantalon, mochila" [(ngModel)]="filter"/>
+            </div>
+            <div class="col-4 mb-2">
+              <button (click)="buscarProd()" class="btn btn-sm btn-primary ">Buscar</button>
+            </div>
+            <div class="row">
+              <p class="text-white col-2 text-end">Ej.</p>
+            <span id="element" class="col-10 text-white"></span>
+            </div>
+            
+          </div>
+              <!--div class="col-6" *ngFor="let lugar of lugares">
                 <button
                   (click)="onSelectBtn(lugar.name!)"
                   class="btn m-1 col-12 btn-light"
@@ -142,22 +167,89 @@
                 >
                   {{ lugar.name }}
                 </button>
-              </div>
+              </div-->
             </div>
+           
           </div>
+          
         </div>
+    
       </div>
       <!--select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
             <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
           </select-->
+          
     </div>
+   
     <div
       *ngFor="let element of elements"
       class="card"
-      class="mt-3 col-xs-6 col-sm-6 col-md-3 col-lg-3"
+      class="mt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-5"
     >
-      <div class="card-body bg-info rounded m-2">
-        <div class="container mt-2">
+    <div id="item{{ element.id }}" class="carousel" >
+
+      <div class="carousel-inner bg-dark">
+    <div  *ngFor="let image of element.images; index as index" [ngClass]="{
+      'carousel-item': true,
+      'active': index==0
+    }" 
+    >
+    <div class="card-body bg-info rounded m-2">
+      <div class="container mt-2 pb-2 pt-1">
+        <p class="text-success text-end">{{image.title}}</p>
+        <h2 class="text-center text-info mt-3 bg-white">
+          {{ image.name }} 
+        </h2>
+        <h4 class="text-bg-dark text-center rounded">{{element.name}}</h4>
+        <button
+        *ngIf="image.type =='model'"
+          (click)="switchToPlace(element)"
+          class="btn col-12 btn-warning"
+        >
+          QR
+        </button>
+        <button
+        *ngIf="emailConfirmed"
+          (click)="switchTo3D(element)"
+          class="btn col-12 btn-light"
+        >
+          3D
+        </button>
+        <button (click)="showItem(element,image)" class="btn col-12 btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+          Ver más
+        </button>
+        <div  class="rounded m-2">
+          <img *ngIf="image.type === 'image' || image.type === 'model'" src="{{ image.url }}" class="card-img-top" alt="..." />
+          <video  class="d-block w-100" style="z-index: 0;"
+                  id='videoplayer{{index}}' 
+                  controls  *ngIf="image.type === 'video'" 
+                  width="360"
+                 height="240">
+                <source src="{{image.url}}" type="video/mp4">
+               </video>
+        </div>
+        
+        
+        <p class="text-bg-dark rounded text-center">{{image.description}}</p>
+      </div>
+
+    </div>
+    <div *ngIf="element.images!.length>1">
+      <button class="carousel-control-prev" style="max-height: 60px;margin-top: 150px;background-color: black;" type="button" [attr.data-bs-target]="'#item'+element.id" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" style="height: 60px;margin-top: 150px;background-color: black;" type="button" [attr.data-bs-target]="'#item'+element.id" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  </div>
+</div>
+      <!--div class="card-body bg-info rounded m-2">
+        <div class="container mt-2 pb-2 pt-1">
           <h2 class="text-center text-info mt-3 bg-white">
             {{ element.name }}
           </h2>
@@ -179,11 +271,15 @@
           data-bs-target="#exampleModal">
             Galeria
           </button>
-          <img src="{{ element.url }}" class="card-img-top" alt="..." />
-          <p class="mb-2 text-bg-secondary mt-2">{{ element.description }}</p>
+          <div class="rounded m-2">
+            <img src="{{ element.url }}" class="card-img-top" alt="..." />
+          </div>
+          
+          <p class="text-bg-dark rounded text-center">{{element.description}}</p>
         </div>
 
-      </div>
+      </div-->
+      
     </div>
   </div>
   <ng-template #showCodeInput>
@@ -221,6 +317,7 @@
   [search]="search"
   [isform]="isForm"
   [codes]="codes"
+  [elements]="indexElements"
   [currentMarkerIndex]="currentMarkerIndex"
   (selectedValue)="changePlace($event)"
 ></app-modal>

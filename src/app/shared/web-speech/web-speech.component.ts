@@ -41,6 +41,7 @@ export class WebSpeechComponent implements OnInit {
     }else {
       this.errorMessage$ = of('Your Browser is not supported. Please try Google Chrome.');
     }
+    //configuring typed instance
     const typed = new Typed('#element', {
       strings: [
         'Buscar becas en UPT',
@@ -54,6 +55,7 @@ export class WebSpeechComponent implements OnInit {
       autoInsertCss: true,
       loop: true
     });
+    //init listening 
     this.start();
   }
 

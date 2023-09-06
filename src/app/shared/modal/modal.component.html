@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div *ngIf="!search; else detalle;">
-            <app-elementcard class="col-sm-6 col-lg-4" [currentMarkerIndex]="currentMarkerIndex" [detail]="detail" [item]="item"></app-elementcard>
+            <app-elementcard class="col-sm-6 col-lg-4" [currentMarkerIndex]="currentMarkerIndex" [elements]="elements" [detail]="detail" [item]="item"></app-elementcard>
             
           </div>
           <ng-template #detalle>
@@ -16,8 +16,8 @@
             <app-elementform *ngIf="isform" [item]="item" [type]="type"></app-elementform>
             <div *ngIf="!isform"> 
               <h1 class="bg-dark text-warning text-center col-12">Escanea en otro lugar</h1>
-              <div *ngIf="codes !== undefined"> 
-                 <button (click)="returnPlace(code)" class="btn btn-light btn-white m-1"  *ngFor="let code of codes.codes">{{code}}</button>
+              <div *ngIf="codes.areas!.length > 0"> 
+                 <button (click)="returnPlace(code)" class="btn btn-light btn-white m-1"  *ngFor="let code of codes.areas">{{code.name}}</button>
               </div>
              </div>
             <!--app-elementadd *ngIf="!edit" [item]="item" [element]="element"></app-elementadd-->

@@ -9,6 +9,7 @@ declare function stopVideo(url:string) : any;
 })
 export class ElementcardComponent implements OnInit {
   @Input() item: ElementId ={uid:"1"};
+  @Input() elements: ElementId[];
   @Input() currentMarkerIndex: number = 0;
   @Input() selected: boolean = false;
   @Input() detail: boolean = false;
@@ -26,7 +27,11 @@ export class ElementcardComponent implements OnInit {
  
   
   ngOnInit(): void {
-    if(this.item.type === "photo" &&  this.item!.images!.length > 0)
+    if(this.elements){
+      this.imgs = this.elements;
+       //console.log("nginit ",JSON.stringify(this.elements))
+    }
+    else if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
     else if(this.item.images![this.currentMarkerIndex] || this.item.type == "poster")
     {
@@ -36,9 +41,14 @@ export class ElementcardComponent implements OnInit {
     }
   ngOnChanges(changes: SimpleChanges): void {
     //console.log("index", this.currentMarkerIndex + " and item",JSON.stringify(this.item));
-    if(this.item.type === "photo" &&  this.item!.images!.length > 0)
+    if(this.elements){
+      this.imgs = this.elements;
+      //console.log("ngchanges ",JSON.stringify(this.elements))
+    }
+    else if(this.item.type === "photo" &&  this.item!.images!.length > 0)
     this.imgs = this.item!.images!
-    else if(this.item!.images![this.currentMarkerIndex] || this.item.type == "poster")
+    else if(
+      this.item!.images![this.currentMarkerIndex] || this.item.type == "poster")
     {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else

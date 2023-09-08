@@ -173,11 +173,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       //setting place
       if(params.place !== undefined){
         console.log("setting place"+params.place);
-        //this.location = params.place;
+        this.location = params.place;
         this.code = this.location;
       }
-        
-        this.getElements("lugares");
+        this.folder = "lugares";
+        this.getElements();
        // this.buscarLugares(this.location);
       if (params.url !== undefined) {
         var redirect = false;
@@ -210,7 +210,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       else if (params.caller !== undefined) {
         //e.log("caller: ");
         this.code = params.code !== undefined ? params.code : 'general';
-        this.getElements(params.type);
+        this.folder = params.type;
+        this.getElements();
       } 
       else if (params.type !== undefined && params.code !== undefined) {
        // console.log("type and code: ");
@@ -226,7 +227,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
         }else{//if user is not logged and email confirmed... once time access
         
-          this.getElements(this.folder);
+          this.getElements();
         //console.log(this.location); // location
         /*this.fotosService
           .getCollection(this.folder, 50, '', '', 'codes', this.location)
@@ -277,7 +278,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     //getting elements every onchange places dropdown fires
     this.textError = '';
     //console.log("this.location= ", this.location);
-    this.getElements(event.toLowerCase());
+    this.getElements();
   }
   goToUrlWithParams(page: string, param:string) {
     this.router.navigate(
@@ -310,37 +311,40 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
      
   }
   //getting el.ements
-getElements(type: string) {
+getElements() {
     this.textError = '';
     
 
-   console.log("searchfolder: "+type+" code: "+this.code)
+   console.log("searchfolder: "+this.folder+" code: "+this.code)
     this.fotosService
-      .getCollection(type, 50, '', '', 'codes', this.code)
+      .getCollection(this.folder, 50, '', '', 'codes', this.code)
       .subscribe((data) => {
         this.elements = [];
        // console.log("data: "+JSON.stringify(data))
         if (data !== undefined && data.length > 0) {
           //console.log("searchfolder: "+type+" location: "+this.location)
-          switch (type) {
+          switch (this.folder) {
             case 'lugares':
               this.lugares = data.filter((obj) => {
-                return obj.normalizedName != 'general';
+                return obj.normalizedName !== 'general';
               });
               this.codes = data.find((obj) => {
                 return obj.normalizedName == this.code;
               })?data.find((obj) => {
                 return obj.normalizedName == this.code;
               }):this.codes;
+              
               if(this.codes.areas === undefined || this.codes.areas === null || this.codes.areas.length <= 1)
               this.codes.areas = [{name:"general",code:"general",normalizedName:"general"}];
               console.log("this.codes:"+JSON.stringify(this.codes));
               (<HTMLInputElement>(
                 document.getElementById('collapseOne')
               )).setAttribute('class', 'show');
+              //this.lugares = this.lugares.sort((a,b) => a-b);
               if(this.lugares.length>0){
-                //this.code = "general";
-                this.getElements(this.lugares[0].normalizedName!);
+                this.folder = this.lugares[0].normalizedName!;
+                this.code = this.lugares[0].code? this.lugares[0].code:"general";
+                this.getElements();
               }
               
 
@@ -384,8 +388,8 @@ getElements(type: string) {
     //console.log("foldersearch: "+this.folderToSearch+" elementnumber"+this.elementNumber);
     if (this.elementNumber !== '') {
       //console.log('sending request: ');
-      this.location = this.elementNumber;
-      this.getElements(this.folderToSearch);
+      this.folder = this.elementNumber;
+      this.getElements();
      /* this.fotosService
         .getCollection(
           this.folderToSearch,
@@ -445,23 +449,25 @@ getElements(type: string) {
   switchTemplate() {
     this.switchTemp = !this.switchTemp;
   }
-  onSelectChange(event: string) {
+  //evento del dropdown de lugares
+  onSelectChange(event: ElementId) {
     //getting elements every onchange places dropdown fires
     this.textError = '';
-    this.code = event;
-    
+    this.folder = event.normalizedName?event.normalizedName:"general";
+    this.code = event.code? event.code:"general";
+    //this.folder assignation
     //console.log("this.code = "+this.code+" this.folder = "+this.folder)
-    this.getElements(this.folder);
+    this.getElements();
   }
   onItemSelectChange(event: string) {
     //getting elements every onchange places dropdown fires
    
     this.folder = event;
-    this.folderToSearch = event;
+    
    // console.log("folder to search: "+this.folderToSearch);
     this.textError = '';
 
-   this.getElements(event.toLowerCase());
+   this.getElements();
   }
  
   showmyCodeDiv(value: boolean, type: string) {
@@ -481,7 +487,10 @@ getElements(type: string) {
   changePlace(place: ElementId) {
     //console.log("receiving: "+JSON.stringify(place));
     this.code = place.code!;
-    this.getElements("lugares");
+    this.folder = "lugares";
+    //this.folder = place.normalizedName!;
+    //this.location = place.normalizedName!;
+    this.getElements();
   /*  if(place === "general")
     {
     this.code = "general";

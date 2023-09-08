@@ -138,7 +138,7 @@
               <div class="col-md-6 col-sm-6 col-xs-12 mb-2 row bg-light bg-opacity-50 rounded-4">
                 <h3 class="bg-light rounded mb-5 text-center me-3">Buscar por lugar</h3>
                 <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select text-bg-warning text-center text-white form-select-sm mb-3" name="title"  aria-label=".form-select-lg example">
-                  <option *ngFor="let lugar of lugares" [ngValue]="lugar.normalizedName">{{lugar.name}}</option>
+                  <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.name}}</option>
                 </select>
               </div>
           

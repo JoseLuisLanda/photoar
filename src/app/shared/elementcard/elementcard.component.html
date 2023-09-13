@@ -38,7 +38,7 @@
 
         <div class="carousel-inner">
           <div class="row" style="margin-bottom: 50px;" *ngFor="let url of item.externalUrls;index as i">
-              <a href="{{url.url}}" class="btn btn-primary col-4">{{url.title}}</a>
+              <a href="{{url.src}}" class="btn btn-primary col-4">{{url.title}}</a>
           </div>
           <div *ngIf="item.type!.includes('photo'); else place">
             <div *ngFor="let image of item.images; index as i" [ngClass]="{
@@ -47,7 +47,7 @@
             }"
             >
             
-              <img src="{{image.url}}" class="d-block w-100" alt="i">
+              <img src="{{image.src}}" class="d-block w-100" alt="i">
             </div>
           </div>
           <ng-template #place>
@@ -74,11 +74,11 @@
                   controls  *ngIf="image.type === 'video'" 
                   width="360"
                  height="240">
-                <source src="{{image.url}}" type="video/mp4">
+                <source src="{{image.src}}" type="video/mp4">
                </video>
         
     
-              <img *ngIf="image.type === 'image'" src="{{image.url}}" class="d-block w-100"  (click)="selectedImage(i)" alt="i">
+              <img *ngIf="image.type === 'image'" src="{{image.src}}" class="d-block w-100"  (click)="selectedImage(i)" alt="i">
            
             </div>
           </div>
@@ -113,7 +113,7 @@
         <div class="row">
           <div *ngFor="let image of item.images; let i = index" class="">
         
-            <img class="d-block w-100" [src]="image.url"
+            <img class="d-block w-100" [src]="image.src"
       (click)="selectedImage(i)"/>
       
           </div>

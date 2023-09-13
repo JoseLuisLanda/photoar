@@ -1,0 +1,5 @@
+<h1 class="bg-dark text-warning text-center col-12">Escanea en otro lugar</h1>
+<div *ngIf="item.areas!.length > 0"> 
+   <button (click)="returnPlace(code)" class="btn btn-light btn-white m-1"  *ngFor="let code of item.areas">{{code.name}}</button>
+
+   

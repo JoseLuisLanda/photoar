@@ -15,10 +15,7 @@
             <app-uploadimage *ngIf="uploadImage"></app-uploadimage>
             <app-elementform *ngIf="isform" [item]="item" [type]="type"></app-elementform>
             <div *ngIf="!isform"> 
-              <h1 class="bg-dark text-warning text-center col-12">Escanea en otro lugar</h1>
-              <div *ngIf="codes.areas!.length > 0"> 
-                 <button (click)="returnPlace(code)" class="btn btn-light btn-white m-1"  *ngFor="let code of codes.areas">{{code.name}}</button>
-              </div>
+              <app-search (selectedValue)="returnPlace($event)" [item]="codes" ></app-search>
              </div>
             <!--app-elementadd *ngIf="!edit" [item]="item" [element]="element"></app-elementadd-->
             <!--div *ngIf="edit" class="d-flex form-inline">

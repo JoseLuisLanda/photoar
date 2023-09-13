@@ -27,6 +27,7 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { WebSpeechModule } from './shared/web-speech/web-speech.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ProductsComponent } from './shared/products/products.component';
+import { SearchComponent } from './shared/search/search.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ProductsComponent } from './shared/products/products.component';
     DashboardComponent,
     FooterComponent,
     ProductsComponent,
+    SearchComponent,
   ],
   imports: [
     HttpClientModule,

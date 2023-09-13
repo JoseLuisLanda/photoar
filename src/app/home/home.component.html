@@ -124,7 +124,7 @@
               aria-expanded="false"
               aria-controls="collapseOne"
             >
-              Buscar en {{location}}
+              Estás buscando en  {{folder}} 
             </button>
           </h2>
           <div
@@ -136,7 +136,7 @@
             <div class="accordion-body row">
               
               <div class="col-md-6 col-sm-6 col-xs-12 mb-2 row bg-light bg-opacity-50 rounded-4">
-                <h3 class="bg-light rounded mb-5 text-center me-3">Buscar por lugar</h3>
+                <h3 class="bg-light rounded mb-5 text-center me-3">Buscar en</h3>
                 <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select text-bg-warning text-center text-white form-select-sm mb-3" name="title"  aria-label=".form-select-lg example">
                   <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.name}}</option>
                 </select>
@@ -145,7 +145,7 @@
           <div class="bg-dark col-md-6 col-sm-6 col-xs-12 ms-md-3 ms-sm-4 ms-xs-0 rounded-4 row">
             <h3 class="text-bg-warning text-white text-center rounded mb-4" >Buscar por producto</h3>
             <div class="col-8 mb-2">
-              <input type="text" class="form-control-sm ms-2" placeholder="playera, pantalon, mochila" [(ngModel)]="filter"/>
+              <input type="text" class="form-control-sm ms-2 col-12" placeholder="playera, pantalon, mochila" [(ngModel)]="filter"/>
             </div>
             <div class="col-4 mb-2">
               <button (click)="buscarProd()" class="btn btn-sm btn-primary ">Buscar</button>
@@ -215,18 +215,18 @@
         >
           3D
         </button>
-        <button (click)="showItem(element,image)" class="btn col-12 btn-primary" data-bs-toggle="modal"
+        <button *ngIf="image.elements" (click)="showItem(element,image)" class="btn col-12 btn-primary" data-bs-toggle="modal"
         data-bs-target="#exampleModal">
           Ver más
         </button>
         <div  class="rounded m-2">
-          <img *ngIf="image.type === 'image' || image.type === 'model'" src="{{ image.url }}" class="card-img-top" alt="..." />
+          <img *ngIf="image.type === 'image' || image.type === 'model'" src="{{ image.src }}" class="card-img-top" alt="..." />
           <video  class="d-block w-100" style="z-index: 0;"
                   id='videoplayer{{index}}' 
                   controls  *ngIf="image.type === 'video'" 
                   width="360"
                  height="240">
-                <source src="{{image.url}}" type="video/mp4">
+                <source src="{{image.src}}" type="video/mp4">
                </video>
         </div>
         

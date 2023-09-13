@@ -172,7 +172,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       this.elements = [];
       //setting place
       if(params.place !== undefined){
-        console.log("setting place"+params.place);
+        //console.log("setting place"+params.place);
         this.location = params.place;
         this.code = this.location;
       }
@@ -336,11 +336,15 @@ getElements() {
               
               if(this.codes.areas === undefined || this.codes.areas === null || this.codes.areas.length <= 1)
               this.codes.areas = [{name:"general",code:"general",normalizedName:"general"}];
-              console.log("this.codes:"+JSON.stringify(this.codes));
+              //console.log("this.codes:"+JSON.stringify(this.codes));
               (<HTMLInputElement>(
                 document.getElementById('collapseOne')
               )).setAttribute('class', 'show');
-              //this.lugares = this.lugares.sort((a,b) => a-b);
+              this.lugares = this.lugares.sort((a,b) => {
+                var anumber = a.indexInit?a.indexInit:0;
+                var bnumber = b.indexInit?b.indexInit:0;
+                return anumber - bnumber
+              });
               if(this.lugares.length>0){
                 this.folder = this.lugares[0].normalizedName!;
                 this.code = this.lugares[0].code? this.lugares[0].code:"general";
@@ -478,7 +482,7 @@ getElements() {
       if(type == "explore"){
         this.code = type;
         //this.getElements("lugares");
-        //this.setLugares();
+        this.setLugares();
       }
     }
     this.folderToSearch = type;
@@ -541,11 +545,12 @@ getElements() {
     //console.log("String a buscar: "+this.filter);
     if(this.filter !== ""){
       normalizedWord = this.filter.replace(/\s/g, '').toLowerCase();
-      //console.log("String a buscar: "+normalizedWord);
+      console.log("String a buscar: "+normalizedWord+" en "+this.folder);
     }
     else
     console.log("No valid string");
 
+    //console.log("String a buscar: "+this.filter);
 
   }
 }

@@ -21,11 +21,12 @@ export class WebSpeechComponent implements OnInit {
   languages: string[] = languages;
   currentLanguage: string = defaultLanguage;
   totalTranscript?: string;
-
+  avatarUrl: string ="../../../assets/avatars/avatartel.png";
   transcript$?: Observable<string>;
   listening$?: Observable<boolean>;
   errorMessage$?: Observable<string>;
   defaultError$ = new Subject<string | undefined>();
+  errorPromp: string = "";
 
   constructor(private router: Router,
     private speechRecognizer: SpeechRecognizerService,
@@ -62,6 +63,7 @@ export class WebSpeechComponent implements OnInit {
   
 
   start(): void {
+    this.avatarUrl = "../../../assets/avatars/avatarfind.png"
     if (this.speechRecognizer.isListening) {
       this.stop();
       return;
@@ -72,6 +74,8 @@ export class WebSpeechComponent implements OnInit {
   }
 
   stop(): void {
+    if(this.errorMessage$)
+    this.avatarUrl = "../../../assets/avatars/avatartel.png"
     this.speechRecognizer.stop();
   }
 
@@ -128,7 +132,10 @@ export class WebSpeechComponent implements OnInit {
       })
     );
   }
-
+  goToHome(){
+    this.router.navigateByUrl('/home');
+  
+  }
   private processNotification(notification: SpeechNotification<string>): void {
     //call output
     if (notification.event === SpeechEvent.FinalContent) {
@@ -221,6 +228,9 @@ export class WebSpeechComponent implements OnInit {
         this.router.navigateByUrl('/home?type='+commandsArray.fileToSearch+'&code='+commandsArray.place+"&caller="+commandsArray.caller);
       }
       this.router.navigateByUrl('/home?type='+commandsArray.fileToSearch+'&code='+commandsArray.place+'&caller='+commandsArray.caller);
+    }else{
+      this.errorMessage$ = of('No encontre algún resultado válido');
+      this.avatarUrl = "../../../assets/avatars/noresult.png"
     }
     /*for (let x = 0; x < promptsArray.length; x++) {
       for (let y = 0; y < promptsArray[x].length; y++) {

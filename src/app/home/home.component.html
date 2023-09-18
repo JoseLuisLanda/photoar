@@ -58,7 +58,7 @@
           id="btnradio2"
           autocomplete="off"
         />
-        <label class="btn btn-outline-primary" for="btnradio2">Buscar</label>
+        <label class="btn btn-outline-light" for="btnradio2">Buscar</label>
 
 
         <!--input
@@ -105,76 +105,9 @@
       >
         Cambiar locación
       </button-->
-      <!--button
-        class="btn btn-warning col-4 btn-md offset-2 text-bg-dark"
-        (click)="startSpeech()"
-        
-      >
-        Búsqueda por Voz
-      </button-->
-      <div class="accordion pt-2 accordion-flush" id="accordionFlushExample">
-        <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
-          <h2 class="accordion-header row text-bg-warning" id="flush-headingOne">
-            <button
-            id="accordionBtn"
-              class="accordion-button text-bg-success bg-gradient text-white bg-transparent"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapseOne"
-              aria-expanded="false"
-              aria-controls="collapseOne"
-            >
-              Estás buscando en  {{folder}} 
-            </button>
-          </h2>
-          <div
-            id="collapseOne"
-            class="accordion-collapse collapse show"
-            aria-labelledby="flush-headingOne"
-            data-bs-parent="#accordionFlushExample"
-          >
-            <div class="accordion-body row">
-              
-              <div class="col-md-6 col-sm-6 col-xs-12 mb-2 row bg-light bg-opacity-50 rounded-4">
-                <h3 class="bg-light rounded mb-5 text-center me-3">Buscar en</h3>
-                <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select text-bg-warning text-center text-white form-select-sm mb-3" name="title"  aria-label=".form-select-lg example">
-                  <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.name}}</option>
-                </select>
-              </div>
-          
-          <div class="bg-dark col-md-6 col-sm-6 col-xs-12 ms-md-3 ms-sm-4 ms-xs-0 rounded-4 row">
-            <h3 class="text-bg-warning text-white text-center rounded mb-4" >Buscar por producto</h3>
-            <div class="col-8 mb-2">
-              <input type="text" class="form-control-sm ms-2 col-12" placeholder="playera, pantalon, mochila" [(ngModel)]="filter"/>
-            </div>
-            <div class="col-4 mb-2">
-              <button (click)="buscarProd()" class="btn btn-sm btn-primary ">Buscar</button>
-            </div>
-            <div class="row">
-              <p class="text-white col-2 text-end">Ej.</p>
-            <span id="element" class="col-10 text-white"></span>
-            </div>
-            
-          </div>
-              <!--div class="col-6" *ngFor="let lugar of lugares">
-                <button
-                  (click)="onSelectBtn(lugar.name!)"
-                  class="btn m-1 col-12 btn-light"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#collapseOne"
-                  aria-expanded="true"
-                  aria-controls="collapseOne"
-                >
-                  {{ lugar.name }}
-                </button>
-              </div-->
-            </div>
-           
-          </div>
-          
-        </div>
-    
-      </div>
+     
+      <!--button (click)="addItem()">Add</button-->
+     
       <!--select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
             <option *ngFor="let lugar of lugares" [ngValue]="lugar.name">{{lugar.name}}</option>
           </select-->
@@ -182,7 +115,7 @@
     </div>
    
     <div
-      *ngFor="let element of elements"
+      *ngFor="let element of searchElements"
       class="card"
       class="mt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-5"
     >
@@ -195,38 +128,49 @@
     }" 
     >
     <div class="card-body bg-info rounded m-2">
-      <div class="container mt-2 pb-2 pt-1">
+      <div class="container text-center mt-2 pb-2 pt-1">
         <p class="text-success text-end">{{image.title}}</p>
         <h2 class="text-center text-info mt-3 bg-white">
-          {{ image.name }} 
+          {{ element.name }} 
         </h2>
-        <h4 class="text-bg-dark text-center rounded">{{element.name}}</h4>
-        <button
-        *ngIf="image.type =='model'"
-          (click)="switchToPlace(element)"
-          class="btn col-12 btn-warning"
-        >
-          QR
-        </button>
-        <button
-        *ngIf="emailConfirmed"
-          (click)="switchTo3D(element)"
-          class="btn col-12 btn-light"
-        >
-          3D
-        </button>
-        <button *ngIf="image.elements" (click)="showItem(element,image)" class="btn col-12 btn-primary" data-bs-toggle="modal"
-        data-bs-target="#exampleModal">
-          Ver más
-        </button>
+        <h4 class="text-bg-warning m-2 text-center rounded">{{image.name}}</h4>
+        <div class="row justify-content-md-center">
+          <div class="col-auto">
+            <button
+            *ngIf="image.type =='model'"
+              (click)="switchToPlace(element)"
+              class="btn col-12 btn-close-white btn-warning"
+            >
+              QR
+            </button>
+          </div>
+          <div class="col-auto">
+            <button *ngIf="image.elements" (click)="showItem(element,image)" class="btn col-12 btn-primary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
+              Ver más
+            </button>
+          </div>
+          <div class="col col-auto">
+            <button
+            *ngIf="emailConfirmed"
+              (click)="switchTo3D(element)"
+              class="btn col-12 btn-light"
+            >
+              3D
+            </button>
+          </div>
+        </div>
+       
+        
+        
         <div  class="rounded m-2">
-          <img *ngIf="image.type === 'image' || image.type === 'model'" src="{{ image.src }}" class="card-img-top" alt="..." />
+          <img *ngIf="image.type === 'image' || image.type === 'model'" src="{{ image.url }}" class="card-img-top" alt="..." />
           <video  class="d-block w-100" style="z-index: 0;"
                   id='videoplayer{{index}}' 
                   controls  *ngIf="image.type === 'video'" 
                   width="360"
                  height="240">
-                <source src="{{image.src}}" type="video/mp4">
+                <source src="{{image.url}}" type="video/mp4">
                </video>
         </div>
         
@@ -281,10 +225,68 @@
       </div-->
       
     </div>
+
   </div>
   <ng-template #showCodeInput>
     <div class="container center form">
-      <h1 class="text-center text-warning">Que deseas buscar</h1>
+      <div class="accordion pt-2 accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item text-blue bg-opacity-75 col-12 bg-dark">
+       
+         
+          <div
+            id="collapseOne"
+            class="main container"
+        
+          >
+            <div class="row">
+              <button
+              class="btn btn-warning btn-block btn-md text-bg-success mb-2"
+              (click)="gotToPage('speech')"
+              
+            >
+              Búsqueda por Voz
+            </button>
+              <div class="row bg-light bg-opacity-50 rounded-4 mb-2">
+                <h3 class="bg-light rounded text-center">Por area</h3>
+                <select [ngModel]="place" (ngModelChange)="onSelectChange($event)" class="form-select text-bg-warning text-center text-white form-select-sm" name="title" >
+                  <option *ngFor="let lugar of lugares" [ngValue]="lugar">{{lugar.name}}</option>
+                </select>
+              </div>
+          
+          <div class="row bg-light bg-opacity-50 rounded-4">
+            <h3 class="bg-light rounded text-center" >Por palabra</h3>
+            <div class="mt-2 col-8">
+              <input type="text" number class="form-control-sm" placeholder="playera, pantalon, mochila" [(ngModel)]="filter"/>
+            </div>
+            <div class="mb-2 col-4">
+              <button (click)="buscarProd()" class="btn btn-sm btn-primary ">Buscar</button>
+            </div>
+            <div class="row">
+              <p class="text-white col-2 text-end">Ej.</p>
+            <span id="element" class="col-10 text-white"></span>
+            </div>
+            
+          </div>
+              <!--div class="col-6" *ngFor="let lugar of lugares">
+                <button
+                  (click)="onSelectBtn(lugar.name!)"
+                  class="btn m-1 col-12 btn-light"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  {{ lugar.name }}
+                </button>
+              </div-->
+            </div>
+           
+          </div>
+          
+        </div>
+    
+      </div>
+      <!--h1 class="text-center text-warning">Que deseas buscar</h1>
       <select [ngModel]="place" (ngModelChange)="onItemSelectChange($event)" class="form-select form-select-md mb-3" name="title"  aria-label=".form-select-lg example">
             <option *ngFor="let folder of folders" [ngValue]="folder.description">{{folder.name}}</option>
           </select>
@@ -300,7 +302,7 @@
         (click)="getARElement()"
       >
         Buscar
-      </button>
+      </button-->
     </div>
   </ng-template>
 

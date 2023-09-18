@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   OnChanges,
   OnInit,
@@ -25,6 +26,7 @@ import { SpeechError } from '../model/speech-error';
 import { SpeechEvent } from '../model/speech-event';
 import { defaultLanguage, languages } from '../model/languages';
 import { SpeechNotification } from '../model/speech-notification';
+import { environment } from 'src/environments/environment';
 //import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
@@ -52,9 +54,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   itemAR: ElementId = {
     uid: 'sky',
     name: '../../../assets/models/Astronaut.glb',
+    type:"image",
+    areas:[{name:"general",code:"general",normalizedName:"general"}],
+    codes:["general"],
+    images:[{name:"test1",type:"image"},{name:"test1",type:"image"}]
   };
   indexElements: ElementId[];
   elements: ElementId[] = [];
+  filteredElements: ElementId[]=[];
+  searchElements: ElementId[]=[];
   lugares: ElementId[] = [{ uid: '2', name: 'Foto', description: 'foto' }];
   codes: ElementId = { uid: '',areas:[{name:"general",code:"general",normalizedName:"general"}],codes:["general"]};
   subElements?: ElementId[];
@@ -72,7 +80,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   folder: string = 'item';
   uploadimage: boolean = true;
   userItem: UserModel = new UserModel();
-  currentItem: any = {};
+  currentItem: ElementId = {name:"Noinfo",type:"image"};
   isForm = false;
   creator = false;
   emailConfirmed = false;
@@ -93,20 +101,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
     //this.serviceRecognition.init()
   }
+  @HostListener('document:keyup', ['$event'])
+  onKeyUp(ev:KeyboardEvent) {
+    // do something meaningful with it
+    this.searchElements = this.elements;
+    //console.log(`The user just pressed ${ev.key}!`);
+  }
   ngAfterViewInit() {
-    const typed = new Typed('#element', {
-      strings: [
-        'Ropa de bebe',
-        'Pantalon de mujer',
-        'Zapatos',
-        'Vestidos',
-      ],
-      typeSpeed: 50,
-      showCursor: true,
-      cursorChar: '|',
-      autoInsertCss: true,
-      loop: true
-    });
+   
     //console.log(this.screen)
     this.emailConfirmed = this.authSvc.isLoggedIn;
   }
@@ -170,7 +172,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     this.activeRoute.queryParams.subscribe((params) => {
       //console.log(params); // { orderby: "location" }
       this.elements = [];
-      //setting place
+      this.searchElements = []
+;      //setting place
       if(params.place !== undefined){
         //console.log("setting place"+params.place);
         this.location = params.place;
@@ -191,6 +194,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
           if (data !== undefined && data.length > 0) {
             var mainElement:ElementId;
             this.elements = data as ElementId[];
+            this.searchElements = this.elements;
             //console.log("ARELEMENT")
             mainElement = this.elements[0];
             this.models = this.elements[0].elements?this.elements[0].elements:[];
@@ -298,12 +302,19 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       this.switchTemp = false;
       this.arelement = false;
     }*/
+   
     window.location.reload();
     //this.router.navigateByUrl('/' + page);
   }
+  gotToPage(page: string) {
+   
+    this.router.navigateByUrl('/' + page);
+  }
   ngOnChanges() {
     this.emailConfirmed = this.authSvc.isLoggedIn;
-
+    console.log("onchanges"+this.filter);
+    if(this.filter == "")
+      this.searchElements = this.elements;
     if(this.elements.length > 0)
     (<HTMLInputElement>(
       document.getElementById('flush-headingOne')
@@ -315,14 +326,20 @@ getElements() {
     this.textError = '';
     
 
-   console.log("searchfolder: "+this.folder+" code: "+this.code)
+   //console.log("searchfolder: "+this.folder+" code: "+this.code)
     this.fotosService
       .getCollection(this.folder, 50, '', '', 'codes', this.code)
       .subscribe((data) => {
         this.elements = [];
+        this.searchElements = [];
        // console.log("data: "+JSON.stringify(data))
         if (data !== undefined && data.length > 0) {
           //console.log("searchfolder: "+type+" location: "+this.location)
+          data = data.sort((a,b) => {
+            var anumber = a.indexInit?a.indexInit:0;
+            var bnumber = b.indexInit?b.indexInit:0;
+            return anumber - bnumber
+          });
           switch (this.folder) {
             case 'lugares':
               this.lugares = data.filter((obj) => {
@@ -337,14 +354,12 @@ getElements() {
               if(this.codes.areas === undefined || this.codes.areas === null || this.codes.areas.length <= 1)
               this.codes.areas = [{name:"general",code:"general",normalizedName:"general"}];
               //console.log("this.codes:"+JSON.stringify(this.codes));
-              (<HTMLInputElement>(
-                document.getElementById('collapseOne')
-              )).setAttribute('class', 'show');
-              this.lugares = this.lugares.sort((a,b) => {
+             // (<HTMLInputElement>(document.getElementById('collapseOne'))).setAttribute('class', 'show');
+              /*this.lugares = this.lugares.sort((a,b) => {
                 var anumber = a.indexInit?a.indexInit:0;
                 var bnumber = b.indexInit?b.indexInit:0;
                 return anumber - bnumber
-              });
+              });*/
               if(this.lugares.length>0){
                 this.folder = this.lugares[0].normalizedName!;
                 this.code = this.lugares[0].code? this.lugares[0].code:"general";
@@ -358,14 +373,12 @@ getElements() {
               this.elements = data.filter((obj) => {
                 return obj.name != 'default';
               });
-
+              this.searchElements = this.elements;
               if (this.elements!.length < 1) {
                 this.textError = 'no existe contenido para este lugar';
                
               }else  
-              (<HTMLInputElement>(
-                document.getElementById('accordionBtn')
-              )).click();
+              console.log("elementos")//(<HTMLInputElement>(document.getElementById('accordionBtn') )).click();
               break;
               
           }
@@ -531,6 +544,15 @@ getElements() {
     this.caller = 'Lugares';
     this.isForm = false;
   }
+  addItem(){
+    this.caller = 'Adding item';
+    this.search = false;
+    this.uploadimage = true;
+    this.isForm = true;
+    
+    this.currentItem = environment.itemAR;
+    //this.indexElements = 1;
+  }
   showItem(itemSelected: ElementId, image: ElementId){
    
     this.caller = 'Detalle de '+itemSelected.name;
@@ -541,16 +563,37 @@ getElements() {
     
   }
   buscarProd(){
+    
+    this.showCodeDiv = true;
     let normalizedWord = "";
     //console.log("String a buscar: "+this.filter);
     if(this.filter !== ""){
       normalizedWord = this.filter.replace(/\s/g, '').toLowerCase();
+      this.filteredElements = this.elements.filter((obj) => {
+        return obj.codes?.includes(normalizedWord);
+      });
+      this.searchElements = this.filteredElements;
+      (<HTMLInputElement>(
+        document.getElementById('accordionBtn')
+      )).click();
       console.log("String a buscar: "+normalizedWord+" en "+this.folder);
     }
     else
     console.log("No valid string");
 
     //console.log("String a buscar: "+this.filter);
-
+    const typed = new Typed('#element', {
+      strings: [
+        'Ropa de bebe',
+        'Pantalon de mujer',
+        'Zapatos',
+        'Vestidos',
+      ],
+      typeSpeed: 50,
+      showCursor: true,
+      cursorChar: '|',
+      autoInsertCss: true,
+      loop: true
+    });
   }
 }

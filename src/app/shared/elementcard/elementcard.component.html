@@ -5,6 +5,8 @@
 </div>
 <div *ngIf="!showImg" class="card h-100 containerHalf">
   <div class="card-body">
+    <h5 *ngIf="item.title" class="card-title text-warning text-end">{{ item.title }}</h5>
+    <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>
     <h4 *ngIf="item.description || item.description !==''" class="card-title m-1 rounded text-bg-info text-center">{{ item.description }}</h4>
     <div class="row text-white" *ngIf="item.type == 'vcard'">
           <!-- Facebook -->
@@ -26,16 +28,14 @@
 
     </div>
 
-   <h5 *ngIf="item.title" class="card-title text-warning">{{ item.title }}</h5>
-    <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>
+
     
     <button *ngIf="false" class="btn btn-outline-warning" (click)="selectedElement()">Seleccionar</button>
-  </div>
-  
+
     <div *ngIf="true; else imgDefault">
    
       <div id="{{ item.id }}" class="carousel" >
-
+  
         <div class="carousel-inner">
           <div class="row" style="margin-bottom: 50px;" *ngFor="let url of item.externalUrls;index as i">
               <a href="{{url.src}}" class="btn btn-primary col-4">{{url.title}}</a>
@@ -58,6 +58,9 @@
             }"
             >
             <div class="row">
+              <!--h5 *ngIf="image.title" class="card-title text-warning text-end">{{ image.title }}</h5-->
+              <h5 *ngIf="image.displayName" class="card-title">{{ image.displayName }}</h5>
+              <!--h4 *ngIf="image.description || image.description !==''" class="card-title m-1 rounded text-bg-info text-center">{{ image.description }}</h4-->
               <h3 *ngIf="image.name" class="card-title col-6 text-success">{{ image.name }}</h3>
               <h3 *ngIf="image.title" class="card-title col-6 text-success text-end">{{ image.title }}</h3>
             </div>
@@ -74,11 +77,11 @@
                   controls  *ngIf="image.type === 'video'" 
                   width="360"
                  height="240">
-                <source src="{{image.src}}" type="video/mp4">
+                <source src="{{image.url}}" type="video/mp4">
                </video>
         
     
-              <img *ngIf="image.type === 'image'" src="{{image.src}}" class="d-block w-100"  (click)="selectedImage(i)" alt="i">
+              <img *ngIf="image.type === 'image'" src="{{image.url}}" class="d-block w-100"  (click)="selectedImage(i)" alt="i">
            
             </div>
           </div>
@@ -113,7 +116,7 @@
         <div class="row">
           <div *ngFor="let image of item.images; let i = index" class="">
         
-            <img class="d-block w-100" [src]="image.src"
+            <img class="d-block w-100" [src]="image.url"
       (click)="selectedImage(i)"/>
       
           </div>
@@ -121,6 +124,9 @@
   
       </div>
     </ng-template>
+     
+  </div>
+
    
   </div>
   <div *ngIf="showImg">

@@ -1,3 +1,4 @@
+<button (click)="goToHome()" class="btn btn-primary">Home</button>
 <div class="bg-white bg-opacity-75 rounded">
   <section>
     <mat-card
@@ -5,16 +6,19 @@
       class="notification"
       >{{ errorMessage }}</mat-card
     >
+    
   </section>
   <div id="typed-strings" class="text-black text-center">
     <h3>
       Realiza <strong>una búsqueda por comandos de voz,</strong> por
       ejemplo:
     </h3>
+    <div class="text-info text-center">
+      <span id="element" class="text-dark text-center"></span>
+    </div>
+    <img style="max-height: 200px;" src={{avatarUrl}}/>
   </div>
-  <div class="text-info text-center">
-    <span id="element" class="text-dark text-center"></span>
-  </div>
+  
   <!--button class="btn btn-outline-primary" (click)="analize()">Analize</button>
   <section>
     <button class="btn btn-outline-primary" (click)="analize()">Analize</button>

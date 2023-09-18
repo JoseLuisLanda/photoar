@@ -27,6 +27,7 @@ export class ElementcardComponent implements OnInit {
  
   
   ngOnInit(): void {
+    if(this.item.images){
     if(this.elements){
       this.imgs = this.elements;
        //console.log("nginit ",JSON.stringify(this.elements))
@@ -38,9 +39,11 @@ export class ElementcardComponent implements OnInit {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else
     this.imgs =[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
+  }
     }
   ngOnChanges(changes: SimpleChanges): void {
     //console.log("index", this.currentMarkerIndex + " and item",JSON.stringify(this.item));
+    if(this.item.images){
     if(this.elements){
       this.imgs = this.elements;
       //console.log("ngchanges ",JSON.stringify(this.elements))
@@ -53,6 +56,7 @@ export class ElementcardComponent implements OnInit {
       this.imgs = this.item.images![this.currentMarkerIndex].elements!;
     }else
     this.imgs =[{uid:"",name:"no hay contenido extra",url:"../../../assets/img/noimage.png"}] ;
+  }
   }
   selectedElement(){
     this.elementSelected.emit(this.item);

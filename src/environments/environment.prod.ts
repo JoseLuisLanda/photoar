@@ -23,10 +23,18 @@ export const environment = {
     ["quiero","dame","enseñame","dime","proyecta","muestrame","muéstrame", "busca","búscame","buscame","muestra","buscar","mostrar","listar"],
 
   folders :  
-  ["servicio","servicios","producto","productos","postgrado","negocio","negocios","vulcanizadora","posgrado","beca", "anuncio", "curso","laboratorio","convocatoria","edificio","aviso"]
+  ["servicio","servicios","producto","museo","museos","productos","postgrado","negocio","negocios","vulcanizadora","posgrado","beca", "anuncio", "curso","laboratorio","convocatoria","edificio","aviso"]
   ,
   places : ["upt","tulancingo","region","alrededor","Tulancingo"],
   conectors : ["en","de","el","al","sobre"],
+  itemAR:  {
+    uid: 'sky',
+    name: '../../../assets/models/Astronaut.glb',
+    type:"image",
+    areas:[{name:"general",code:"general",normalizedName:"general"}],
+    codes:["general"],
+    images:[{name:"test1",type:"image"},{name:"test1",type:"image"}]
+  },
   arElements : [
     //models tuzo
     { name: "Comida", url: "../../../assets/models/menu_chico.glb", },

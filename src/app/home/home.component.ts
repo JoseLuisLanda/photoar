@@ -27,6 +27,7 @@ import { SpeechEvent } from '../model/speech-event';
 import { defaultLanguage, languages } from '../model/languages';
 import { SpeechNotification } from '../model/speech-notification';
 import { environment } from 'src/environments/environment';
+import { isBoolean } from 'util';
 //import * as html2canvas from 'html2canvas';
 @Component({
   selector: 'app-home',
@@ -84,6 +85,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   isForm = false;
   creator = false;
   emailConfirmed = false;
+  generalSearch = false;
   folders: ElementId[]=[{ uid: '1', name: 'Producto3D', description: 'item' },{ uid: '2', name: 'Playera', description: 'playera' },{ uid: '3', name: 'Foto', description: 'foto' }];
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -172,15 +174,23 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     this.activeRoute.queryParams.subscribe((params) => {
       //console.log(params); // { orderby: "location" }
       this.elements = [];
-      this.searchElements = []
-;      //setting place
+      this.searchElements = [];      //setting place
+      this.folder = "lugares";
       if(params.place !== undefined){
         //console.log("setting place"+params.place);
-        this.location = params.place;
-        this.code = this.location;
+        this.location = "lugares";
+        this.code = params.place;
+        
+         
+      }else{
+        this.code = "general";
       }
-        this.folder = "lugares";
-        this.getElements();
+      
+
+
+      if (params.type !== undefined && params.code !== undefined)
+      this.generalSearch = params.type !== undefined && params.code !== undefined?false:true;
+      this.getElements(this.generalSearch);
        // this.buscarLugares(this.location);
       if (params.url !== undefined) {
         var redirect = false;
@@ -219,9 +229,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
       } 
       else if (params.type !== undefined && params.code !== undefined) {
        // console.log("type and code: ");
-       
-        this.code = params.code;
-        this.folder = params.type;
+      
+      
         //confirmed then look for all cards with userid code
         if(this.emailConfirmed){
           
@@ -230,8 +239,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
           
 
         }else{//if user is not logged and email confirmed... once time access
-        
-          this.getElements();
+         
+          this.code = params.code;
+          this.folder = params.type;
+          //this.generalSearch = params.place !== undefined?true:false;
+      this.getElements(this.generalSearch);
+       
         //console.log(this.location); // location
         /*this.fotosService
           .getCollection(this.folder, 50, '', '', 'codes', this.location)
@@ -276,6 +289,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         this.switchTemp = false;
             this.arelement = false;
       }
+    
     });
   }
   onSelectBtn(event: string) {
@@ -322,17 +336,16 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
      
   }
   //getting el.ements
-getElements() {
+getElements(generalSearch:boolean = false) {
     this.textError = '';
-    
 
-   //console.log("searchfolder: "+this.folder+" code: "+this.code)
-    this.fotosService
+    console.log("searchfolder: "+this.folder+" location: "+this.code)
+    const getElements = this.fotosService
       .getCollection(this.folder, 50, '', '', 'codes', this.code)
       .subscribe((data) => {
         this.elements = [];
         this.searchElements = [];
-       // console.log("data: "+JSON.stringify(data))
+        //console.log("data: "+JSON.stringify(data))
         if (data !== undefined && data.length > 0) {
           //console.log("searchfolder: "+type+" location: "+this.location)
           data = data.sort((a,b) => {
@@ -340,31 +353,30 @@ getElements() {
             var bnumber = b.indexInit?b.indexInit:0;
             return anumber - bnumber
           });
-          switch (this.folder) {
+          switch (this.location) {
             case 'lugares':
+              //console.log("this.codes before:"+JSON.stringify(this.codes)+ " this.code: "+this.code+" this.folder: "+this.folder);
               this.lugares = data.filter((obj) => {
-                return obj.normalizedName !== 'general';
+                return !obj.codes.includes("lugares");
               });
               this.codes = data.find((obj) => {
-                return obj.normalizedName == this.code;
+                return obj.codes.includes("lugares");
               })?data.find((obj) => {
-                return obj.normalizedName == this.code;
+                return obj.codes.includes("lugares");
               }):this.codes;
+
               
-              if(this.codes.areas === undefined || this.codes.areas === null || this.codes.areas.length <= 1)
+              if(this.codes.areas === undefined || this.codes.areas === null || this.codes.areas.length < 1)
               this.codes.areas = [{name:"general",code:"general",normalizedName:"general"}];
-              //console.log("this.codes:"+JSON.stringify(this.codes));
-             // (<HTMLInputElement>(document.getElementById('collapseOne'))).setAttribute('class', 'show');
+              console.log("this.codes:"+JSON.stringify(this.codes));
+
+             // (<HTMLInputElement>(document.getElementById('xcollapseOne'))).setAttribute('class', 'show');
               /*this.lugares = this.lugares.sort((a,b) => {
                 var anumber = a.indexInit?a.indexInit:0;
                 var bnumber = b.indexInit?b.indexInit:0;
                 return anumber - bnumber
               });*/
-              if(this.lugares.length>0){
-                this.folder = this.lugares[0].normalizedName!;
-                this.code = this.lugares[0].code? this.lugares[0].code:"general";
-                this.getElements();
-              }
+              
               
 
               
@@ -378,10 +390,16 @@ getElements() {
                 this.textError = 'no existe contenido para este lugar';
                
               }else  
-              console.log("elementos")//(<HTMLInputElement>(document.getElementById('accordionBtn') )).click();
+              console.log("elementos: ")//(<HTMLInputElement>(document.getElementById('accordionBtn') )).click();
               break;
               
           }
+          if(this.lugares.length>0 && generalSearch){
+            //console.log("sending search first place:"+JSON.stringify(this.codes));
+             this.folder = this.lugares[0].normalizedName!;
+             this.code = this.lugares[0].code? this.lugares[0].code:"general";
+             this.getElements();
+           }
           this.showmyCodeDiv(true, 'explorer')
           //this.buscarLugares();
         } else {
@@ -392,8 +410,7 @@ getElements() {
           this.textError = 'no existe contenido para este lugar';
          // this.buscarLugares(this.place);
         }
-        
-
+        this.location = "";
         //console.log("GETTING chat messages: "+JSON.stringify(this.users));
       });
       
@@ -502,12 +519,15 @@ getElements() {
     this.showCodeDiv = value;
   }
   changePlace(place: ElementId) {
-    //console.log("receiving: "+JSON.stringify(place));
+    console.log("receiving: "+JSON.stringify(place));
     this.code = place.code!;
-    this.folder = "lugares";
+    this.folder = place.normalizedName!;
     //this.folder = place.normalizedName!;
     //this.location = place.normalizedName!;
-    this.getElements();
+    //this.getElements();
+    this.folder = "lugares";
+    this.location  = "lugares";
+    this.getElements(true);
   /*  if(place === "general")
     {
     this.code = "general";
@@ -573,10 +593,8 @@ getElements() {
         return obj.codes?.includes(normalizedWord);
       });
       this.searchElements = this.filteredElements;
-      (<HTMLInputElement>(
-        document.getElementById('accordionBtn')
-      )).click();
-      console.log("String a buscar: "+normalizedWord+" en "+this.folder);
+     // (<HTMLInputElement>(7document.getElementById('accordionBtn')7)).click();
+     // console.log("String a buscar: "+normalizedWord+" en "+this.folder);
     }
     else
     console.log("No valid string");

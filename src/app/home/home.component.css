@@ -1,0 +1,10 @@
+.textarea {
+    margin:0px 0px;
+    padding:5px;
+    min-height:16px;
+    line-height:16px;
+    width:96%;
+    display:block;
+    margin:0px auto;   
+    color: antiquewhite !important; 
+  }

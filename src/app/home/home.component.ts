@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   filteredElements: ElementId[]=[];
   searchElements: ElementId[]=[];
   lugares: ElementId[] = [{ uid: '2', name: 'Foto', description: 'foto' }];
-  codes: ElementId = { uid: '',areas:[{name:"general",code:"general",normalizedName:"general"}],codes:["general"]};
+  codes: ElementId = { uid: '',areas:[{displayName:"general",name:"general",code:"general",normalizedName:"general"}],codes:["general"]};
   subElements?: ElementId[];
   myPhoto?: ElementId;
   search: boolean = true;
@@ -81,10 +81,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   folder: string = 'item';
   uploadimage: boolean = true;
   userItem: UserModel = new UserModel();
-  currentItem: ElementId = {name:"Noinfo",type:"image"};
+  currentItem: ElementId = {name:"hola",description:"descr",type:"image", indexInit:0,images:[],codes:[]};
+  newItem: ElementId = {name:"",description:"",type:"image", indexInit:0,images:[],codes:[]};
   isForm = false;
   creator = false;
   emailConfirmed = false;
+  isAdminluis = false;
   generalSearch = false;
   folders: ElementId[]=[{ uid: '1', name: 'Producto3D', description: 'item' },{ uid: '2', name: 'Playera', description: 'playera' },{ uid: '3', name: 'Foto', description: 'foto' }];
   @ViewChild('screen') screen: ElementRef;
@@ -113,6 +115,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
    
     //console.log(this.screen)
     this.emailConfirmed = this.authSvc.isLoggedIn;
+    this.isAdminluis = this.authSvc.isAdminLuis;
   }
   startService() {
     this.serviceRecognition.start();
@@ -183,6 +186,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         
          
       }else{
+        this.location = "lugares";
         this.code = "general";
       }
       
@@ -325,8 +329,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
     this.router.navigateByUrl('/' + page);
   }
   ngOnChanges() {
+    
     this.emailConfirmed = this.authSvc.isLoggedIn;
-    console.log("onchanges"+this.filter);
+    //console.log("onchanges"+this.filter);
     if(this.filter == "")
       this.searchElements = this.elements;
     if(this.elements.length > 0)
@@ -382,6 +387,7 @@ getElements(generalSearch:boolean = false) {
               
               break;
             default:
+
               this.elements = data.filter((obj) => {
                 return obj.name != 'default';
               });
@@ -389,8 +395,9 @@ getElements(generalSearch:boolean = false) {
               if (this.elements!.length < 1) {
                 this.textError = 'no existe contenido para este lugar';
                
-              }else  
-              console.log("elementos: ")//(<HTMLInputElement>(document.getElementById('accordionBtn') )).click();
+              }  
+              //console.log("elementos: "+JSON.stringify(this.elements))//(<HTMLInputElement>(document.getElementById('accordionBtn') )).click();
+              
               break;
               
           }
@@ -566,11 +573,13 @@ getElements(generalSearch:boolean = false) {
   }
   addItem(){
     this.caller = 'Adding item';
-    this.search = false;
+    this.search = true;
     this.uploadimage = true;
     this.isForm = true;
+    this.newItem = {name:"",description:"",type:"image", indexInit:0,images:[],codes:[]};
+    this.newItem.codes?.push(this.code);
+   // this.currentItem = environment.itemAR;
     
-    this.currentItem = environment.itemAR;
     //this.indexElements = 1;
   }
   showItem(itemSelected: ElementId, image: ElementId){

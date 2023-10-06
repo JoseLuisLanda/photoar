@@ -15,6 +15,10 @@ export class UploadimageComponent implements OnInit {
   @Input() item: ElementId = {} as ElementId;
   @Input() singleUpload = false;
   estaSobreElemento = false;
+  @Input() type:string = "image";
+  @Input() index:number = 0;
+  @Input() elementIndex:number = 0;
+  @Input() edit:boolean = false;
 
   @ViewChild('screen') screen: ElementRef;
   @ViewChild('canvas') canvas: ElementRef;
@@ -29,16 +33,16 @@ export class UploadimageComponent implements OnInit {
     this.archivos = [];
     }
   async cargarImagenes() {
-    //console.log("saving image with SingleUpload: "+this.singleUpload)
-   const upload = this.fileSvc.cargarImagenesFirebase(this.archivos, "test").then(()=>{
+    console.log("saving image with SingleUpload: "+this.singleUpload)
+    const upload = this.fileSvc.cargarImagenesFirebase(this.archivos, this.item, this.singleUpload, this.type, this.index, this.elementIndex, this.edit).then(()=>{
       console.log("FILE uploaded");
-      //this.borrarElementos();
+      this.borrarElementos();
       console.log("value of item uploadimage: ",this.item);
-      //(<HTMLInputElement> document.getElementById("imgToggle")).click();
+      (<HTMLInputElement> document.getElementById("imgToggle")).click();
     }).catch((error)=>{
        console.log("ERROR AL SUBIOR:"+JSON.stringify(error))
     })
-console.log("images upladed: ",JSON.stringify(upload));
+
    
 //this.addImage.emit(imagenes);
  }
@@ -56,10 +60,10 @@ console.log("images upladed: ",JSON.stringify(upload));
         const imageFile = new File([blob!], "testing", { type: 'image/png' });
         this.archivos[0] = new FileModel(imageFile);
         //this.archivos[0].archivo = imageFile;
-        const upload = this.fileSvc.cargarImagenesFirebase(this.archivos, "testUpload").then(()=>{
+        const upload = this.fileSvc.cargarImagenesFirebase(this.archivos, this.item, this.singleUpload).then((data)=>{
           console.log("FILE uploaded");
           //this.borrarElementos();
-          console.log("value of item uploadimage: ",this.item);
+          console.log("value of item uploadimage: ",JSON.stringify(data));
           //(<HTMLInputElement> document.getElementById("imgToggle")).click();
         }).catch((error)=>{
            console.log("ERROR AL SUBIOR:"+JSON.stringify(error))

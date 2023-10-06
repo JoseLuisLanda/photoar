@@ -109,6 +109,11 @@ get isLoggedIn(): boolean {
   const user = JSON.parse(localStorage.getItem('user')!);
   return user !== null && user.emailVerified !== false ? true : false;
 }
+
+get isAdminLuis(): boolean {
+  const user = JSON.parse(localStorage.getItem('user')!);
+  return user !== null && user.email === "luis.joshep@hotmail.com" ? true : false;
+}
 // Sign in with Google
 GoogleAuth() {
   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
@@ -120,7 +125,7 @@ AuthLogin(provider: any) {
   return this.afAuth
     .signInWithPopup(provider)
     .then((result) => {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['home']);
       this.SetUserData(result.user);
     })
     .catch((error) => {

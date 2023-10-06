@@ -1,8 +1,11 @@
-<div class="btn btn-primary mb-2 col-4 offset-8" (click)="uploadImage()">Actualizar</div>
+<!--div class="btn btn-primary mb-2 col-4 offset-8" (click)="uploadImage()">Actualizar</div>
 <div #screen >
     <app-element-to-img></app-element-to-img>
-</div>
-<div class="main mt-3">
+</div-->
+
+
+<br/>
+<div class="main">
     <!--div class="row">
         <div class="col-md-9">
             <h3>Nuevo Elemento</h3>
@@ -24,13 +27,15 @@
 
     <div class="col 12">
         <div class="row">
-            <!--div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento = $event" [ngClass]="{ 'file-over': estaSobreElemento}" class="col-md-4 well drop-zone">
+            <div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento = $event" [ngClass]="{ 'file-over': estaSobreElemento}" class="col-md-4 well drop-zone">
                 <label>Suelta Archivo aquí</label>
                 <br>
                 <img src="assets/img/drop-images.png " alt=" ">
-            </div-->
+            </div>
             <div class="col-md-12 ">
-                
+                <button (click)="cargarImagenes() "  class="btn btn-success ">Cargar</button>
+
+                <button (click)="borrarElementos()" class="btn btn-warning ">Limpiar</button>
                 <table class="table ">
                     <thead class="thead-dark ">
                         <tr>
@@ -55,22 +60,18 @@
                     </tbody>
 
                 </table>
-                <div class="container">
-                    <button (click)="cargarImagenes() "  class="btn col-6 btn-success ">Cargar</button>
-
-                    <button (click)="borrarElementos()" class="btn col-6 btn-warning ">Limpiar</button>
-                </div>
-               
             </div>
 
         </div>
      
     </div>
- 
+    
+</div>
 
-  
-  <div id="download">
+
+
+  <!--div id="download">
     <img #canvas>
     <a #downloadLink></a>
-  </div>
-</div>
+  </div-->
+

@@ -26,8 +26,8 @@ export class FileService {
 
   }
   
-  async cargarImagenesFirebase( imagenes: FileModel[], path: string): Promise<ElementId[]> {
-    this.CARPETA_FILES = path;
+  async cargarImagenesFirebase(imagenes: FileModel[], element: ElementId, single: boolean = false, type: string = "image", index: number = 0, elementIndex:number = 0, edit: boolean = false ): Promise<ElementId[]> {
+    this.CARPETA_FILES = "negocio";
     
     this.imagenes = [];
         for (const item of imagenes) {
@@ -37,7 +37,7 @@ export class FileService {
             continue;
           }
 
-          const storageRef = ref(this.storage,  path +"/"+ item.nombreArchivo);
+          const storageRef = ref(this.storage,  this.CARPETA_FILES +"/"+element.id+"/"+ item.nombreArchivo);
           const uploadTask1 = uploadBytesResumable(storageRef, item.archivo);
 
           uploadTask1.on('state_changed',
@@ -63,26 +63,61 @@ export class FileService {
     // Handle successful uploads on complete
     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
     getDownloadURL(uploadTask1.snapshot.ref).then((downloadURL) => {
-      console.log('File available at', downloadURL);
-      item.url =  downloadURL ;
-                              item.estaSubiendo = false;
-                           
-                                this.imagenes.push({
-                                  uid:"",
-                                  name:item.nombreArchivo,
-                                  url:item.url,
-                                  duration: item.duration
-                                });
+      console.log('Imagen cargada correctamente');
+     
+       // update firebase database
+       item.url =  downloadURL ;
+       item.estaSubiendo = false;
+       if(single)
+       element.images = this.imagenes;
+       else
+       element.images = element.images  ? element.images:this.imagenes;
+       //console.log("Is Single: "+single+" element.images: "+JSON.stringify(element.images))
+       switch (type){
+        case "image":
+          
+          element.images.push({
+            uid:Date.now().toString(),
+            id: element.url,
+            name:element.name,
+            type:"image",
+            src:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/3Dmodels%2Fpublicar3d%2Fpublicar3d.glb?alt=media&token=0e9b981e-3234-4511-84c2-bec20864590e",
+            value:"../../../assets/models/playera.glb",
+            description:item.nombreArchivo,
+            url:item.url
+          });
+          break;
+          case "element":
+            element.images[index].elements = element.images[index].elements !== undefined ? element.images[index].elements:[];
+
+            element.images[index].elements?.push({
+              uid:Date.now().toString(),
+              id: element.url,
+              name:element.name,
+              type:"image",
+              description:item.nombreArchivo,
+              url:item.url
+            });
+            break;
+            default:
+              break;
+      
+        }
+         //this.guardarFile (element, imagenes);
+  
+       
+
                                 
     });
   }
 );
        
         }
+        //this.guardarFile(this.images);
         return this.imagenes;
       }
     
-    /*  guaradarFile(imagenes: FileModel[], element: ElementId, single: boolean = false ){
+     /* guaradarFile(imagenes: FileModel[], element: ElementId, single: boolean = false ){
         console.log("element on service: "+JSON.stringify(element))
       const item = imagenes[0];
       const uploadTask: firebase.default.storage.UploadTask =
@@ -129,17 +164,17 @@ export class FileService {
         }
       }
       if (lastFile) {
-       // this.updateUserData({images:element.images}, element.url!) 
+        this.updateUserData({images:element.images}, element.url!) 
       }
       
     }
-   /* private updateUserData(element: any, url: string) {
-      //console.log("FGUARDANDO FILE: "+ JSON.stringify(element)+" TO: "+ url);
+    private updateUserData(element: any, url: string) {
+      console.log("FGUARDANDO FILE: "+ JSON.stringify(element)+" TO: "+ url);
       this.imagenes = [];
       const userRef = this.db.doc(url);
       console.log("setting element:"+JSON.stringify(element)+url)
       return userRef.set(element, { merge: true });
-    }*/
+    }
     
     deleteFile(element: ElementId) {
       //var name = element.item!.id +"/"+ element.item!.name.split(".")[0];

@@ -7,7 +7,8 @@ import { ElementId } from 'src/app/collections/element';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit{
-  @Input() item: ElementId = {name:"example",description:"hola"} as ElementId;
+  @Input() item: ElementId = {name:"example",description:"hola", normalizedName:""} as ElementId;
+  @Input() newItem: ElementId = {name:"example",description:"hola", normalizedName:""} as ElementId;
   @Input() uploadImage: boolean = false;
   @Input() elements: ElementId[] =[];
   @Input() isform: boolean = true;

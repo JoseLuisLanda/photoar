@@ -18,16 +18,19 @@
     <textarea matInput [value]="totalTranscript || ''" placeholder="Speech Input Result" rows="15" disabled="true"></textarea>
   </mat-form-field>
 </section-->
+
 <app-header></app-header>
 <div #screen *ngIf="!switchTemp; else showPhoto">
-  <div *ngIf="user$ | async as user" class="main container form-group">
+  <div *ngIf="user$ | async as user" class="main container row ">
     <button
       *ngIf="emailConfirmed && creator"
       (click)="gotTo(true)"
-      class="btn btn-primary btn-sm form-control"
+      class="btn btn-primary col-6"
     >
       Models 3D
     </button>
+    <button *ngIf="user$ | async as user" (click)="addItem()" class="btn col-6 btn-warning" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Add item</button>
   </div>
 
   <div class="main bg-dark row">
@@ -129,11 +132,12 @@
     >
     <div class="card-body bg-info rounded m-2">
       <div class="container text-center mt-2 pb-2 pt-1">
-        <p class="text-success text-end">{{image.title}}</p>
+      
         <h2 class="text-center text-info mt-3 bg-white">
           {{ element.name }} 
         </h2>
         <h4 class="text-bg-warning m-2 text-center rounded">{{image.name}}</h4>
+        <p class="text-bg-secondary rounded text-center">{{image.description}}</p>
         <div class="row justify-content-md-center">
           <div class="col-auto">
             <button
@@ -173,9 +177,13 @@
                 <source src="{{image.url}}" type="video/mp4">
                </video>
         </div>
+        <div class="row">
+          <p class="text-success col-8 textarea text-bg-dark">{{image.email}}</p>
+          <p class="text-success col-4 textarea text-bg-secondary">{{image.title}}</p>
+          <!--p class="text-success col-4 textarea text-bg-secondary">{{image.id}}</p-->
+        </div>
         
-        
-        <p class="text-bg-dark rounded text-center">{{image.description}}</p>
+       
       </div>
 
     </div>
@@ -254,7 +262,7 @@
               </div>
           
           <div class="row bg-light col-md-6 ms-3 bg-opacity-50 rounded-4">
-            <h3 class="bg-light rounded text-center" >Por palabra</h3>
+            <h3 class="bg-light rounded text-center">Por palabra</h3>
             <div class="mt-2 col-8">
               <input type="text" number class="form-control-sm" placeholder="playera, pantalon, mochila" [(ngModel)]="filter"/>
             </div>
@@ -313,9 +321,10 @@
 </ng-template>
 
 <app-modal
-  [uploadimage]="uploadimage"
+  [uploadImage]="uploadimage"
   [caller]="caller"
   [item]="currentItem"
+  [newItem]="newItem"
   [search]="search"
   [isform]="isForm"
   [codes]="codes"

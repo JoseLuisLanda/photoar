@@ -344,7 +344,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 getElements(generalSearch:boolean = false) {
     this.textError = '';
 
-    console.log("searchfolder: "+this.folder+" location: "+this.code)
+    //console.log("searchfolder: "+this.folder+" location: "+this.code)
     const getElements = this.fotosService
       .getCollection(this.folder, 50, '', '', 'codes', this.code)
       .subscribe((data) => {
@@ -373,7 +373,7 @@ getElements(generalSearch:boolean = false) {
               
               if(this.codes.areas === undefined || this.codes.areas === null || this.codes.areas.length < 1)
               this.codes.areas = [{name:"general",code:"general",normalizedName:"general"}];
-              console.log("this.codes:"+JSON.stringify(this.codes));
+             // console.log("this.codes:"+JSON.stringify(this.codes));
 
              // (<HTMLInputElement>(document.getElementById('xcollapseOne'))).setAttribute('class', 'show');
               /*this.lugares = this.lugares.sort((a,b) => {
@@ -526,7 +526,7 @@ getElements(generalSearch:boolean = false) {
     this.showCodeDiv = value;
   }
   changePlace(place: ElementId) {
-    console.log("receiving: "+JSON.stringify(place));
+    //console.log("receiving: "+JSON.stringify(place));
     this.code = place.code!;
     this.folder = place.normalizedName!;
     //this.folder = place.normalizedName!;

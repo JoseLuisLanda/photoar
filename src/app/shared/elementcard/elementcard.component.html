@@ -3,7 +3,7 @@
   <button (click)="selectedTempImage(item.code!)" class="btn btn-outline-light col-4">Show QR</button>
   <button  class="btn btn-warning col-4">Descargar</button>
 </div>
-<div *ngIf="!showImg" class="card h-100 containerHalf">
+<div *ngIf="!showImg" class="card h-100 blackHoles">
   <div class="card-body">
     <h5 *ngIf="item.title" class="card-title text-warning text-end">{{ item.title }}</h5>
     <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>

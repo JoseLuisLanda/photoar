@@ -1,8 +1,10 @@
-<button (click)="goToHome()" class="btn btn-primary btn-sm">Home</button>
+<app-header></app-header>
+<!--button (click)="goToHome()" class="btn btn-primary btn-sm">Home</button-->
 <div
-*ngFor="let element of items"
-class="card"
-class="mt-3 col-xs-3 col-sm-3 col-md-3 col-lg-3"
+      class="main bg-secondary jumbotron row"
 >
-<app-elementcard class="col-sm-6 col-lg-4" [currentMarkerIndex]="0" [detail]="true" [item]="element" [showImg]="false"></app-elementcard>
+
+<h2 class="text-white text-center">Publicar te ofrece una gama de productos y servicios para la publicidad de tu negocio</h2>
+<app-elementcard *ngFor="let element of items" class="card"
+class="mt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-5 " [currentMarkerIndex]="0" [detail]="true" [item]="element" [showImg]="false"></app-elementcard>
 </div>

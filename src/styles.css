@@ -4,9 +4,28 @@ html, body {
      height: 100%; 
    
 }
+.jumbotron {
+  padding: 4rem 2rem;
+  margin-bottom: 2rem;
+  background-color: var(--bs-light);
+  border-radius: .3rem;  
+}
+.blackHoles{
+  background-image: url("../src/assets/img/background.png");
+}
+.brown{
+  background-image: url("../src/assets/img/brown.png");
+}
+.blue{
+  background-image: url("../src/assets/img/blue.png");
+}
+.white{
+  background-image: url("../src/assets/img/whiteback.jpeg");
+}
+
 body {
     color: transparent;
-    background-image: url("assets/img/rpowall.jpg");
+    background-image: url("assets/img/whiteback.jpeg");
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
     .containermain{

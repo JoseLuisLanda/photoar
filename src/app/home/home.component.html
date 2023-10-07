@@ -33,10 +33,10 @@
             data-bs-target="#exampleModal">Add item</button>
   </div>
 
-  <div class="main bg-dark row">
+  <div class="main bg-light row">
     <div class="mb-3 col container align-center">
       <div
-        class="btn-group col-12 mt-2"
+        class="btn-group bg-black col-12 mt-2"
         role="group"
         aria-label="Basic radio toggle button group"
       >
@@ -51,7 +51,7 @@
           autocomplete="off"
           checked
         />
-        <label class="btn btn-outline-light" for="btnradio1">Explorar</label>
+        <label class="btn btn-outline-secondary" for="btnradio1">Explorar</label>
 
         <input
           type="radio"
@@ -118,7 +118,7 @@
     </div>
    
     <div
-      *ngFor="let element of searchElements"
+      *ngFor="let element of searchElements; index as elem"
       class="card"
       class="mt-3 col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-5"
     >
@@ -127,25 +127,28 @@
       <div class="carousel-inner bg-dark">
     <div  *ngFor="let image of element.images; index as index" [ngClass]="{
       'carousel-item': true,
+      'bg-white':true,
       'active': index==0
     }" 
     >
-    <div class="card-body bg-info rounded m-2">
+    <div [ngClass]="{'blackHoles': elem  % 2 === 0,'brown':elem % 2 === 1}"
+     >
       <div class="container text-center mt-2 pb-2 pt-1">
       
-        <h2 class="text-center text-info mt-3 bg-white">
+        <h2 class="mt-3 text-bg-warning text-center text-dark text-info">
           {{ element.name }} 
         </h2>
-        <h4 class="text-bg-warning m-2 text-center rounded">{{image.name}}</h4>
-        <p class="text-bg-secondary rounded text-center">{{image.description}}</p>
+        <h4 class="text-bg-light m-2 text-center rounded">{{image.name}}</h4>
+        <p class="text-bg-dark rounded text-center">{{image.description}}</p>
         <div class="row justify-content-md-center">
           <div class="col-auto">
             <button
             *ngIf="image.type =='model'"
               (click)="switchToPlace(element)"
-              class="btn col-12 btn-close-white btn-warning"
+              class="btn btn-block btn-close-white btn-outline-dark btn-warning col-12"
+              
             >
-              QR
+              QR/3D
             </button>
           </div>
           <div class="col-auto">

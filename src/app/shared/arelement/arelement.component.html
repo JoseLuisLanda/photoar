@@ -15,12 +15,12 @@
     <app-arheader [modelos]="modelos" (changeModel)="receiveModel($event)"></app-arheader>
   </div>
   
-  <div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden;">
+  <div class="demo" style="background: linear-gradient(#ffffff, #ada996); overflow: hidden; height: max-content;">
   <model-viewer src="{{urlItem}}" 
   ar ar-scale="auto" camera-controls touch-action="pan-y" 
   alt="A 3D model of an astronaut" 
   xr-environment
-  ar  ></model-viewer>
+  ar style="height: 500px;width: auto;" class="text-center"  ></model-viewer>
 
 
   </div>

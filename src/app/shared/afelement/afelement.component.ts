@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ElementId } from 'src/app/collections/element';
 import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/dataservice';
 @Component({
   selector: 'app-afelement',
   templateUrl: './afelement.component.html',
@@ -8,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class AfelementComponent implements OnInit {
   @Input() item: ElementId = 
-  {} as ElementId;
+  {type:"image",name:"test",indexInit:0,images:[{name:"Imagen1",type:"model",
+  url:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/Publicar3D%2Fdescription%2Fmi%20tarjeta.png?alt=media&token=0892dd65-9daa-4905-b90f-7445b4f7e33d",
+  src:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/3Dmodels%2Famlo.glb?alt=media&token=7f0bf2cb-d98f-469d-b065-298f1107f99e",
+  value:"../../../assets/models/bolijpglow.glb"}]} as ElementId;
   @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
   urlPhoto: string = '../../../assets/presets/pat0.patt';
   urls:string[] = [];
@@ -22,7 +26,8 @@ export class AfelementComponent implements OnInit {
   @ViewChild('markr', { static: false }) mrkDiv: ElementRef<HTMLInputElement> = {} as ElementRef;
 
   constructor(private elementRef:ElementRef,
-    private router: Router
+    private router: Router,
+    private dataService: DataService
   ) {}
   ngAfterViewInit() {
     
@@ -93,6 +98,12 @@ export class AfelementComponent implements OnInit {
   }
   ngOnInit(): void {
    //console.log("AFELEMENT receiving"+JSON.stringify(this.item));
+
+   this.dataService.selectedItemAR$.subscribe((data)=>{
+    //console.log("itemService: "+JSON.stringify(this.itemService))
+    this.item = data;
+    
+  });
     this.urlPhoto = this.item.images![0].url!;
     
     this.tagNumberlength = this.item.images!.length !== undefined 
@@ -107,12 +118,16 @@ export class AfelementComponent implements OnInit {
   }
   goToHome(){
     //this.router.navigateByUrl('/home');
-  
+    this.router.navigate(['/home'])
+    .then(() => {
+      window.location.reload();
+    });
     this.returnBtn.emit(false);
   }
   homeAction(){
-    //console.log("home action pressed");
-    this.router.navigate(['/home?location=citnova'])
+    console.log("home action pressed");
+   // this.router.navigateByUrl('/home');
+    this.router.navigate(['/home'])
   .then(() => {
     window.location.reload();
   });

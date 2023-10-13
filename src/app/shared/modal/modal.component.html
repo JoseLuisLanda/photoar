@@ -13,7 +13,7 @@
           </div>
           <ng-template #detalle>
             <!--app-uploadimage *ngIf="uploadImage"></app-uploadimage-->
-            <app-elementform *ngIf="isform" [item]="newItem" [type]="type"></app-elementform>
+            <app-elementform *ngIf="isform" [item]="newItem" ></app-elementform>
             <div *ngIf="!isform"> 
               <app-search (selectedValue)="returnPlace($event)" [item]="codes" ></app-search>
              </div>

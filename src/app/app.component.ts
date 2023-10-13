@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class AppComponent implements OnInit, OnChanges  {
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean  = false;
-  title = 'Visualiz-AR';
+  title = 'PublicAR-3D';
 
   itemAR:ElementId={uid:"sky",name:"../../../assets/models/Astronaut.glb"};
   elements?: ElementId[]=[];
@@ -21,6 +21,8 @@ export class AppComponent implements OnInit, OnChanges  {
   elementNumber = "";
   textError = "";
   place = "lugares";
+
+ 
 
   constructor(private fotosService: FotosService) {}
 

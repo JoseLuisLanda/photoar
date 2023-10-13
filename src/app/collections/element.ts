@@ -19,6 +19,10 @@ export interface Elemento {
     password?: string;
     tokn?: string;
     elements?: ElementId[];
+    position?:string;
+    latitude?: string;
+    longitude?:string;
+    location?:string;
     id?:string;
     owner?: string;
     idUser?: string;

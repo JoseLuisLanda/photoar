@@ -1,4 +1,4 @@
-.hotspot{
+/*.hotspot{
     display: block;
     width: 20px;
     height: 20px;
@@ -26,7 +26,7 @@
     border-radius: 10px;
     padding: 10px;
   }
-  /* This keeps child nodes hidden while the element loads */
+  /* This keeps child nodes hidden while the element loads 
   :not(:defined) > * {
     display: none;
   }
@@ -50,4 +50,4 @@
     color: black;
     width: 4em;
     height: 2em;
-  }
+  }*/

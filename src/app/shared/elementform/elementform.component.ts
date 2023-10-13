@@ -61,7 +61,7 @@ export class ElementformComponent implements OnInit, OnChanges {
     if(this.item!== undefined)
     {
     this.formReset();
-   console.log("formelement: "+JSON.stringify(this.formElement)+"item: "+JSON.stringify(this.item))
+   //console.log("formelement: "+JSON.stringify(this.formElement)+"item: "+JSON.stringify(this.item))
     
      // this.formElement = this.item;
       if(this.item.uid === undefined || this.item.uid === null)

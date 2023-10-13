@@ -10,7 +10,7 @@ import { AfsService } from './afs.service';
 import { ElementId, Elemento } from '../../collections/element';
 import { UserModel } from '../../collections/user.model';
 import { RoleValidator } from '../../helpers/roleValidator';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
@@ -18,6 +18,7 @@ import {getFirestore, arrayUnion, updateDoc, doc } from 'firebase/firestore';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService extends RoleValidator{
   //private url: string = 'urlApi';
   //private apiKey: string = 'apiKey';
@@ -29,6 +30,13 @@ export class AuthService extends RoleValidator{
   userData: any;
   usertoUpdate: any=[];
   userFB:any=[];
+
+  private isLogged$ = new BehaviorSubject<boolean>(false);
+
+  isLoggedStatus$ = this.isLogged$.asObservable();
+
+  private userSubject: BehaviorSubject<boolean | null>;
+    public userSigned$: Observable<boolean | null>;
   
 
   constructor(public afAuth: AngularFireAuth,
@@ -38,7 +46,12 @@ export class AuthService extends RoleValidator{
     public router: Router,
   ) {
   super();
-  this.afAuth.authState.subscribe((user) => {
+  this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+        this.userSigned$ = this.userSubject.asObservable();
+        
+        this.setUserStatus(this.isLoggedIn)
+
+ this.afAuth.authState.subscribe((user) => {
     if (user) {
       this.userData = user;
       const userFb = this.afsService.doc$(`users/${user.uid}`).subscribe((data) => {
@@ -46,7 +59,6 @@ export class AuthService extends RoleValidator{
         this.userFB =   data as ElementId;
         localStorage.setItem('user', JSON.stringify(this.userFB));
       });
-      
       //JSON.parse(localStorage.getItem('user')!);
     } else {
       localStorage.setItem('user', 'null');
@@ -55,31 +67,43 @@ export class AuthService extends RoleValidator{
   });
  
 }
-
+setUserStatus(status: boolean) {
+  //console.log("SETTING ITEM"+JSON.stringify(item));
+   this.isLogged$.next(status);
+ }
 SignIn(email: string, password: string) {
   return this.afAuth
     .signInWithEmailAndPassword(email, password)
     .then((result) => {
+      console.log("logged") 
       this.SetUserData(result.user);
       this.afAuth.authState.subscribe((user) => {
         if (user) {
           this.router.navigate(['home']);
         }
+        this.setUserStatus(true);
+        return true;
       });
+     
     })
     .catch((error) => {
-      window.alert(error.message);
+      console.log("errror")
+      //window.alert(error.message);
+      return false;
     });
 }
 // Sign up with email/password
-SignUp(email: string, password: string) {
+SignUp(name: string, email: string,password: string) {
   return this.afAuth
     .createUserWithEmailAndPassword(email, password)
     .then((result) => {
       /* Call the SendVerificaitonMail() function when new user sign 
       up and returns promise */
+      //result.user!.displayName = name;
       this.SendVerificationMail();
-      this.SetUserData(result.user);
+      this.SetUserData(result.user, name);
+      this.setUserStatus(true);
+      this.router.navigate(['home']);
     })
     .catch((error) => {
       window.alert(error.message);
@@ -107,7 +131,8 @@ ForgotPassword(passwordResetEmail: string) {
 // Returns true when user is looged in and email is verified
 get isLoggedIn(): boolean {
   const user = JSON.parse(localStorage.getItem('user')!);
-  return user !== null && user.emailVerified !== false ? true : false;
+  return user !== null ? true : false;
+  //return this.authState;
 }
 
 get isAdminLuis(): boolean {
@@ -135,16 +160,20 @@ AuthLogin(provider: any) {
 /* Setting up user data when sign in with username/password, 
 sign up with username/password and sign in with social auth  
 provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-SetUserData(user: any) {
+SetUserData(user: any, name:string="user") {
+  if(name ==="user"){
+    name += user.uid.substr(user.uid.length - 4);
+  }
   const userRef: AngularFirestoreDocument<any> = this.afsService.doc(
     `users/${user.uid}`
   );
   const userData: any = {
     uid: user.uid,
     email: user.email,
-    displayName: user.displayName,
+    displayName: name,
     photoURL: user.photoURL,
     emailVerified: user.emailVerified,
+    name: name
   };
   return userRef.set(userData, {
     merge: true,
@@ -155,7 +184,10 @@ SetUserData(user: any) {
 SignOut() {
   return this.afAuth.signOut().then(() => {
     localStorage.removeItem('user');
-    this.router.navigate(['sign-in']);
+    
+    this.setUserStatus(false);
+    this.router.navigate(['/home']);
+   window.location.reload();
   });
 }
   isAuthenticated() {

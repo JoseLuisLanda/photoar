@@ -5,14 +5,22 @@
   "projects": {
     "Visualiz-AR": {
       "projectType": "application",
+      
       "schematics": {
         "@schematics/angular:application": {
-          "strict": false
-        }
+          "strict": false,
+          "style": "scss"
+        },
+        "schematics": {
+          "@schematics/angular:component": {
+             "style": "scss"
+           }
+         }
       },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -22,16 +30,22 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "chart.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.scss",
+              "src/assets/scss/argon.scss"
             ],
             "scripts": [
-              "src/app/shared/afelement/multiMarkersName.js"
+              "src/app/shared/afelement/multiMarkersName.js",
+              "./node_modules/chart.js/dist/Chart.min.js",
+              "./node_modules/clipboard/dist/clipboard.min.js"
             ]
           },
           "configurations": {
@@ -92,20 +106,27 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
+            
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": [
-              "src/app/shared/afelement/multiMarkersName.js"
+              "src/app/shared/afelement/multiMarkersName.js",
+               "./node_modules/chart.js/dist/Chart.min.js",
+              "./node_modules/clipboard/dist/clipboard.min.js"
             ]
           }
         }
       }
+    }
+  },
+   "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
     }
   },
   "cli": {

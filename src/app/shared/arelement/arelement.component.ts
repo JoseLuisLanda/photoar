@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 })
 export class ARElementComponent implements OnInit {
 
-  @Input() modelos: ElementId [] = [{name:"chase"},{name:"rubble"}];
+  @Input() modelos: ElementId [] = [{name:"Publicar3D",url:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/3Dmodels%2Fpublicar3d%2Fpublicar3d.glb?alt=media&token=0e9b981e-3234-4511-84c2-bec20864590e"},
+  {name:"Venom",url:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/3Dmodels%2Fvenom2018.glb?alt=media&token=c242b813-cb22-48fa-a8a7-ecf727ea6a49"}];
 
   @Input() itemAR:ElementId={};
   @Output() returnBtn: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -18,16 +19,17 @@ export class ARElementComponent implements OnInit {
 
   ngOnInit(): void {
    // console.log(JSON.stringify(this.item));
-   this.urlItem = this.itemAR.url?this.itemAR.url:"";
+   this.urlItem = this.itemAR.url?this.itemAR.url:this.modelos[0].url!;
+
   }
   receiveModel(modelName: string){
     //console.log("otro modelo received: " + modelName);
     this.urlItem = modelName;
   }
   goToHome(){
-    //this.router.navigateByUrl('/home');
+    this.router.navigateByUrl('/home');
   
-    this.returnBtn.emit(false);
+   // this.returnBtn.emit(false);
   }
   
 }

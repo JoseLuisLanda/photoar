@@ -1,4 +1,4 @@
-<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main">
+<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-gradient-lighter" id="sidenav-main">
   <div class="container-fluid">
     <!-- Toggler -->
     <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
@@ -58,13 +58,13 @@
       </li>
     </ul>
     <!-- Collapse -->
-    <div class="collapse navbar-collapse"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse bg-gradient-gray-dark"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
       <!-- Collapse header -->
-      <div class="navbar-collapse-header d-md-none">
+      <div class="bg-cyan navbar-collapse-header d-md-none opacity-8 p-2 rounded-3">
         <div class="row">
           <div class="col-6 collapse-brand">
             <a  routerLinkActive="active" [routerLink]="['/home']">
-              <img src="./assets/img/brand/blue.png">
+              <img src="./assets/img/logopublicar3d.png">
             </a>
           </div>
           <div class="col-6 collapse-close">
@@ -76,8 +76,9 @@
         </div>
       </div>
       <!-- Form -->
-      <form class="mt-4 mb-3 d-md-none form-inline">
-        <div class="col-4">
+      <form class="bg-gradient-success d-md-none form-inline mb-3 mt-4 p-3 rounded-3">
+        <div class="col-12 mb-2">
+          <h2 class="bg-gradient-white rounded-5 text-break text-center">Búsqueda general</h2>
           <select (ngModel)="place" (ngModelChange)="selectChange($event)" class="form-select text-center ng-untouched ng-pristine ng-valid" name="searchDrop" >
             <option *ngFor="let lug of lugares" class="text-bg-primary" [ngValue]="lug">{{lug.name}}</option>
           </select>
@@ -94,13 +95,16 @@
         
         </form>
       <!-- Navigation -->
-      <ul class="navbar-nav">
-          <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+      <ul class="navbar-nav p-2">
+          <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} mt-2 m-1 rounded-5 bg-gradient-cyan nav-item">
               <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
                   <i class="ni {{menuItem.icon}}"></i>
                   {{menuItem.title}}
+                 
               </a>
+        
           </li>
+         
       </ul>
       <!-- Divider -->
       <hr class="my-3">

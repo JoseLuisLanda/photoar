@@ -1,14 +1,7 @@
-<button (click)="goToHome()" class="btn btn-primary">Home</button>
-<div class="bg-white bg-opacity-75 rounded">
-  <section>
-    <mat-card
-      *ngIf="errorMessage$ | async as errorMessage"
-      class="notification"
-      >{{ errorMessage }}</mat-card
-    >
-    
-  </section>
-  <div id="typed-strings" class="text-black text-center">
+<!--button (click)="goToHome()" class="btn btn-primary">Home</button-->
+<div class="mt-5 bg-white bg-opacity-75 rounded">
+  
+  <div id="typed-strings" class="mt-5 text-center">
     <h3>
       Realiza <strong>una búsqueda por comandos de voz,</strong> por
       ejemplo:
@@ -18,7 +11,14 @@
     </div>
     <img style="max-height: 200px;" src={{avatarUrl}}/>
   </div>
-  
+  <section>
+    <mat-card
+      *ngIf="errorMessage$ | async as errorMessage"
+      class="notification"
+      >{{ errorMessage }}</mat-card
+    >
+    
+  </section>
   <!--button class="btn btn-outline-primary" (click)="analize()">Analize</button>
   <section>
     <button class="btn btn-outline-primary" (click)="analize()">Analize</button>

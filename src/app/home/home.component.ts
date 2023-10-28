@@ -250,7 +250,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
         //e.log("caller: ");
         this.code = params.code !== undefined ? params.code : 'general';
         this.folder = params.type;
-        this.getElements(false);
+        //this.getElements(false,"lugares",params.url);
       } 
       else if (params.type !== undefined && params.code !== undefined) {
        // console.log("type and code: ");
@@ -567,7 +567,9 @@ getElements(generalSearch:boolean = false, type: string = "", code : string = ""
     //this.getElements();
     //this.folder = "lugares";
     //this.location  = "lugares";
-    this.getElements(true,"lugares",place.value);
+    this.getElements(false,"lugares",place.value);
+    this.getElements(false,place.normalizedName,place.code);
+
   /*  if(place === "general")
     {
     this.code = "general";

@@ -10,6 +10,7 @@
   }
   .blackHoles{
     background-image: url("../../assets/img/background.png");
+    background-color: black;
   }
   .brown{
     background-image: url("../../assets/img/brown.png");

@@ -10,6 +10,9 @@ import { SpeechNotification } from '../../model/speech-notification';
 import Typed from 'typed.js';
 import { SearchParams } from 'src/app/model/searchparams';
 import { Router } from '@angular/router';
+import { speechrecognition } from '../services/speechrecognition.service';
+import { OpenAI } from 'openai';
+import { error } from 'console';
 
 @Component({
   selector: 'wsa-web-speech',
@@ -27,9 +30,13 @@ export class WebSpeechComponent implements OnInit {
   errorMessage$?: Observable<string>;
   defaultError$ = new Subject<string | undefined>();
   errorPromp: string = "";
+   openai = new OpenAI({
+    apiKey: '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', dangerouslyAllowBrowser: true
+});
 
   constructor(private router: Router,
     private speechRecognizer: SpeechRecognizerService,
+    public serviceRecognition: speechrecognition,
    // private actionContext: ActionContext
   ) {}
   ngOnDestroy(): void{
@@ -45,10 +52,9 @@ export class WebSpeechComponent implements OnInit {
     //configuring typed instance
     const typed = new Typed('#element', {
       strings: [
-        'Buscar becas en UPT',
-        'Muéstrame programas de posgrado',
-        'Busca laboratorios en UPT',
-        'Muéstrame tiendas en Tulancingo',
+        'Muestrame el menu de bebidas',
+        'Ver menu de platillos',
+        'Quiero ver los postres'
       ],
       typeSpeed: 50,
       showCursor: true,
@@ -58,10 +64,47 @@ export class WebSpeechComponent implements OnInit {
     });
     //init listening 
     this.start();
+   // this.generateArrivalText("hola como estas, generame una lista de 3 productos para el cuidado del cabello");
   }
 
-  
+  startSpeech(cadena: string) {
+    this.listening$ = merge(
+      this.speechRecognizer.onStart(),
+      this.speechRecognizer.onEnd()
+    ).pipe(map((notification) => notification.event === SpeechEvent.Start));
 
+    this.serviceRecognition.speechNow(cadena);
+  }
+  public async generateResposeFromChatGPT(message: string) {
+    const completion = await this.openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: message}]
+    }).then((response)=>{
+      console.log("response "+response.choices[0].message.content);
+      
+      this.startSpeech(response.choices[0].message.content!);
+    }).catch((error)=>{
+      console.log("response "+error);
+      //this.errorMessage$ = of(error);
+      this.startSpeech(error);
+    })
+    
+    //console.log(completion.choices[0].message.content);
+}
+  /*public async chat(message: string): Promise<string> {
+    try {
+      // Use chatgpt.query method with optional parameters
+      const response = await this.chatgpt.sendPrompt(message)
+      // Return the response text
+      console.log("CHATGPT RESPONSE: "+response);
+      return response.message;
+    } catch (error) {
+      // Handle any errors
+      console.error(error);
+      console.log("CHATGPT error: "+error);
+      return 'Something went wrong.';
+    }
+  }*/
   start(): void {
     this.avatarUrl = "../../../assets/avatars/avatarfind.png"
     if (this.speechRecognizer.isListening) {
@@ -202,36 +245,47 @@ export class WebSpeechComponent implements OnInit {
         console.log("entrando a key 2");
           commandsArray.fileToSearch = this.cleaningS(arrString[1]);
           for (let z = 2; z < arrString.length; z++) {//only if its a valid place
-            if(environment.places.includes(arrString[z])){
+            //if(environment.places.includes(arrString[z])){
+              if(arrString[z].length > 3){
               console.log("entrando a key 3");
                 commandsArray.place = arrString[z];
+               //commandsArray.place = "menu";
                 break;
             }else console.log("lugares con key no incluye",arrString[z]);
       }
     }
     }
     if(environment.folders.includes(this.cleaningS(arrString[0]))){
+      //if(true){
       console.log("entrando a no key");
       commandsArray.fileToSearch = this.cleaningS(arrString[0]);
       for (let z = 1; z < arrString.length; z++) {//only if its a valid place
-        if(environment.places.includes(arrString[z])){
+       // if(environment.places.includes(arrString[z])){
           console.log("entrando a no key 2");
             commandsArray.place = arrString[z];
-            break;
-        }else console.log("lugares con file no incluye",arrString[z]);
+            //commandsArray.place = "menu";
+          //  break;
+        //}else console.log("lugares con file no incluye",arrString[z]);
   }
     }
     console.log(JSON.stringify(commandsArray));
     //launching search if there is a folder name valid search
     if(commandsArray.fileToSearch){
+     // commandsArray.fileToSearch = "menu";
+      //commandsArray.place = "menu";
       if(commandsArray.place){
         this.router.navigateByUrl('/home?type='+commandsArray.fileToSearch+'&code='+commandsArray.place+"&caller="+commandsArray.caller);
       }
       this.router.navigateByUrl('/home?type='+commandsArray.fileToSearch+'&code='+commandsArray.place+'&caller='+commandsArray.caller);
+   
+      
     }else{
-      this.errorMessage$ = of('No encontre algún resultado válido');
+     
+      this.errorMessage$ = of("No escontre una respuesta valida para tu consulta");
       this.avatarUrl = "../../../assets/avatars/noresult.png"
+      this.generateResposeFromChatGPT(string);
     }
+    
     /*for (let x = 0; x < promptsArray.length; x++) {
       for (let y = 0; y < promptsArray[x].length; y++) {
         //searching for key index 0

@@ -3,11 +3,11 @@
   <button (click)="selectedTempImage(item.code!)" class="btn btn-outline-light col-4">Show QR</button>
   <button  class="btn btn-warning col-4">Descargar</button>
 </div>
-<div *ngIf="!showImg" class="card h-100 blackHoles">
-  <div class="card-body">
-    <h5 *ngIf="item.title" class="card-title text-warning text-end">{{ item.title }}</h5>
-    <h5 *ngIf="item.displayName" class="card-title">{{ item.displayName }}</h5>
-    <h4 *ngIf="item.description || item.description !==''" class="card-title m-1 rounded text-bg-info text-center">{{ item.description }}</h4>
+<div *ngIf="!showImg" class="mt--4 container blackHoles">
+  <div class="container100">
+    <h5 *ngIf="item.title" class="text-white text-end">{{ item.title }}</h5>
+    <h5 *ngIf="item.displayName" class="text-white">{{ item.displayName }}</h5>
+    <!--h4 *ngIf="item.description || item.description !==''" class="card-title m-1 rounded text-warning text-center">{{ item.description }}</h4-->
     <div class="row text-white" *ngIf="item.type == 'vcard'">
           <!-- Facebook -->
           <a href="{{item.facebook}}" *ngIf="item.facebook || item.facebook !==''" class="text-white btn col-4" style="background-color: #46139d;" href="{{item.facebook}}" role="button"
@@ -57,21 +57,21 @@
               'active': i==0
             }"
             >
-            <div class="row">
+            <div class="row pt-3">
               <!--h5 *ngIf="image.title" class="card-title text-warning text-end">{{ image.title }}</h5-->
-              <h5 *ngIf="image.displayName" class="card-title">{{ image.displayName }}</h5>
+              <h5 *ngIf="image.displayName" class="text-white">{{ image.displayName }}</h5>
               <!--h4 *ngIf="image.description || image.description !==''" class="card-title m-1 rounded text-bg-info text-center">{{ image.description }}</h4-->
-              <h3 *ngIf="image.name" class="card-title col-6 text-success">{{ image.name }}</h3>
-              <h3 *ngIf="image.title" class="card-title col-6 text-success text-end">{{ image.title }}</h3>
+              <h3 *ngIf="image.name" class="col-6 text-white">{{ image.name }}</h3>
+              <h3 *ngIf="image.title" class="col-6 text-white text-end">{{ image.title }}</h3>
             </div>
             
-            <h5 *ngIf="image.description" class="card-title text-warning text-center ms-5 me-5">{{ image.description }}</h5>
+            <h5 *ngIf="image.description" class="rounded-4 text-bg-light text-center me-3 ms-3 p-2">{{ image.description }}</h5>
             <!--div class="row" *ngIf="image.type === 'video'" >
               <button class="btn offset-2 col-4 btn-outline-primary align-center" (click)="startVideo('videoplayer'+i)">Play</button>
               <button class="btn col-4 btn-outline-light align-center" (click)="stopVideo('videoplayer'+i)">Pause</button>
             
             </div-->
-            <div class="row mt-2">
+            <div class="row mt-2 mb-2">
               <video class="d-block w-100" style="z-index: 0;"
                   id='videoplayer{{i}}' 
                   controls  *ngIf="image.type === 'video'" 
@@ -92,11 +92,11 @@
          
         </div>
         <div *ngIf="item.images!.length>1 || imgs.length >1">
-          <button class="carousel-control-prev" style="max-height: 40px;margin-top: 50px;background-color: black;" type="button" [attr.data-bs-target]="'#'+item.id" data-bs-slide="prev">
+          <button class="carousel-control-prev" style="max-width: 60px;max-height: 60px;margin-top: 180px;background-color: black;" type="button" [attr.data-bs-target]="'#'+item.id" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" style="height: 40px;margin-top: 50px;background-color: black;" type="button" [attr.data-bs-target]="'#'+item.id" data-bs-slide="next">
+          <button class="carousel-control-next" style="max-width: 60px;max-height: 60px;margin-top: 180px;background-color: black;" type="button" [attr.data-bs-target]="'#'+item.id" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -131,9 +131,12 @@
   </div>
   <div *ngIf="showImg">
     <button class="btn btn-danger" (click)="closeImg()">Cerrar</button>
-    <img
+ 
+      <img
     class="d-block w-100"
     [src]="imgURL"
     
   />
+ 
+    
   </div>

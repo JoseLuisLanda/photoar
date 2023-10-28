@@ -34,7 +34,8 @@ export const environment = {
     areas:[{name:"general",code:"general",normalizedName:"general"}],
     codes:["general"],
     images:[{name:"test1",type:"image"},{name:"test1",type:"image"}]
-  },
+  },chatgptKey:"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"
+  ,
   arElements : [
     //models tuzo
     { name: "Comida", url: "../../../assets/models/menu_chico.glb", },

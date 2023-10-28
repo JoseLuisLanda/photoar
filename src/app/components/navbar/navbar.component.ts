@@ -24,16 +24,23 @@ export class NavbarComponent implements OnInit {
   code = "";
   place: string = "negocio";
   lugares: ElementId[] = [{ uid: '1', name: 'Negocios', description: 'negocio' },
-  { uid: '2', name: 'Restaurantes', description: 'restaurantes' },
-  { uid: '3', name: 'Museos', description: 'museos' }];
-  subscription: Subscription;
+  { uid: '2', name: 'Productos', description: 'producto' },
+  { uid: '3', name: 'Servicios', description: 'servicio' },
+  { uid: '4', name: 'Restaurantes', description: 'restaurantes' },
+  { uid: '5', name: 'Museos', description: 'museos' },
+  { uid: '6', name: 'Turismo', description: 'turismo' }];
+  private subscription: Subscription[]= [];
 
   constructor(private authService: AuthService, private dataService: DataService, location: Location,  private element: ElementRef, private router: Router) {
     this.location = location;
-    this.subscription = this.authService.isLoggedStatus$.subscribe((dta)=>{
+    //this.dataService.setfolderSearch("negocio");
+    this.subscription.push(this.authService.isLoggedStatus$.subscribe((dta)=>{
       this.isLogged = dta;
       
-    })
+    }))
+    this.subscription.push(this.dataService.selectedFolder$.subscribe((data)=>{
+      this.place = data;
+    }))
   }
 
   ngOnInit() {
@@ -69,6 +76,7 @@ export class NavbarComponent implements OnInit {
   }
   selectChange(folder: ElementId){
     this.place = folder.description!;
+    this.dataService.setfolderSearch(folder.description!);
     console.log('Your order has been changed'+this.place);
    // this.dataService.setItem(this.itemSearch);
     //this.itemSearch.normalizedName = folder;
@@ -87,6 +95,8 @@ export class NavbarComponent implements OnInit {
     this.authService.SignOut();
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription.forEach((elem)=>{
+        elem.unsubscribe()
+    }) 
 }
 }

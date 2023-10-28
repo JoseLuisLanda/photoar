@@ -11,9 +11,9 @@ declare const google: any;
 })
 export class MapsComponent implements OnInit {
 
-  placesPublicar: ElementId[]=[{normalizedName:"negocio",code:"tulancingo",name:"Tulancingo",latitude:"20.065288",longitude:"-98.423772",position:"", description:"San jose tulancingo",location:"tulancingo"},
-  {normalizedName:"negocio",code:"artesaniasgdl",name:"CreativaGDL",latitude:"20.677960",longitude:"-103.342280",position:"", description:"Tulancingo de bravo Hgo",location:"general"},
-  {normalizedName:"museos",code:"citnova",name:"CITNOVA",latitude:"20.134168",longitude:"-98.802341",position:"", description:"Centro de investigación y tecnología",location:"citnova"}]
+  placesPublicar: ElementId[]=[{normalizedName:"turismo",code:"huapalcalco",name:"Huapalcalco",latitude:"20.065288",longitude:"-98.423772",position:"", description:"Centro arqueológico",location:"general"},
+  {normalizedName:"negocio",code:"artesaniasgdl",name:"Creativa GDL",latitude:"20.677960",longitude:"-103.342280",position:"", description:"Tulancingo de bravo Hgo",location:"creativagdl"},
+  {normalizedName:"museos",code:"citnova",name:"CITNOVA",latitude:"20.134168",longitude:"-98.802341",position:"", description:"Centro de investigación y tecnología",location:"general"}]
   constructor(private dataService: DataService, private router: Router) { }
 
   ngOnInit() {

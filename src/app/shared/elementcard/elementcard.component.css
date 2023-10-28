@@ -1,0 +1,13 @@
+.blackHoles{
+    background-image: url("../../../assets/img/background.png");
+    background-color: black;
+  }
+  .brown{
+    background-image: url("../../../assets/img/brown.png");
+  }
+  .blue{
+    background-image: url("../../../assets/img/blue.png");
+  }
+  .white{
+    background-image: url("../../../assets/img/whiteback.jpeg");
+  }

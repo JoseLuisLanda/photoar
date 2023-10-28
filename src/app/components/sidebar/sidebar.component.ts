@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
     { path: '/maps', title: 'Locación',  icon:'ni-pin-3 text-orange', class: '' },
     //{ path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
+    { path: '/speech', title:"Asistente",  icon:'ni-single-02 text-yellow', class: '' },
     { path: '/3delement', title: '3D',  icon:'ni-world text-pink', class: '' },
     { path: '/qrelement', title: 'QR',  icon:'ni-tablet-button text-blue', class: '' },
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
@@ -38,7 +39,8 @@ export class SidebarComponent implements OnInit {
   place: string = "negocio";
   lugares: ElementId[] = [{ uid: '1', name: 'Negocios', description: 'negocio' },
   { uid: '2', name: 'Restaurantes', description: 'restaurantes' },
-  { uid: '3', name: 'Museos', description: 'museos' }];
+  { uid: '3', name: 'Museos', description: 'museos' },
+  { uid: '4', name: 'Turismo', description: 'turismo' }];
   subscription: Subscription;
 
   constructor(private router: Router,

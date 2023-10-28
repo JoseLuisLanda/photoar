@@ -31,6 +31,7 @@ import { ARElementComponent } from 'src/app/shared/arelement/arelement.component
 import { ARHeaderComponent } from 'src/app/shared/arheader/arheader.component';
 import { AnnotationsComponent } from 'src/app/shared/annotations/annotations.component';
 import { AfelementComponent } from 'src/app/shared/afelement/afelement.component';
+import { WebSpeechComponent } from 'src/app/shared/web-speech/web-speech.component';
 
 @NgModule({
   imports: [
@@ -64,7 +65,6 @@ import { AfelementComponent } from 'src/app/shared/afelement/afelement.component
     ProductsComponent,
     SearchComponent,
     UploadimageComponent,
-   
     AnnotationsComponent,
   
   ],

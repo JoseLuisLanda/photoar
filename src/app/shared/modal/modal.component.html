@@ -2,13 +2,13 @@
 <div class="modal fade opacity-100" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg ">
       <div class="modal-content container85" >
-        <div class="modal-header bg-info">
+        <div class="modal-header bg-gradient bg-dark bg-opacity-50">
           <h1 class="modal-title" id="exampleModalLabel" style="color:white;">{{caller}}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body white">
           <div *ngIf="!search; else detalle;">
-            <app-elementcard class="col-sm-6 col-lg-4" [currentMarkerIndex]="currentMarkerIndex" [elements]="elements" [detail]="detail" [item]="item"></app-elementcard>
+            <app-elementcard class="main col-sm-6 col-lg-4" [currentMarkerIndex]="currentMarkerIndex" [elements]="elements" [detail]="detail" [item]="item"></app-elementcard>
             
           </div>
           <ng-template #detalle>

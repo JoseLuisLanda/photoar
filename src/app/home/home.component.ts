@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
   filteredElements: ElementId[]=[];
   searchElements: ElementId[]=[];
   lugares: ElementId[] = [{ uid: '2', name: 'Foto', description: 'foto' }];
-  codes: ElementId = { uid: '',areas:[{displayName:"general",name:"general",code:"general",normalizedName:"general"}],codes:["general"]};
+  codes: ElementId = { uid: '',areas:[{displayName:"negocio",name:"general",code:"general",normalizedName:"negocio"}],codes:["general"]};
   subElements?: ElementId[];
   myPhoto?: ElementId;
   search: boolean = true;

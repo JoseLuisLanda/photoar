@@ -52,9 +52,9 @@ export class WebSpeechComponent implements OnInit {
     //configuring typed instance
     const typed = new Typed('#element', {
       strings: [
-        'Muestrame el menu de bebidas',
-        'Ver menu de platillos',
-        'Quiero ver los postres'
+        'Muestrame turismo en tulancingo',
+        'Ver museos en tulancingo',
+        'Quiero ver turismo en huapalcalco'
       ],
       typeSpeed: 50,
       showCursor: true,

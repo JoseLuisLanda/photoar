@@ -31,7 +31,7 @@ export class DataService {
     this.item$.next(item);
   }
   setItemAR(item: ElementId) {
-    console.log("SETTING ITEMAR"+JSON.stringify(item));
+   // console.log("SETTING ITEMAR"+JSON.stringify(item));
      this.itemAR$.next(item);
    }
   setItems(itemList: ElementId) {

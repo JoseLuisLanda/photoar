@@ -60,7 +60,7 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse bg-gradient-gray-dark"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
       <!-- Collapse header -->
-      <div class="bg-cyan navbar-collapse-header d-md-none opacity-8 p-2 rounded-3">
+      <div class="bg-body navbar-collapse-header d-md-none opacity-8 p-2 rounded-3">
         <div class="row">
           <div class="col-6 collapse-brand">
             <a  routerLinkActive="active" [routerLink]="['/home']">
@@ -76,7 +76,7 @@
         </div>
       </div>
       <!-- Form -->
-      <form class="bg-gradient-success d-md-none form-inline mb-3 mt-4 p-3 rounded-3">
+      <form class="bg-gradient-teal d-md-none form-inline mb-3 mt-4 p-3 rounded-3">
         <div class="col-12 mb-2">
           <h2 class="bg-gradient-white rounded-5 text-break text-center">Búsqueda general</h2>
           <select (ngModel)="place" (ngModelChange)="selectChange($event)" class="form-select text-center ng-untouched ng-pristine ng-valid" name="searchDrop" >
@@ -96,7 +96,7 @@
         </form>
       <!-- Navigation -->
       <ul class="navbar-nav p-2">
-          <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} mt-2 m-1 rounded-5 bg-gradient-cyan nav-item">
+          <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} mt-2 m-1 rounded-5 bg-gradient-lighter nav-item">
               <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
                   <i class="ni {{menuItem.icon}}"></i>
                   {{menuItem.title}}

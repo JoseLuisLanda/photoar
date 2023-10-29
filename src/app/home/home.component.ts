@@ -181,7 +181,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
   //reading params to itemService
   this.subscription = this.dataService.selectedItem$.subscribe((data)=>{
-    console.log("itemService: "+JSON.stringify(this.itemService))
+    //console.log("itemService: "+JSON.stringify(this.itemService))
     this.itemService = data;
     this.folder = this.itemService.normalizedName!;
     this.code = this.itemService.code!;
@@ -365,13 +365,14 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 getElements(generalSearch:boolean = false, type: string = "", code : string = "") {
     this.textError = '';
     
+    
     this.folder = type !== "" ? type:this.itemService.normalizedName!;
     
     this.code = code !== "" ? code:this.itemService.code!;
-  
+    this.itemService.name = this.code;
   //  this.code = this.folder === "lugares"? this.itemService.location!:code;
 
-    console.log("searchfolder: "+this.folder+" location: "+this.code)
+    //console.log("searchfolder: "+this.folder+" location: "+this.code)
     const getElements = this.fotosService
       .getCollection(this.folder, 50, '', '', 'codes', this.code)
       .subscribe((data) => {
@@ -497,21 +498,12 @@ getElements(generalSearch:boolean = false, type: string = "", code : string = ""
     this.router.navigateByUrl('/qrelement');
   }
   switchTo3D(event: any) {
-    this.models=[];
-    event.images.forEach((element: ElementId) => {
-      this.models.push(element);
-    });
+    //console.log("ITEMAR: ",JSON.stringify(event))
+    this.dataService.setItemAR(event);
     
-    //this.itemAR = event;
-
-   /* if(showPage)
-    {*/
-      this.switchTemp = true;
-      this.arelement = true;
-    /*}else{
-      this.switchTemp = false;
-      this.arelement = false;
-    }*/
+    this.router.navigateByUrl('/3delement');
+    
+  
   }
   
   receiveModel(modelName: string) {

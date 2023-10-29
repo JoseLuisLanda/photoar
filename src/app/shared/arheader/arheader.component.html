@@ -7,7 +7,7 @@
       </h2>
       <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
         <div class="accordion-body overflow" style="overflow: scroll">
-          <button *ngFor="let element of localModels" type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(element.url)">{{element.name}}</button>    
+          <button *ngFor="let element of localModels" type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" (click)="sendModel(element.value)">{{element.name}}</button>    
 
         </div>
       </div>

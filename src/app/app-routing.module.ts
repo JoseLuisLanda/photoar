@@ -10,6 +10,7 @@ import { DashboardComponent } from './shared/dashboard/dashboard.component';
 import { WebSpeechComponent } from './shared/web-speech/web-speech.component';
 import { ProductsComponent } from './shared/products/products.component';
 import { ElementformComponent } from './shared/elementform/elementform.component';
+import { LandingComponent } from './landing/landing.component';
 
 const routes: Routes = [
   {path: 'arelement', component: ARElementComponent,canActivate:[AuthGuard]},

@@ -44,6 +44,7 @@
             ],
             "scripts": [
               "src/app/shared/afelement/multiMarkersName.js",
+              "src/assets/js/paper-kit.js",
               "./node_modules/chart.js/dist/Chart.min.js",
               "./node_modules/clipboard/dist/clipboard.min.js"
             ]
@@ -58,8 +59,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "200kb"
                 }
               ],
               "fileReplacements": [
@@ -116,6 +117,7 @@
             ],
             "scripts": [
               "src/app/shared/afelement/multiMarkersName.js",
+              "src/assets/js/paper-kit.js",
                "./node_modules/chart.js/dist/Chart.min.js",
               "./node_modules/clipboard/dist/clipboard.min.js"
             ]

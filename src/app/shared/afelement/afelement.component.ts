@@ -2,12 +2,14 @@ import { Component, ElementRef, Input, OnInit, ViewChild, AfterViewInit, Output,
 import { ElementId } from 'src/app/collections/element';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/services/dataservice';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-afelement',
   templateUrl: './afelement.component.html',
   styleUrls: ['./afelement.component.css']
 })
 export class AfelementComponent implements OnInit {
+  subscription: Subscription;
   @Input() item: ElementId = 
   {type:"image",name:"test",indexInit:0,images:[{name:"Imagen1",type:"model",
   url:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/Publicar3D%2Fdescription%2Fmi%20tarjeta.png?alt=media&token=0892dd65-9daa-4905-b90f-7445b4f7e33d",
@@ -30,7 +32,95 @@ export class AfelementComponent implements OnInit {
     private dataService: DataService
   ) {}
   ngAfterViewInit() {
+    //this.item = this.item.images?this.item :{type:"image",name:"test",indexInit:0,images:[{name:"Imagen1",type:"model",
+   // url:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/Publicar3D%2Fdescription%2Fmi%20tarjeta.png?alt=media&token=0892dd65-9daa-4905-b90f-7445b4f7e33d",
+   // src:"https://firebasestorage.googleapis.com/v0/b/uptamira.appspot.com/o/3Dmodels%2Famlo.glb?alt=media&token=7f0bf2cb-d98f-469d-b065-298f1107f99e",
+   // value:"../../../assets/models/bolijpglow.glb"}]};
+    //console.log(JSON.stringify(this.item));
+   /* var scene = this.elementRef.nativeElement.querySelector('.scene');
     
+    for(var i=0; i<= this.tagNumberlength; i++)
+		{
+      var indexPath = +this.tagNumberinit+i;
+			var url="../../../assets/presets/pat"+indexPath+".patt";
+      var markerIndex = "marker_"+i;
+
+			scene.insertAdjacentHTML('beforeend', 
+      '<a-marker id="'+markerIndex+'" type="pattern" registerevents url="'+url+'"></a-marker>');
+      var marker = this.elementRef.nativeElement.querySelector('#'+markerIndex+'');
+
+      if(this.item.images![i].type == "video")
+      {
+        marker.id = "markervid_"+i;
+        marker.title = "video"+indexPath;
+        marker.insertAdjacentHTML('beforeEnd', 
+        '<a-video class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" id="videop'+indexPath+'" src="#video'+indexPath+'" width="3" height="2" position="0 0 0" rotation="270 0 0"></a-video>');
+        console.log("asignando a marker: "+marker.id);
+      
+      }else if(this.item.images![i].type == "model"){
+        //console.log("inserting model: "+this.item.images![i].value)
+        // <a-asset-item *ngIf="image.type == 'model'" id="{{'model'+(i+tagNumberinit)}}" src="../../../assets/models/alien.glb"></a-asset-item>
+        marker.insertAdjacentHTML('beforeEnd', 
+        '<a-asset-item id="model'+indexPath+'" position="0 .1 0" rotation="0, 0, 0" src="'+this.item.images![i].value+'" ></a-asset-item>');
+        marker.insertAdjacentHTML('beforeEnd', 
+        '<a-gltf-model class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 .1 0" rotation="-90, 0, 0" src="#model'+indexPath+'" ></a-gltf-model>');
+        //'<a-gltf-model position="0 .1 0" rotation="0, 0, 0" src="../../../assets/models/hover_board_low_poly.glb" ></a-gltf-model>');
+      }else{
+        var imgPath = "#img"+indexPath;
+        if(this.isSingleMarker)
+        imgPath = "multimarkerImg";
+
+        var width = this.item.images![i].type =="poster" ? 2 : 3;
+        var height = this.item.images![i].type =="vcard" ? 2 : 3;
+        var xvalue = 0;
+        var yvalue = 0;
+        var entities ='';
+         /* if(this.item.images![i].elements?.length!>0){
+            for(var j=0; j< this.item.images![i].elements?.length!-2; j++){
+              if(j%2!=0)
+              {
+                xvalue -= (2-j);
+                yvalue += (2+j);
+              }else{
+                xvalue += (2+j);
+                yvalue -= (2-j);
+              }
+               entities +='<a-entity position="'+xvalue+' 1 '+yvalue+'" template="src: #plane" data-src="#elem'+(j)+'" data-thumb="#elem'+(j)+'-thumb"></a-entity>' 
+           
+            }
+             }**-/
+        
+        marker.insertAdjacentHTML('beforeEnd', 
+        entities+'<a-entity crossorigin="anonymous" template="src: #plane" data-thumb="#img123" class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" rotation="-90, 0, 0" geometry="primitive: plane; height: '+height+'; width: '+width+'" material="shader: standard; src: url('+this.item.images![i].url+')"></a-entity>');
+        //'<a-entity template="src: #plane" data-thumb="#img123" class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" rotation="-90, 0, 0" geometry="primitive: plane; height: '+height+'; width: '+width+'" material="shader: flat; src: #img'+indexPath+'"></a-entity>');
+        //'<a-image class="clickable" gesture-handler="minScale: 0.25; maxScale: 10" position="0 1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="'+width+'" height="'+height+'"></a-image>');
+    }
+      
+      
+      
+      //'<a-image position="0 .1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="3" height="3"></a-image>');
+     //'<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>');
+    }*/
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+}
+  ngOnInit(): void {
+   //console.log("AFELEMENT receiving"+JSON.stringify(this.item));
+
+   this.subscription = this.dataService.selectedItemAR$.subscribe((data)=>{
+    //console.log("itemService: "+JSON.stringify(this.itemService))
+    this.item = data;
+    
+  });
+    this.urlPhoto = this.item.images![0].url!;
+    
+    this.tagNumberlength = this.item.images!.length !== undefined 
+    && this.item.images!.length >0 ? this.item.images!.length-1:this.tagNumberlength;
+    this.tagNumberinit = this.item.indexInit !== undefined 
+    && this.item.images!.length >0 ? this.item.indexInit:this.tagNumberinit;
+    this.tagNumberend = this.item.indexEnd !== undefined 
+    && this.item.images!.length >0 ?this.item.indexEnd:this.tagNumberend;
     var scene = this.elementRef.nativeElement.querySelector('.scene');
     
     for(var i=0; i<= this.tagNumberlength; i++)
@@ -91,31 +181,10 @@ export class AfelementComponent implements OnInit {
     }
       
       
-      
-      //'<a-image position="0 .1 0" rotation="-90, 0, 0" src="#img'+indexPath+'" width="3" height="3"></a-image>');
-     //'<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>');
-    }
-  }
-  ngOnInit(): void {
-   //console.log("AFELEMENT receiving"+JSON.stringify(this.item));
-
-   this.dataService.selectedItemAR$.subscribe((data)=>{
-    //console.log("itemService: "+JSON.stringify(this.itemService))
-    this.item = data;
-    
-  });
-    this.urlPhoto = this.item.images![0].url!;
-    
-    this.tagNumberlength = this.item.images!.length !== undefined 
-    && this.item.images!.length >0 ? this.item.images!.length-1:this.tagNumberlength;
-    this.tagNumberinit = this.item.indexInit !== undefined 
-    && this.item.images!.length >0 ? this.item.indexInit:this.tagNumberinit;
-    this.tagNumberend = this.item.indexEnd !== undefined 
-    && this.item.images!.length >0 ?this.item.indexEnd:this.tagNumberend;
-
     
     
   }
+}
   goToHome(){
     //this.router.navigateByUrl('/home');
     this.router.navigate(['/home'])

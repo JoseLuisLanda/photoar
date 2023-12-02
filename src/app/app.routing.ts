@@ -13,7 +13,7 @@ import { ARElementComponent } from './shared/arelement/arelement.component';
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'landing',
     pathMatch: 'full',
   },
   { path: 'qrelement',           component: AfelementComponent },
@@ -38,7 +38,7 @@ const routes: Routes =[
     ]
   }, {
     path: '**',
-    redirectTo: 'dasboard'
+    redirectTo: 'landing'
   }
 ];
 

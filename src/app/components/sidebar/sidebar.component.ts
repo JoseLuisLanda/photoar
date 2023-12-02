@@ -13,15 +13,16 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/home', title: 'Home',  icon: 'ni-tv-2 text-primary', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '' },
+
+  { path: '/landing', title: 'Inicio',  icon: 'ni-tv-2 text-primary', class: '' },
+  { path: '/home', title: 'Search',  icon:'ni-planet text-blue', class: '' },
     { path: '/maps', title: 'Locación',  icon:'ni-pin-3 text-orange', class: '' },
     //{ path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
     { path: '/speech', title:"Asistente",  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/3delement', title: '3D',  icon:'ni-world text-pink', class: '' },
-    { path: '/qrelement', title: 'QR',  icon:'ni-tablet-button text-blue', class: '' },
+    { path: '/3delement', title: 'Modelos 3D',  icon:'ni-world text-pink', class: '' },
+    { path: '/qrelement', title: 'Escanear QR',  icon:'ni-tablet-button text-blue', class: '' },
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
-    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '' }
+    { path: '/register', title: 'Registro',  icon:'ni-circle-08 text-pink', class: '' }
 ];
 
 @Component({
@@ -40,7 +41,9 @@ export class SidebarComponent implements OnInit {
   lugares: ElementId[] = [{ uid: '1', name: 'Negocios', description: 'negocio' },
   { uid: '2', name: 'Restaurantes', description: 'restaurantes' },
   { uid: '3', name: 'Museos', description: 'museos' },
-  { uid: '4', name: 'Turismo', description: 'turismo' }];
+  { uid: '4', name: 'Turismo', description: 'turismo' },
+  { uid: '5', name: 'Item', description: 'item' },
+  { uid: '6', name: 'Educación', description: 'educacion' }];
   subscription: Subscription;
 
   constructor(private router: Router,

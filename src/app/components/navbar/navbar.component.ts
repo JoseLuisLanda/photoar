@@ -28,7 +28,8 @@ export class NavbarComponent implements OnInit {
   { uid: '3', name: 'Servicios', description: 'servicio' },
   { uid: '4', name: 'Restaurantes', description: 'restaurantes' },
   { uid: '5', name: 'Museos', description: 'museos' },
-  { uid: '6', name: 'Turismo', description: 'turismo' }];
+  { uid: '6', name: 'Turismo', description: 'turismo' },
+  { uid: '7', name: 'Educación', description: 'educacion' }];
   private subscription: Subscription[]= [];
 
   constructor(private authService: AuthService, private dataService: DataService, location: Location,  private element: ElementRef, private router: Router) {

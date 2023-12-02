@@ -32,6 +32,7 @@ import { ARHeaderComponent } from 'src/app/shared/arheader/arheader.component';
 import { AnnotationsComponent } from 'src/app/shared/annotations/annotations.component';
 import { AfelementComponent } from 'src/app/shared/afelement/afelement.component';
 import { WebSpeechComponent } from 'src/app/shared/web-speech/web-speech.component';
+import { LandingComponent } from 'src/app/landing/landing.component';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { WebSpeechComponent } from 'src/app/shared/web-speech/web-speech.compone
     SearchComponent,
     UploadimageComponent,
     AnnotationsComponent,
+    LandingComponent
   
   ],
   providers: [],

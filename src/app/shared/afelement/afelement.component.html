@@ -6,18 +6,18 @@
       Mostrar más</button-->
 
 </div>
-<div class="buttonsRight row">
+<!--div class="buttonsRight row">
       <button style="height: 20%;" (click)="resize(1)" class="btn btn-outline-warning">+</button>
       <button style="height: 20%;" (click)="resize(-1)" class="btn btn-outline-primary">-</button>
-</div>
+</div-->
 <div class="buttonsLeft">
   <button (click)="goToHome()" type="button" style="height: 30%;" class="btn btn-primary"><</button>
 </div>
-<div class="buttonsTop">
+<!--div class="buttonsTop">
   <div *ngFor="let image of item.images; index as i">
     <button *ngIf="isSingleMarker" (click)="setImage(image.url!,i)" class="btn btn-sm btn-outline-light">{{image.name}}</button>
   </div>  
-</div>
+</div-->
 
 <a-scene  vr-mode-ui="enabled: false" color-space="sRGB" renderer="gammaOutput: true"
   embedded arjs='debugUIEnabled: false; sourceType: webcam; patternRatio: 0.85; trackingMethod: best;'

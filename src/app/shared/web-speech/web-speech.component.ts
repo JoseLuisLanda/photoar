@@ -207,7 +207,7 @@ export class WebSpeechComponent implements OnInit {
       .replace(/whats/g, "what is")
       .replace(/please /g, "")
       .replace(/ please/g, "")
-      .replace(/r u/g, "are you");
+      .replace(/r u/g, "are you").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   
     /*if (this.compare(environment.prompts, text)) { 
       // Search for exact match in `prompts`

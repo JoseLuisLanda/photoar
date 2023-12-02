@@ -35,6 +35,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from './components/components.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LandingComponent } from './landing/landing.component';
 
 
 @NgModule({

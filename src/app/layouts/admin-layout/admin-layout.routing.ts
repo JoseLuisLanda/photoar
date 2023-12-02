@@ -7,10 +7,12 @@ import { UserProfileComponent } from '../../pages/user-profile/user-profile.comp
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { HomeComponent } from 'src/app/home/home.component';
 import { WebSpeechComponent } from 'src/app/shared/web-speech/web-speech.component';
+import { LandingComponent } from 'src/app/landing/landing.component';
 
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
+    { path: 'landing',      component: LandingComponent },
     { path: 'home',      component: HomeComponent },
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'tables',         component: TablesComponent },

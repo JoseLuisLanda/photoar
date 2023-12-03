@@ -41,11 +41,13 @@ export class SidebarComponent implements OnInit {
   isLogged: boolean = false;
   place: string = "negocio";
   lugares: ElementId[] = [{ uid: '1', name: 'Negocios', description: 'negocio' },
-  { uid: '2', name: 'Restaurantes', description: 'restaurantes' },
-  { uid: '3', name: 'Museos', description: 'museos' },
-  { uid: '4', name: 'Turismo', description: 'turismo' },
-  { uid: '5', name: 'Item', description: 'item' },
-  { uid: '6', name: 'Educación', description: 'educacion' }];
+  { uid: '2', name: 'Productos', description: 'producto' },
+  { uid: '3', name: 'Eventos', description: 'evento' },
+  { uid: '4', name: 'Aviso', description: 'turismo' },
+  { uid: '5', name: 'Tarjeta', description: 'item' },
+  { uid: '6', name: 'Turismo', description: 'turismo' },
+  { uid: '7', name: 'Educación', description: 'educacion' },
+  { uid: '8', name: 'Foto', description: 'foto' }];
   subscription: Subscription;
 
   constructor(private router: Router,

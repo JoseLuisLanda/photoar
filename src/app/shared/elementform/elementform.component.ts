@@ -12,7 +12,12 @@ import * as firebase from 'firebase/compat';
 })
 export class ElementformComponent implements OnInit, OnChanges {
   hastags:string[]=[];
-  folders: ElementId[]=[{ uid: '1', name: 'Negocio', description: 'negocio' },{ uid: '2', name: 'Playera', description: 'playera' },{ uid: '3', name: 'Foto', description: 'foto' }];
+  folders: ElementId[]=[{ uid: '1', name: 'Negocio', description: 'negocio' },
+  { uid: '2', name: 'Producto', description: 'aviso' },
+  { uid: '3', name: 'Aviso', description: 'aviso' },
+  { uid: '4', name: 'Tarjeta', description: 'tarjeta' },
+  { uid: '5', name: 'Evento', description: 'tarjeta' },
+  { uid: '6', name: 'Foto', description: 'foto' }];
   forma: FormGroup = this.fb.group({} as ElementId);
   @Input() isNewElement: boolean = false;
   @Input() item: ElementId = {name:"",description:""} as ElementId;

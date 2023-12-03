@@ -180,8 +180,8 @@
 
   <div class="container-fluid mt--7">
     <div class="row">
-      <!--button  (click)="addItem()" class="btn col-6 btn-block btn-warning" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">Add item</button-->
+      <button *ngIf="emailConfirmed && creator" (click)="addItem()" class="btn col-6 btn-block btn-warning" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Add item</button>
       <div class="col-12">
         <div class="card shadow">
           <div class="bg-gradient-default bg-transparent card-header">

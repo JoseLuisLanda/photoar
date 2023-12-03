@@ -189,7 +189,7 @@
              <h1 class="text-end text-neutral">Buscando en - {{itemService.name}}</h1>
             </div>
           </div>
-          <div class="bg-gradient-cyan card-body">
+          <div class="bg-gradient card-body">
             <!-- Chart -->
             <h1 id="error" class="text-bg-danger text-center ms-5 me-5 mt-1">{{ textError }}</h1>
   <div *ngIf="showCodeDiv; else showCodeInput" class="main mt--5 row">
@@ -227,14 +227,14 @@
       'active': index==0
     }" 
     >
-    <div [ngClass]="{'blackHoles': elem  % 2 === 0,'brown':elem % 2 === 1}"
-     >
+    <div class="bg-black rounded-4"> <!--[ngClass]="{'bggradient': elem  % 2 === 0,'white':elem % 2 === 1}"-->
+     
       <div class="container text-center pb-2 pt-1">
       
         <h2 class="mt-3 bg-gradient-lighter text-center text-dark text-info">
           {{ element.name }} 
         </h2>
-        <h4 class="text-bg-dark m-2 text-center rounded">{{image.name}}</h4>
+        <h4 class="text-bg-secondary m-2 text-center rounded">{{image.name}}</h4>
         <!--p class="text-bg-dark rounded text-center">{{image.description}}</p-->
         <div class="form-row justify-content-md-center">
           <div class="col-auto">
@@ -248,9 +248,9 @@
             </button>
           </div>
           <div class="col-auto">
-            <button *ngIf="image.elements" (click)="showItem(element,image)" class="btn col-12 btn-block btn-info" data-bs-toggle="modal"
+            <button *ngIf="image.elements" (click)="showItem(element,image)" class="btn col-12 btn-block btn-secondary" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
-              Ver más
+              Detalle
             </button>
           </div>
           <div class="col col-auto">

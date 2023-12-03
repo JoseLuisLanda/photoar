@@ -19,7 +19,7 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
   goTo(index: number){
-    this.dataService.setItem(this.placesPublicar[0]);
+    this.dataService.setItem(this.placesPublicar[1]);
     this.router.navigateByUrl('/home');
     
 

@@ -15,12 +15,14 @@ declare interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
 
   { path: '/landing', title: 'Inicio',  icon: 'ni-tv-2 text-primary', class: '' },
-  { path: '/home', title: 'Search',  icon:'ni-planet text-blue', class: '' },
+  { path: '/home', title: 'Buscar',  icon:'ni-planet text-blue', class: '' },
     { path: '/maps', title: 'Locación',  icon:'ni-pin-3 text-orange', class: '' },
     //{ path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '' },
+   // { path: '/icons', title: 'Iconos',  icon:'ni-single-02 text-yellow', class: '' },
+    //{ path: '/dashboard', title: 'Dashboard',  icon:'ni-single-02 text-yellow', class: '' },
     { path: '/speech', title:"Asistente",  icon:'ni-single-02 text-yellow', class: '' },
-    { path: '/3delement', title: 'Modelos 3D',  icon:'ni-world text-pink', class: '' },
-    { path: '/qrelement', title: 'Escanear QR',  icon:'ni-tablet-button text-blue', class: '' },
+    //{ path: '/3delement', title: 'Modelos 3D',  icon:'ni-world text-pink', class: '' },
+    //{ path: '/qrelement', title: 'Escanear QR',  icon:'ni-tablet-button text-blue', class: '' },
     { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '' },
     { path: '/register', title: 'Registro',  icon:'ni-circle-08 text-pink', class: '' }
 ];

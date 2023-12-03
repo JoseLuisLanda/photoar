@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Output() item: EventEmitter<ElementId> = new EventEmitter<ElementId>();
   switchTemp: boolean = false;
-  title = 'Visualiz-AR';
+  title = 'Public-AR';
   itemAR: ElementId = {
     uid: 'sky',
     name: '../../../assets/models/Astronaut.glb',

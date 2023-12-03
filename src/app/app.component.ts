@@ -31,6 +31,7 @@ export class AppComponent implements OnInit, OnChanges  {
     throw new Error('Method not implemented.');
   }
   ngOnInit(): void {
+    console.log("NGONINIT APPCOMPONENT");
     this.getElements("lugares");
   }
 
